@@ -1,0 +1,4 @@
+services:
+#    librinfo_base_entities.example:
+#        class: Librinfo\BaseEntitiesBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
