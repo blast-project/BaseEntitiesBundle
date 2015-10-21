@@ -2,3 +2,7 @@ services:
 #    librinfo_base_entities.example:
 #        class: Librinfo\BaseEntitiesBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+    librinfo.base_entities.listener:
+        class: Librinfo\BaseEntitiesBundle\EventListener\MappingListener
+        tags:
+            - { name: doctrine.event_listener, event: loadClassMetadata }
