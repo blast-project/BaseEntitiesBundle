@@ -1,5 +1,5 @@
 {
-    "name": "libre-informatique/core-bundle",
+    "name": "libre-informatique/base-entities-bundle",
     "type": "symfony-bundle",
     "description": " This provides base (abstract) entities for Libre Informatique Symfony2 projects",
     "require": {
