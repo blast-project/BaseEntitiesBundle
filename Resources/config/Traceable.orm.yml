@@ -1,9 +1,9 @@
 Librinfo\BaseEntitiesBundle\Entity\Traceable:
     type: mappedSuperclass
-    id:
-        id:
-            type: guid
-            generator:  { strategy: UUID }
+#    id:
+#        id:
+#            type: guid
+#            generator:  { strategy: UUID }
     fields:
         user_id:
             type:       guid

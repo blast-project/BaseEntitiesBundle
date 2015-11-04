@@ -1,11 +1,8 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Entity;
+namespace Librinfo\BaseEntitiesBundle\Entity\Traits;
 
-/**
- * Addressable
- */
-abstract class Addressable extends Traceable
+trait Adressable
 {
     /**
      * @var string
@@ -67,24 +64,7 @@ abstract class Addressable extends Traceable
      */
     private $confirmed = true;
 
-
     /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Addressable
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
      * @return string
      */
     public function getName()
@@ -93,22 +73,17 @@ abstract class Addressable extends Traceable
     }
 
     /**
-     * Set address
+     * @param string $name
      *
-     * @param string $address
-     *
-     * @return Addressable
+     * @return Adressable
      */
-    public function setAddress($address)
+    public function setName($name)
     {
-        $this->address = $address;
-
+        $this->name = $name;
         return $this;
     }
 
     /**
-     * Get address
-     *
      * @return string
      */
     public function getAddress()
@@ -117,22 +92,17 @@ abstract class Addressable extends Traceable
     }
 
     /**
-     * Set postalcode
+     * @param string $address
      *
-     * @param string $postalcode
-     *
-     * @return Addressable
+     * @return Adressable
      */
-    public function setPostalcode($postalcode)
+    public function setAddress($address)
     {
-        $this->postalcode = $postalcode;
-
+        $this->address = $address;
         return $this;
     }
 
     /**
-     * Get postalcode
-     *
      * @return string
      */
     public function getPostalcode()
@@ -141,22 +111,17 @@ abstract class Addressable extends Traceable
     }
 
     /**
-     * Set city
+     * @param string $postalcode
      *
-     * @param string $city
-     *
-     * @return Addressable
+     * @return Adressable
      */
-    public function setCity($city)
+    public function setPostalcode($postalcode)
     {
-        $this->city = $city;
-
+        $this->postalcode = $postalcode;
         return $this;
     }
 
     /**
-     * Get city
-     *
      * @return string
      */
     public function getCity()
@@ -165,22 +130,17 @@ abstract class Addressable extends Traceable
     }
 
     /**
-     * Set country
+     * @param string $city
      *
-     * @param string $country
-     *
-     * @return Addressable
+     * @return Adressable
      */
-    public function setCountry($country)
+    public function setCity($city)
     {
-        $this->country = $country;
-
+        $this->city = $city;
         return $this;
     }
 
     /**
-     * Get country
-     *
      * @return string
      */
     public function getCountry()
@@ -189,46 +149,36 @@ abstract class Addressable extends Traceable
     }
 
     /**
-     * Set npai
+     * @param string $country
      *
-     * @param boolean $npai
-     *
-     * @return Addressable
+     * @return Adressable
      */
-    public function setNpai($npai)
+    public function setCountry($country)
     {
-        $this->npai = $npai;
-
+        $this->country = $country;
         return $this;
     }
 
     /**
-     * Get npai
-     *
      * @return boolean
      */
-    public function getNpai()
+    public function isNpai()
     {
         return $this->npai;
     }
 
     /**
-     * Set email
+     * @param boolean $npai
      *
-     * @param string $email
-     *
-     * @return Addressable
+     * @return Adressable
      */
-    public function setEmail($email)
+    public function setNpai($npai)
     {
-        $this->email = $email;
-
+        $this->npai = $npai;
         return $this;
     }
 
     /**
-     * Get email
-     *
      * @return string
      */
     public function getEmail()
@@ -237,70 +187,55 @@ abstract class Addressable extends Traceable
     }
 
     /**
-     * Set emailNpai
+     * @param string $email
      *
-     * @param boolean $emailNpai
-     *
-     * @return Addressable
+     * @return Adressable
      */
-    public function setEmailNpai($emailNpai)
+    public function setEmail($email)
     {
-        $this->emailNpai = $emailNpai;
-
+        $this->email = $email;
         return $this;
     }
 
     /**
-     * Get emailNpai
-     *
      * @return boolean
      */
-    public function getEmailNpai()
+    public function isEmailNpai()
     {
         return $this->emailNpai;
     }
 
     /**
-     * Set emailNoNewsletter
+     * @param boolean $emailNpai
      *
-     * @param boolean $emailNoNewsletter
-     *
-     * @return Addressable
+     * @return Adressable
      */
-    public function setEmailNoNewsletter($emailNoNewsletter)
+    public function setEmailNpai($emailNpai)
     {
-        $this->emailNoNewsletter = $emailNoNewsletter;
-
+        $this->emailNpai = $emailNpai;
         return $this;
     }
 
     /**
-     * Get emailNoNewsletter
-     *
      * @return boolean
      */
-    public function getEmailNoNewsletter()
+    public function isEmailNoNewsletter()
     {
         return $this->emailNoNewsletter;
     }
 
     /**
-     * Set description
+     * @param boolean $emailNoNewsletter
      *
-     * @param string $description
-     *
-     * @return Addressable
+     * @return Adressable
      */
-    public function setDescription($description)
+    public function setEmailNoNewsletter($emailNoNewsletter)
     {
-        $this->description = $description;
-
+        $this->emailNoNewsletter = $emailNoNewsletter;
         return $this;
     }
 
     /**
-     * Get description
-     *
      * @return string
      */
     public function getDescription()
@@ -309,22 +244,17 @@ abstract class Addressable extends Traceable
     }
 
     /**
-     * Set vcardUid
+     * @param string $description
      *
-     * @param string $vcardUid
-     *
-     * @return Addressable
+     * @return Adressable
      */
-    public function setVcardUid($vcardUid)
+    public function setDescription($description)
     {
-        $this->vcardUid = $vcardUid;
-
+        $this->description = $description;
         return $this;
     }
 
     /**
-     * Get vcardUid
-     *
      * @return string
      */
     public function getVcardUid()
@@ -333,26 +263,32 @@ abstract class Addressable extends Traceable
     }
 
     /**
-     * Set confirmed
+     * @param string $vcardUid
      *
-     * @param boolean $confirmed
-     *
-     * @return Addressable
+     * @return Adressable
      */
-    public function setConfirmed($confirmed)
+    public function setVcardUid($vcardUid)
     {
-        $this->confirmed = $confirmed;
-
+        $this->vcardUid = $vcardUid;
         return $this;
     }
 
     /**
-     * Get confirmed
-     *
      * @return boolean
      */
-    public function getConfirmed()
+    public function isConfirmed()
     {
         return $this->confirmed;
+    }
+
+    /**
+     * @param boolean $confirmed
+     *
+     * @return Adressable
+     */
+    public function setConfirmed($confirmed)
+    {
+        $this->confirmed = $confirmed;
+        return $this;
     }
 }
