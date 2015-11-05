@@ -10,13 +10,12 @@ services:
             - { name: doctrine.event_subscriber }
         calls:
             - [setLogger,[@logger]]
-#    librinfo.base_entities.tree.listener:
-#        class: Librinfo\BaseEntitiesBundle\EventListener\TreeableListener
-#        tags:
-#            - { name: doctrine.event_listener, event: loadClassMetadata }
-#    gedmo.listener.tree:
-#        class: Gedmo\Tree\TreeListener
-#        tags:
-#          - { name: doctrine.event_subscriber, connection: default }
-#        calls:
-#          - [ setAnnotationReader, [ @annotation_reader ] ]
+            - [setTokenStorage, [@security.token_storage]]
+            - [setUserClass, [%fos_user.model.user.class%]]
+
+    librinfo.base_entities.listener.addressable:
+        class: Librinfo\BaseEntitiesBundle\EventListener\AddressableListener
+        tags:
+            - { name: doctrine.event_subscriber }
+        calls:
+            - [setLogger,[@logger]]

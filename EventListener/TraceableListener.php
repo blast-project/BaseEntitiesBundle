@@ -2,14 +2,16 @@
 
 namespace Librinfo\BaseEntitiesBundle\EventListener;
 
+use DateTime;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Gedmo\Loggable\LoggableListener;
+use Librinfo\BaseEntitiesBundle\Entity\Interfaces\TraceableInterface;
 use Monolog\Logger;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 
 class TraceableListener implements LoggerAwareInterface, EventSubscriber
 {
@@ -17,6 +19,16 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
      * @var Logger
      */
     private $logger;
+
+    /**
+     * @var TokenStorage
+     */
+    private $tokenStorage;
+
+    /**
+     * @var string
+     */
+    private $userClass;
 
     /**
      * Returns an array of events this subscriber wants to listen to.
@@ -32,113 +44,115 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
         ];
     }
 
+    /**
+     * define Traceable mapping at runtime
+     *
+     * @param LoadClassMetadataEventArgs $eventArgs
+     */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
 
-        $namingStrategy = $eventArgs
-            ->getEntityManager()
-            ->getConfiguration()
-            ->getNamingStrategy();
+        if (!array_key_exists(TraceableInterface::class, $metadata->getReflectionClass()->getInterfaces()))
+            return; // return if current entity doesn't implement TraceableInterface
 
-        if (!array_key_exists('Librinfo\BaseEntitiesBundle\Entity\Interfaces\TraceableInterface', $metadata->getReflectionClass()->getInterfaces()))
-            return;
+        $this->logger->debug(
+            "[TraceableListner] Entering TraceableListner for « loadClassMetadata » event"
+        );
 
-        var_dump($metadata);
+        $this->logger->debug(
+            "[TraceableListner] Using « " . $this->userClass . " » as User class"
+        );
 
+        // setting default mapping configuration for Traceable
+
+        // createdDate
         $metadata->mapField([
             'fieldName' => 'createdDate',
-            'type'      => 'datetime'
+            'type'      => 'datetime',
+            'nullable'  => true
         ]);
 
+        // lastUpdateDate
         $metadata->mapField([
             'fieldName' => 'lastUpdateDate',
-            'type'      => 'datetime'
+            'type'      => 'datetime',
+            'nullable'  => true
         ]);
 
-//        $metadata->mapField([
-//            'fieldName' => 'name',
-//            'type'      => 'string',
-//            'length'    => 255
-//        ]);
+        // createdBy
+        $metadata->mapManyToOne([
+            'targetEntity' => $this->userClass,
+            'fieldName'    => 'createdBy',
+            'joinColumn'   => [
+                'name'                 => 'createdBy_id',
+                'referencedColumnName' => 'id',
+                'onDelete'             => 'SET NULL',
+                'nullable'             => true
+            ]
+        ]);
 
-//        address:
-//            type:       string
-//            nullable:   true
-//        postalcode:
-//            type:       string(10)
-//            nullable:   true
-//        city:
-//            type:       string(255)
-//            nullable:   true
-//        country:
-//            type:       string(255)
-//            nullable:   true
-//            option:     { default: FRANCE }
-//        npai:
-//            type:       boolean
-//            nullable:   true
-//            options:    { default: false }
-//        email:
-//            type:       string(255)
-//            nullable:   true
-//        emailNpai:
-//            type:       boolean
-//            nullable:   true
-//            options:    { default: false }
-//        emailNoNewsletter:
-//            type:       boolean
-//            nullable:   true
-//            options:    { default: false }
-//        description:
-//            type:       string
-//            nullable:   true
-//        vcardUid:
-//            type:       string(255)
-//            nullable:   true
-//        confirmed:
-//            type:       boolean
-//            nullable:   true
-//            options:    { default: true }
+        // updatedBy
+        $metadata->mapManyToOne([
+            'targetEntity' => $this->userClass,
+            'fieldName'    => 'updatedBy',
+            'joinColumn'   => [
+                'name'                 => 'updatedBy_id',
+                'referencedColumnName' => 'id',
+                'onDelete'             => 'SET NULL',
+                'nullable'             => true
+            ]
+        ]);
 
-//        $metadata->mapManyToOne([
-//            'targetEntity' => $metadata->getReflectionClass()->getName(),
-//            'fieldName'    => 'parent',
-//            'inversedBy'   => 'children',
-//            'joinColumn'   => [
-//                'name'                 => 'parent_id',
-//                'referencedColumnName' => 'id',
-//                'onDelete'             => 'CASCADE'
-//            ],
-//            'gedmo'        => [
-//                'treeParent'
-//            ]
-//        ]);
-//
-//        $metadata->mapOneToMany([
-//            'targetEntity' => $metadata->getReflectionClass()->getName(),
-//            'fieldName'    => 'children',
-//            'mappedBy'     => 'parent',
-//            'orderBy'      => [
-//                'lft' => 'ASC'
-//            ]
-//        ]);
-
-//        $evm = new \Doctrine\Common\EventManager();
-//        $treeListener = new \Gedmo\Tree\TreeListener();
-//        $evm->addEventSubscriber($treeListener);
-
+        $this->logger->debug(
+            "[TraceableListner] Added Traceable mapping metadata to Entity",
+            ['class' => $metadata->getName()]
+        );
     }
 
+    /**
+     * sets Traceable dateTime and user information when persisting entity
+     *
+     * @param LifecycleEventArgs $eventArgs
+     */
     public function prePersist(LifecycleEventArgs $eventArgs)
     {
+        $entity = $eventArgs->getObject();
+        if (!$entity instanceof TraceableInterface)
+            return;
 
+        $this->logger->debug(
+            "[TraceableListner] Entering TraceableListner for « prePersist » event"
+        );
+
+        $user = $this->tokenStorage->getToken()->getUser();
+        $now = new DateTime('NOW');
+
+        $entity->setCreatedBy($user);
+        $entity->setCreatedDate($now);
     }
 
+    /**
+     * sets Traceable dateTime and user information when updating entity
+     *
+     * @param LifecycleEventArgs $eventArgs
+     */
     public function preUpdate(LifecycleEventArgs $eventArgs)
     {
+        $entity = $eventArgs->getObject();
+        if (!$entity instanceof TraceableInterface)
+            return;
 
+        $this->logger->debug(
+            "[TraceableListner] Entering TraceableListner for « preUpdate » event"
+        );
+
+        $user = $this->tokenStorage->getToken()->getUser();
+        $now = new DateTime('NOW');
+
+        $entity->setUpdatedBy($user);
+        $entity->setLastUpdateDate($now);
     }
 
     /**
@@ -151,6 +165,24 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
     public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
+    }
+
+    /**
+     * setTokenStorage
+     *
+     * @param TokenStorage $tokenStorage
+     */
+    public function setTokenStorage(TokenStorage $tokenStorage)
+    {
+        $this->tokenStorage = $tokenStorage;
+    }
+
+    /**
+     * @param string $userClass
+     */
+    public function setUserClass($userClass)
+    {
+        $this->userClass = $userClass;
     }
 
 }

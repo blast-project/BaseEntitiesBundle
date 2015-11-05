@@ -2,19 +2,23 @@
 
 namespace Librinfo\BaseEntitiesBundle\Entity\Interfaces;
 
-interface AdressableInterface
+interface AddressableInterface
 {
-    public function getName();
+    public function getAddressName();
 
-    public function setName($name);
+    public function setAddressName($addressName);
+
+    public function getAddressDescription();
+
+    public function setAddressDescription($addressDescription);
 
     public function getAddress();
 
     public function setAddress($address);
 
-    public function getPostalcode();
+    public function getPostalCode();
 
-    public function setPostalcode($postalcode);
+    public function setPostalCode($postalCode);
 
     public function getCity();
 
@@ -40,15 +44,11 @@ interface AdressableInterface
 
     public function setEmailNoNewsletter($emailNoNewsletter);
 
-    public function getDescription();
-
-    public function setDescription($description);
-
     public function getVcardUid();
 
     public function setVcardUid($vcardUid);
 
-    public function isConfirmed();
+    public function isAddressConfirmed();
 
-    public function setConfirmed($confirmed);
+    public function setAddressConfirmed($addressConfirmed);
 }

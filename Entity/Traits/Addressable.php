@@ -2,12 +2,17 @@
 
 namespace Librinfo\BaseEntitiesBundle\Entity\Traits;
 
-trait Adressable
+trait Addressable
 {
     /**
      * @var string
      */
-    private $name;
+    private $addressName;
+
+    /**
+     * @var string
+     */
+    private $addressDescription;
 
     /**
      * @var string
@@ -17,7 +22,7 @@ trait Adressable
     /**
      * @var string
      */
-    private $postalcode;
+    private $postalCode;
 
     /**
      * @var string
@@ -52,34 +57,29 @@ trait Adressable
     /**
      * @var string
      */
-    private $description;
-
-    /**
-     * @var string
-     */
     private $vcardUid;
 
     /**
      * @var boolean
      */
-    private $confirmed = true;
+    private $addressConfirmed = true;
 
     /**
      * @return string
      */
-    public function getName()
+    public function getAddressName()
     {
-        return $this->name;
+        return $this->addressName;
     }
 
     /**
-     * @param string $name
+     * @param string $addressName
      *
-     * @return Adressable
+     * @return Addressable
      */
-    public function setName($name)
+    public function setAddressName($addressName)
     {
-        $this->name = $name;
+        $this->addressName = $addressName;
         return $this;
     }
 
@@ -94,7 +94,7 @@ trait Adressable
     /**
      * @param string $address
      *
-     * @return Adressable
+     * @return Addressable
      */
     public function setAddress($address)
     {
@@ -105,19 +105,19 @@ trait Adressable
     /**
      * @return string
      */
-    public function getPostalcode()
+    public function getPostalCode()
     {
-        return $this->postalcode;
+        return $this->postalCode;
     }
 
     /**
-     * @param string $postalcode
+     * @param string $postalCode
      *
-     * @return Adressable
+     * @return Addressable
      */
-    public function setPostalcode($postalcode)
+    public function setPostalCode($postalCode)
     {
-        $this->postalcode = $postalcode;
+        $this->postalCode = $postalCode;
         return $this;
     }
 
@@ -132,7 +132,7 @@ trait Adressable
     /**
      * @param string $city
      *
-     * @return Adressable
+     * @return Addressable
      */
     public function setCity($city)
     {
@@ -151,7 +151,7 @@ trait Adressable
     /**
      * @param string $country
      *
-     * @return Adressable
+     * @return Addressable
      */
     public function setCountry($country)
     {
@@ -170,7 +170,7 @@ trait Adressable
     /**
      * @param boolean $npai
      *
-     * @return Adressable
+     * @return Addressable
      */
     public function setNpai($npai)
     {
@@ -189,7 +189,7 @@ trait Adressable
     /**
      * @param string $email
      *
-     * @return Adressable
+     * @return Addressable
      */
     public function setEmail($email)
     {
@@ -208,7 +208,7 @@ trait Adressable
     /**
      * @param boolean $emailNpai
      *
-     * @return Adressable
+     * @return Addressable
      */
     public function setEmailNpai($emailNpai)
     {
@@ -227,7 +227,7 @@ trait Adressable
     /**
      * @param boolean $emailNoNewsletter
      *
-     * @return Adressable
+     * @return Addressable
      */
     public function setEmailNoNewsletter($emailNoNewsletter)
     {
@@ -238,19 +238,19 @@ trait Adressable
     /**
      * @return string
      */
-    public function getDescription()
+    public function getAddressDescription()
     {
-        return $this->description;
+        return $this->addressDescription;
     }
 
     /**
-     * @param string $description
+     * @param string $addressDescription
      *
-     * @return Adressable
+     * @return Addressable
      */
-    public function setDescription($description)
+    public function setAddressDescription($addressDescription)
     {
-        $this->description = $description;
+        $this->addressDescription = $addressDescription;
         return $this;
     }
 
@@ -265,7 +265,7 @@ trait Adressable
     /**
      * @param string $vcardUid
      *
-     * @return Adressable
+     * @return Addressable
      */
     public function setVcardUid($vcardUid)
     {
@@ -276,19 +276,19 @@ trait Adressable
     /**
      * @return boolean
      */
-    public function isConfirmed()
+    public function isAddressConfirmed()
     {
-        return $this->confirmed;
+        return $this->addressConfirmed;
     }
 
     /**
-     * @param boolean $confirmed
+     * @param boolean $addressConfirmed
      *
-     * @return Adressable
+     * @return Addressable
      */
-    public function setConfirmed($confirmed)
+    public function setAddressConfirmed($addressConfirmed)
     {
-        $this->confirmed = $confirmed;
+        $this->addressConfirmed = $addressConfirmed;
         return $this;
     }
 }
