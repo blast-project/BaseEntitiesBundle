@@ -142,7 +142,6 @@ trait BaseEntitySelf
  */
 class Category implements BaseEntityInterface
 {
-
     use BaseEntitySelf, BaseEntity
     {
         BaseEntitySelf::__toString insteadof BaseEntity; // Here is the « overriding » instruction
@@ -155,14 +154,116 @@ When executing this instruction : ```echo new Category();``` it ouputs ```overri
 
 ### EventSubscribers
 
+We're using standard Doctrine EventSubscriber to manage BaseEntities behaviors.
+* [see official Symfony documentation](http://symfony.com/doc/current/cookbook/doctrine/event_listeners_subscribers.html#creating-the-subscriber-class)
+* [see official Doctrine documentation](http://doctrine-orm.readthedocs.org/projects/doctrine-orm/en/latest/reference/events.html#the-event-system)
 
+Here's a simplified example of Traceable EventSubscriber :
 
-## Extend or Customize a Base Entity
+```php
+namespace Librinfo\BaseEntitiesBundle\EventListener;
 
-### Create Interface
+use DateTime;
+use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Librinfo\BaseEntitiesBundle\Entity\Interfaces\TraceableInterface;
 
-### Create Trait
+class TraceableListener implements EventSubscriber
+{
+    /**
+     * Returns an array of events this subscriber wants to listen to.
+     *
+     * @return array
+     */
+    public function getSubscribedEvents()
+    {
+        return [
+            'loadClassMetadata', // event when doctrine build Entities mapping
+            'prePersist', // event when doctrine creates new entity
+            'preUpdate' // event when doctrine update existing entity
+        ];
+    }
 
-### Create EventSubscriber (Optionnal)
+    /**
+     * define Traceable mapping at runtime
+     *
+     * @param LoadClassMetadataEventArgs $eventArgs
+     */
+    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
+    {
+        /** @var ClassMetadata $metadata */
+        $metadata = $eventArgs->getClassMetadata();
 
-### Apply to your entities
+        if (!array_key_exists(TraceableInterface::class, $metadata->getReflectionClass()->getInterfaces()))
+            return; // return if current entity doesn't implement TraceableInterface
+
+        // [...]
+
+        // setting default mapping configuration for Traceable
+
+        // createdDate
+        $metadata->mapField([
+            'fieldName' => 'createdDate',
+            'type'      => 'datetime',
+            'nullable'  => true
+        ]);
+
+        // [...]
+
+        // createdBy
+        $metadata->mapManyToOne([
+            'targetEntity' => $this->userClass,
+            'fieldName'    => 'createdBy',
+            'joinColumn'   => [
+                'name'                 => 'createdBy_id',
+                'referencedColumnName' => 'id',
+                'onDelete'             => 'SET NULL',
+                'nullable'             => true
+            ]
+        ]);
+
+        // [...]
+    }
+```
+
+This EventSubscriber declares which events it will manage with the method ```getSubscribedEvents()```.
+* [see official Doctrine documentation](http://doctrine-orm.readthedocs.org/projects/doctrine-orm/en/latest/reference/events.html#lifecycle-events)
+
+For each subscribed events, this class has to implement corresponding method :
+```Event : loadClassMetadata``` => ```Method : loadClassMetadata()```
+
+Let's take a usefull example :
+* The need : automaticaly inserting creation date of an entity and storing the User that created that entity.
+* Expected : simplify entity lifecycle logging management.
+
+```php
+
+class TraceableListener implements EventSubscriber
+{
+    // [...]
+
+    /**
+     * sets Traceable dateTime and user information when persisting entity
+     *
+     * @param LifecycleEventArgs $eventArgs
+     */
+    public function prePersist(LifecycleEventArgs $eventArgs)
+    {
+        $entity = $eventArgs->getObject();
+        if (!$entity instanceof TraceableInterface)
+            return;
+
+        $user = $this->tokenStorage->getToken()->getUser(); // Using SF 2.6 TokenStorage service to retreive current user
+        $now = new DateTime('NOW');
+
+        $entity->setCreatedBy($user);
+        $entity->setCreatedDate($now);
+    }
+
+    // [...]
+}
+```
+
+This is quite trivial, this event listener appends data before persisting entities that implements TraceableInterface.
