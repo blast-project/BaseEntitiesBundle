@@ -1,8 +1,13 @@
 services:
+
+# Service that manage Entity / Table naming convention
+
     librinfo.base_entities.listener.mapping:
         class: Librinfo\BaseEntitiesBundle\EventListener\MappingListener
         tags:
             - { name: doctrine.event_listener, event: loadClassMetadata }
+
+# Service that manage Traceable doctrine mapping and behavior
 
     librinfo.base_entities.listener.traceable:
         class: Librinfo\BaseEntitiesBundle\EventListener\TraceableListener
@@ -12,6 +17,8 @@ services:
             - [setLogger,[@logger]]
             - [setTokenStorage, [@security.token_storage]]
             - [setUserClass, [%fos_user.model.user.class%]]
+
+# Service that manage Addressable doctrine mapping
 
     librinfo.base_entities.listener.addressable:
         class: Librinfo\BaseEntitiesBundle\EventListener\AddressableListener
