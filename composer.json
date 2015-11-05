@@ -4,15 +4,20 @@
     "description": " This provides base (abstract) entities for Libre Informatique Symfony2 projects",
     "require": {
         "php": ">=5.3.0",
-        "symfony/symfony": "2.7.*"
+        "symfony/symfony": "2.7.*",
+        "knplabs/doctrine-behaviors": "~1.1"
     },
-    "license":  "GNU-GPL",
-    "keywords": ["e-venement", "libio", "symfony"],
+    "license": "GNU-GPL",
+    "keywords": [
+        "e-venement",
+        "libio",
+        "symfony"
+    ],
     "homepage": "https://github.com/libre-informatique/SymfonyLibrinfoBaseEntitiesBundle",
     "authors": [
         {
-           "name": "Baptiste SIMON",
-           "email": "baptiste.simon@libre-informatique.fr"
+            "name": "Baptiste SIMON",
+            "email": "baptiste.simon@libre-informatique.fr"
         },
         {
             "name": "Libre Informatique",
@@ -20,7 +25,9 @@
         }
     ],
     "autoload": {
-        "psr-4": { "Librinfo\\BaseEntitiesBundle\\": "" }
+        "psr-4": {
+            "Librinfo\\BaseEntitiesBundle\\": ""
+        }
     },
     "suggest": {
         "libre-informatique/core-bundle": "Make things easier to manage your entities",

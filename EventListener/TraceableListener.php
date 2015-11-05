@@ -7,7 +7,7 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Librinfo\BaseEntitiesBundle\Entity\Interfaces\TraceableInterface;
+use Knp\DoctrineBehaviors\Reflection\ClassAnalyzer;
 use Monolog\Logger;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
@@ -29,6 +29,11 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
      * @var string
      */
     private $userClass;
+
+    /**
+     * @var ClassAnalyzer
+     */
+    private $classAnalyzer;
 
     /**
      * Returns an array of events this subscriber wants to listen to.
@@ -54,8 +59,14 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
         /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
 
-        if (!array_key_exists(TraceableInterface::class, $metadata->getReflectionClass()->getInterfaces()))
-            return; // return if current entity doesn't implement TraceableInterface
+        if (!$this->classAnalyzer
+            ->hasTrait(
+                $metadata->getReflectionClass(),
+                'Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable',
+                true
+            )
+        )
+            return; // return if current entity doesn't use Traceable trait
 
         $this->logger->debug(
             "[TraceableListner] Entering TraceableListner for « loadClassMetadata » event"
@@ -119,7 +130,14 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
     public function prePersist(LifecycleEventArgs $eventArgs)
     {
         $entity = $eventArgs->getObject();
-        if (!$entity instanceof TraceableInterface)
+
+        if (!$this->classAnalyzer
+            ->hasTrait(
+                new \ReflectionClass($entity),
+                'Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable',
+                true
+            )
+        )
             return;
 
         $this->logger->debug(
@@ -141,7 +159,14 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
     public function preUpdate(LifecycleEventArgs $eventArgs)
     {
         $entity = $eventArgs->getObject();
-        if (!$entity instanceof TraceableInterface)
+
+        if (!$this->classAnalyzer
+            ->hasTrait(
+                new \ReflectionClass($entity),
+                'Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable',
+                true
+            )
+        )
             return;
 
         $this->logger->debug(
@@ -183,6 +208,11 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
     public function setUserClass($userClass)
     {
         $this->userClass = $userClass;
+    }
+
+    public function setClassAnalyser($classAnalyzer)
+    {
+        $this->classAnalyzer = new $classAnalyzer;
     }
 
 }

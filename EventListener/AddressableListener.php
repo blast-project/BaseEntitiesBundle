@@ -5,7 +5,7 @@ namespace Librinfo\BaseEntitiesBundle\EventListener;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Librinfo\BaseEntitiesBundle\Entity\Interfaces\AddressableInterface;
+use Knp\DoctrineBehaviors\Reflection\ClassAnalyzer;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Monolog\Logger;
@@ -16,6 +16,11 @@ class AddressableListener implements LoggerAwareInterface, EventSubscriber
      * @var Logger
      */
     private $logger;
+
+    /**
+     * @var ClassAnalyzer
+     */
+    private $classAnalyzer;
 
     /**
      * Returns an array of events this subscriber wants to listen to.
@@ -39,8 +44,14 @@ class AddressableListener implements LoggerAwareInterface, EventSubscriber
         /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
 
-        if (!array_key_exists(AddressableInterface::class, $metadata->getReflectionClass()->getInterfaces()))
-            return; // return if current entity doesn't implement AddressableInterface
+        if (!$this->classAnalyzer
+            ->hasTrait(
+                $metadata->getReflectionClass(),
+                'Librinfo\BaseEntitiesBundle\Entity\Traits\Addressable',
+                true
+            )
+        )
+            return; // return if current entity doesn't use Addressable trait
 
         $this->logger->debug(
             "[AddressableListner] Entering AddressableListner for « loadClassMetadata » event"
@@ -150,5 +161,10 @@ class AddressableListener implements LoggerAwareInterface, EventSubscriber
     public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
+    }
+
+    public function setClassAnalyser($classAnalyzer)
+    {
+        $this->classAnalyzer = new $classAnalyzer;
     }
 }

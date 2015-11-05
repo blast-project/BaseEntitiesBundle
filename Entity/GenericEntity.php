@@ -2,7 +2,7 @@
 
 namespace Librinfo\BaseEntitiesBundle\Entity;
 
-class GenericEntity
+abstract class GenericEntity
 {
 
 }

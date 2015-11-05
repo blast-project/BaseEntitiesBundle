@@ -1,3 +1,5 @@
+
+
 services:
 
 # Service that manage Entity / Table naming convention
@@ -17,6 +19,7 @@ services:
             - [setLogger,[@logger]]
             - [setTokenStorage, [@security.token_storage]]
             - [setUserClass, [%fos_user.model.user.class%]]
+            - [setClassAnalyser, [%knp.doctrine_behaviors.reflection.class_analyzer.class%]]
 
 # Service that manage Addressable doctrine mapping
 
@@ -26,3 +29,4 @@ services:
             - { name: doctrine.event_subscriber }
         calls:
             - [setLogger,[@logger]]
+            - [setClassAnalyser, [%knp.doctrine_behaviors.reflection.class_analyzer.class%]]
