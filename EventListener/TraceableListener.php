@@ -30,10 +30,7 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
      */
     private $userClass;
 
-    /**
-     * @var ClassAnalyzer
-     */
-    private $classAnalyzer;
+    use ClassChecker;
 
     /**
      * Returns an array of events this subscriber wants to listen to.
@@ -59,13 +56,7 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
         /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
 
-        if (!$this->classAnalyzer
-            ->hasTrait(
-                $metadata->getReflectionClass(),
-                'Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable',
-                true
-            )
-        )
+        if (!$this->hasTrait($metadata->getReflectionClass(), 'Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable'))
             return; // return if current entity doesn't use Traceable trait
 
         $this->logger->debug(
@@ -131,13 +122,7 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
     {
         $entity = $eventArgs->getObject();
 
-        if (!$this->classAnalyzer
-            ->hasTrait(
-                new \ReflectionClass($entity),
-                'Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable',
-                true
-            )
-        )
+        if (!$this->hasTrait($entity, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable'))
             return;
 
         $this->logger->debug(
@@ -160,13 +145,7 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
     {
         $entity = $eventArgs->getObject();
 
-        if (!$this->classAnalyzer
-            ->hasTrait(
-                new \ReflectionClass($entity),
-                'Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable',
-                true
-            )
-        )
+        if (!$this->hasTrait($entity, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable'))
             return;
 
         $this->logger->debug(
@@ -208,11 +187,6 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
     public function setUserClass($userClass)
     {
         $this->userClass = $userClass;
-    }
-
-    public function setClassAnalyser($classAnalyzer)
-    {
-        $this->classAnalyzer = new $classAnalyzer;
     }
 
 }

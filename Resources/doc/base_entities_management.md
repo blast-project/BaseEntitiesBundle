@@ -8,59 +8,6 @@ The first idea was to use OOP inheritance, but it had too many disadvantage (par
 
 ## Architecture
 
-### Interfaces
-
-The aim of Interfaces is to notify the Base Entities Management System that the Entity (the one which implement the Interface) will have additional attributes (database fields), relations, methods.
-
-We define specific methods signature in these Interfaces in order to force the Entity to implement these methods.
-
-Here's an example of a basic Interface :
-
-```php
-namespace Librinfo\BaseEntitiesBundle\Entity\Interfaces;
-
-interface BaseEntityInterface
-{
-    public function __toString();
-}
-```
-
-This Interface force the ```__toString``` method implementation.
-
-This Entity will implement this Interface :
-
-```php
-namespace Librinfo\CRMBundle\Entity;
-
-use Librinfo\BaseEntitiesBundle\Entity\Interfaces\BaseEntityInterface;
-
-/**
- * Category
- */
-class Category implements BaseEntityInterface
-{
-
-    /**
-     * @var string
-     */
-    protected $id;
-
-    /**
-     * @var string
-     */
-    private $name;
-
-    public function __toString()
-    {
-        return $this->name;
-    }
-}
-```
-
-At this point, it's just a simple OOP concept. This entity must implement interface's methods
-
-But, we will not implement these methods in each Entities, we use Traits to factorize these implementations.
-
 ### Traits
 
 Traits have been introduced in PHP since version 5.4.0.
@@ -93,13 +40,12 @@ See the previous Entity using this Trait :
 ```php
 namespace Librinfo\CRMBundle\Entity;
 
-use Librinfo\BaseEntitiesBundle\Entity\Interfaces\BaseEntityInterface;
 use Librinfo\BaseEntitiesBundle\Entity\Traits\BaseEntity;
 
 /**
  * Category
  */
-class Category implements BaseEntityInterface
+class Category
 {
     // Here we « include » the Trait
     use BaseEntity;
@@ -121,34 +67,26 @@ We don't have to write the « __toString() » method because the trait already h
 
 #### Note
 
-Traits don't support standard OOP « inheritance » concepts. If you want to « override » a trait's method,
-you just have to declare a local Trait before your Entity and use it insteadof the original one.
+Traits don't support standard OOP « inheritance ». But, if you want to « override » a trait's method,
+you just have to override it as if it where a parent class.
 
 ```php
 namespace Librinfo\CRMBundle\Entity;
 
-use Librinfo\BaseEntitiesBundle\Entity\Interfaces\BaseEntityInterface;
 use Librinfo\BaseEntitiesBundle\Entity\Traits\BaseEntity;
 
-trait BaseEntitySelf
+/**
+ * Category
+ */
+class Category
 {
+    use BaseEntity;
+
     public function __toString()
     {
         return 'overrided_method';
     }
 }
-
-/**
- * Category
- */
-class Category implements BaseEntityInterface
-{
-    use BaseEntitySelf, BaseEntity
-    {
-        BaseEntitySelf::__toString insteadof BaseEntity; // Here is the « overriding » instruction
-    }
-}
-
 ```
 
 When executing this instruction : ```echo new Category();``` it ouputs ```overrided_method```.
@@ -169,7 +107,7 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Librinfo\BaseEntitiesBundle\Entity\Interfaces\TraceableInterface;
+use Knp\DoctrineBehaviors\Reflection\ClassAnalyzer;
 
 class TraceableListener implements EventSubscriber
 {
@@ -197,8 +135,8 @@ class TraceableListener implements EventSubscriber
         /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
 
-        if (!array_key_exists(TraceableInterface::class, $metadata->getReflectionClass()->getInterfaces()))
-            return; // return if current entity doesn't implement TraceableInterface
+        if (!$this->hasTrait($metadata->getReflectionClass(), 'Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable'))
+            return; // return if current entity doesn't use Traceable trait
 
         // [...]
 
@@ -253,7 +191,8 @@ class TraceableListener implements EventSubscriber
     public function prePersist(LifecycleEventArgs $eventArgs)
     {
         $entity = $eventArgs->getObject();
-        if (!$entity instanceof TraceableInterface)
+
+        if (!$this->hasTrait($entity, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable'))
             return;
 
         $user = $this->tokenStorage->getToken()->getUser(); // Using SF 2.6 TokenStorage service to retreive current user
@@ -267,4 +206,4 @@ class TraceableListener implements EventSubscriber
 }
 ```
 
-This is quite trivial, this event listener appends data before persisting entities that implements TraceableInterface.
+This is quite trivial, this event listener appends data before persisting entities that use Traceable trait.

@@ -17,10 +17,7 @@ class AddressableListener implements LoggerAwareInterface, EventSubscriber
      */
     private $logger;
 
-    /**
-     * @var ClassAnalyzer
-     */
-    private $classAnalyzer;
+    use ClassChecker;
 
     /**
      * Returns an array of events this subscriber wants to listen to.
@@ -44,13 +41,7 @@ class AddressableListener implements LoggerAwareInterface, EventSubscriber
         /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
 
-        if (!$this->classAnalyzer
-            ->hasTrait(
-                $metadata->getReflectionClass(),
-                'Librinfo\BaseEntitiesBundle\Entity\Traits\Addressable',
-                true
-            )
-        )
+        if (!$this->hasTrait($metadata->getReflectionClass(), 'Librinfo\BaseEntitiesBundle\Entity\Traits\Addressable'))
             return; // return if current entity doesn't use Addressable trait
 
         $this->logger->debug(
@@ -161,10 +152,5 @@ class AddressableListener implements LoggerAwareInterface, EventSubscriber
     public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
-    }
-
-    public function setClassAnalyser($classAnalyzer)
-    {
-        $this->classAnalyzer = new $classAnalyzer;
     }
 }
