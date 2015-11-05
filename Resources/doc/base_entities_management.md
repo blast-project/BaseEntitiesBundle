@@ -4,12 +4,13 @@ This documentation explain how base entities works.
 
 BaseEntities adds doctrine behaviors to manage entity common data structure and behaviors.
 
+The first idea was to use OOP inheritance, but it had too many disadvantage (particularly because PHP does not know multiple inheritance), and this method provides a powerful workaround.
+
 ## Architecture
 
 ### Interfaces
 
-The aim of Interfaces is to notify the Base Entities Management system
-that the Entity (the one which implement the Interface) will have additional attributes (database fields), relations, methods.
+The aim of Interfaces is to notify the Base Entities Management System that the Entity (the one which implement the Interface) will have additional attributes (database fields), relations, methods.
 
 We define specific methods signature in these Interfaces in order to force the Entity to implement these methods.
 
