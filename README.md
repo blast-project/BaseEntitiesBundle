@@ -31,6 +31,7 @@ Edit your app/AppKernel.php file and add your "libre-informatique/base-entities-
             // ...
 
             // The libre-informatique bundles
+            new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
             new Librinfo\BaseEntitiesBundle\LibrinfoBaseEntitiesBundle(),
 
             // your personal bundles
