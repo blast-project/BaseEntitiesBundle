@@ -8,7 +8,7 @@
         "knplabs/doctrine-behaviors": "~1.1",
         "libre-informatique/user-bundle": "dev-master"
     },
-    "license": "GNU-GPL",
+    "license": "GPL-3.0",
     "keywords": [
         "e-venement",
         "libio",
