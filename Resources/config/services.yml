@@ -18,7 +18,7 @@ services:
         calls:
             - [setLogger,[@logger]]
             - [setTokenStorage, [@security.token_storage]]
-            - [setUserClass, [%fos_user.model.user.class%]]
+            - [setUserClass, [%librinfo.user_bundle.user.class%]]
             - [setClassAnalyser, [%knp.doctrine_behaviors.reflection.class_analyzer.class%]]
 
 # Service that manage Addressable doctrine mapping
