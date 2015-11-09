@@ -28,3 +28,13 @@ services:
         calls:
             - [setLogger,[@logger]]
             - [setClassAnalyser, [%knp.doctrine_behaviors.reflection.class_analyzer.class%]]
+
+# Service that manage Addressable doctrine mapping
+
+    librinfo.base_entities.listener.treeable:
+        class: Librinfo\BaseEntitiesBundle\EventListener\TreeableListener
+        tags:
+            - { name: doctrine.event_subscriber }
+        calls:
+            - [setLogger,[@logger]]
+            - [setClassAnalyser, [%knp.doctrine_behaviors.reflection.class_analyzer.class%]]
