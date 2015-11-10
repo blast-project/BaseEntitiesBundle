@@ -11,9 +11,6 @@ parameters:
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     General:
-                        '':
-                            name: ~
-                            email: ~
                         Address:
                             address:
                                 type: textarea
@@ -29,11 +26,34 @@ parameters:
                                 read_only: true
                                 disabled: true
                                 required: false
+                        Address:
+                            npai: ~
+
+
+        Librinfo\BaseEntitiesBundle\Entity\Traits\Emailable:
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    email: ~
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    General:
+                        '':
+                            email: ~
+                    Specifics:
                         Email:
                             emailNpai: ~
                             emailNoNewsletter: ~
-                        Address:
-                            npai: ~
+
+
+        Librinfo\BaseEntitiesBundle\Entity\Traits\Nameable:
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    name: ~
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    General:
+                        '':
+                            name: ~
 
 
         Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable:
@@ -51,6 +71,7 @@ parameters:
                                 read_only: true
                                 disabled: true
                                 required: false
+
 
         Librinfo\BaseEntitiesBundle\Entity\Traits\BaseEntity:
             Sonata\AdminBundle\Form\FormMapper:
