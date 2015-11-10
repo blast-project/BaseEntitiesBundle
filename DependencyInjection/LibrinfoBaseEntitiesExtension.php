@@ -7,13 +7,14 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\Yaml\Yaml;
+use Librinfo\CoreBundle\DependencyInjection\LibrinfoCoreExtension;
 
 /**
  * This is the class that loads and manages your bundle configuration
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class LibrinfoBaseEntitiesExtension extends Extension
+class LibrinfoBaseEntitiesExtension extends LibrinfoCoreExtension
 {
     /**
      * {@inheritdoc}
@@ -32,10 +33,8 @@ class LibrinfoBaseEntitiesExtension extends Extension
             $loader = new Loader\YamlFileLoader($container, new FileLocator($container->getParameter('kernel.root_dir') . "/../vendor/knplabs/doctrine-behaviors/config/"));
             $loader->load('orm-services.yml');
         }
-        catch (\Exception $e)
-        {
-
-        }
-
+        catch (\Exception $e) { }
+        
+        $this->mergeParameter('librinfo', $container, __DIR__.'/../Resources/config');
     }
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\EventListener;
+namespace Librinfo\BaseEntitiesBundle\EventListener\Traits;
 
-use Knp\DoctrineBehaviors\Reflection\ClassAnalyzer;
+use Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer;
 
 trait ClassChecker
 {
@@ -18,8 +18,6 @@ trait ClassChecker
 
     public function hasTrait($object, $traitFQDN)
     {
-        if (!$object instanceof \ReflectionClass && is_object($object))
-            $object = new \ReflectionClass($object);
         return $this->classAnalyzer->hasTrait($object, $traitFQDN, true);
     }
 }

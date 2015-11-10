@@ -17,7 +17,7 @@ services:
             - [setLogger,[@logger]]
             - [setTokenStorage, [@security.token_storage]]
             - [setUserClass, [%librinfo.user_bundle.user.class%]]
-            - [setClassAnalyser, [%knp.doctrine_behaviors.reflection.class_analyzer.class%]]
+            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manage Addressable doctrine mapping
 
@@ -27,4 +27,4 @@ services:
             - { name: doctrine.event_subscriber }
         calls:
             - [setLogger,[@logger]]
-            - [setClassAnalyser, [%knp.doctrine_behaviors.reflection.class_analyzer.class%]]
+            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]

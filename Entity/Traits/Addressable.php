@@ -7,12 +7,12 @@ trait Addressable
     /**
      * @var string
      */
-    private $addressName;
+    private $name;
 
     /**
      * @var string
      */
-    private $addressDescription;
+    private $description;
 
     /**
      * @var string
@@ -22,7 +22,7 @@ trait Addressable
     /**
      * @var string
      */
-    private $postalCode;
+    private $zip;
 
     /**
      * @var string
@@ -62,25 +62,25 @@ trait Addressable
     /**
      * @var boolean
      */
-    private $addressConfirmed = true;
+    private $confirmed = true;
+
+    /**
+     * @param string $name
+     *
+     * @return Addressable
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        return $this;
+    }
 
     /**
      * @return string
      */
-    public function getAddressName()
+    public function getName()
     {
-        return $this->addressName;
-    }
-
-    /**
-     * @param string $addressName
-     *
-     * @return Addressable
-     */
-    public function setAddressName($addressName)
-    {
-        $this->addressName = $addressName;
-        return $this;
+        return $this->name;
     }
 
     /**
@@ -105,19 +105,19 @@ trait Addressable
     /**
      * @return string
      */
-    public function getPostalCode()
+    public function getZip()
     {
-        return $this->postalCode;
+        return $this->zip;
     }
 
     /**
-     * @param string $postalCode
+     * @param string $zip
      *
      * @return Addressable
      */
-    public function setPostalCode($postalCode)
+    public function setZip($zip)
     {
-        $this->postalCode = $postalCode;
+       $this->zip = $zip;
         return $this;
     }
 
@@ -238,19 +238,19 @@ trait Addressable
     /**
      * @return string
      */
-    public function getAddressDescription()
+    public function getDescription()
     {
-        return $this->addressDescription;
+        return $this->description;
     }
 
     /**
-     * @param string $addressDescription
+     * @param string $description
      *
      * @return Addressable
      */
-    public function setAddressDescription($addressDescription)
+    public function setdescription($description)
     {
-        $this->addressDescription = $addressDescription;
+        $this->description = $description;
         return $this;
     }
 
@@ -276,19 +276,19 @@ trait Addressable
     /**
      * @return boolean
      */
-    public function isAddressConfirmed()
+    public function isConfirmed()
     {
-        return $this->addressConfirmed;
+        return $this->confirmed;
     }
 
     /**
-     * @param boolean $addressConfirmed
+     * @param boolean $confirmed
      *
      * @return Addressable
      */
-    public function setAddressConfirmed($addressConfirmed)
+    public function setConfirmed($confirmed)
     {
-        $this->addressConfirmed = $addressConfirmed;
+        $this->confirmed = $confirmed;
         return $this;
     }
 }

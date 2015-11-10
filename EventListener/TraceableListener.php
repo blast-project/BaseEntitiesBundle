@@ -12,6 +12,7 @@ use Monolog\Logger;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
 
 class TraceableListener implements LoggerAwareInterface, EventSubscriber
 {
@@ -69,42 +70,18 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
 
         // setting default mapping configuration for Traceable
 
-        // createdDate
+        // createdAt
         $metadata->mapField([
-            'fieldName' => 'createdDate',
+            'fieldName' => 'createdAt',
             'type'      => 'datetime',
             'nullable'  => true
         ]);
 
-        // lastUpdateDate
+        // updatedAt
         $metadata->mapField([
-            'fieldName' => 'lastUpdateDate',
+            'fieldName' => 'updatedAt',
             'type'      => 'datetime',
             'nullable'  => true
-        ]);
-
-        // createdBy
-        $metadata->mapManyToOne([
-            'targetEntity' => $this->userClass,
-            'fieldName'    => 'createdBy',
-            'joinColumn'   => [
-                'name'                 => 'createdBy_id',
-                'referencedColumnName' => 'id',
-                'onDelete'             => 'SET NULL',
-                'nullable'             => true
-            ]
-        ]);
-
-        // updatedBy
-        $metadata->mapManyToOne([
-            'targetEntity' => $this->userClass,
-            'fieldName'    => 'updatedBy',
-            'joinColumn'   => [
-                'name'                 => 'updatedBy_id',
-                'referencedColumnName' => 'id',
-                'onDelete'             => 'SET NULL',
-                'nullable'             => true
-            ]
         ]);
 
         $this->logger->debug(
@@ -129,10 +106,7 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
             "[TraceableListner] Entering TraceableListner for « prePersist » event"
         );
 
-        $user = $this->tokenStorage->getToken()->getUser();
         $now = new DateTime('NOW');
-
-        $entity->setCreatedBy($user);
         $entity->setCreatedDate($now);
     }
 
@@ -152,10 +126,7 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
             "[TraceableListner] Entering TraceableListner for « preUpdate » event"
         );
 
-        $user = $this->tokenStorage->getToken()->getUser();
         $now = new DateTime('NOW');
-
-        $entity->setUpdatedBy($user);
         $entity->setLastUpdateDate($now);
     }
 
@@ -188,5 +159,4 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
     {
         $this->userClass = $userClass;
     }
-
 }

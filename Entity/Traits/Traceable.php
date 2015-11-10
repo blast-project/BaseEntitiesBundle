@@ -3,106 +3,57 @@
 namespace Librinfo\BaseEntitiesBundle\Entity\Traits;
 
 use DateTime;
-use FOS\UserBundle\Model\UserInterface;
+//use Librinfo\UserBundle\Entity\Traits\Traceable;
 
 trait Traceable
 {
+    use \Librinfo\UserBundle\Entity\Traits\Traceable;
+    
     /**
      * @var DateTime
      */
-    private $createdDate = null;
-
-    /**
-     * @var UserInterface
-     */
-    private $createdBy = null;
+    private $createdAt = null;
 
     /**
      * @var DateTime
      */
-    private $lastUpdateDate = null;
-
-    /**
-     * @var UserInterface
-     */
-    private $updatedBy = null;
+    private $updatedAt = null;
 
     /**
      * @return DateTime
      */
-    public function getCreatedDate()
+    public function getCreatedAt()
     {
-        return $this->createdDate;
+        return $this->createdAt;
     }
 
     /**
-     * @param DateTime $createdDate
+     * @param DateTime $createdAt
      *
      * @return Traceable
      */
-    public function setCreatedDate(DateTime $createdDate)
+    public function setCreatedAt(DateTime $createdAt)
     {
-        $this->createdDate = $createdDate;
+        $this->createdAt = $createdAt;
         return $this;
     }
 
     /**
      * @return DateTime
      */
-    public function getLastUpdateDate()
+    public function getUpdatedAt()
     {
-        return $this->lastUpdateDate;
+        return $this->updatedAt;
     }
 
     /**
-     * @param DateTime $lastUpdateDate
+     * @param DateTime $lastUpdatedAt
      *
      * @return Traceable
      */
-    public function setLastUpdateDate(DateTime $lastUpdateDate)
+    public function setLastUpdatedAt(DateTime $lastUpdatedAt)
     {
-        $this->lastUpdateDate = $lastUpdateDate;
+        $this->updatedAt = $lastUpdatedAt;
         return $this;
     }
-
-    /**
-     * @return UserInterface
-     */
-    public function getCreatedBy()
-    {
-        return $this->createdBy;
-    }
-
-    /**
-     * @param UserInterface $createdBy
-     *
-     * @return Traceable
-     */
-    public function setCreatedBy(UserInterface $createdBy)
-    {
-        $this->createdBy = $createdBy;
-        return $this;
-    }
-
-    /**
-     * @return UserInterface
-     */
-    public function getUpdatedBy()
-    {
-        return $this->updatedBy;
-    }
-
-    /**
-     * @param UserInterface $updatedBy
-     *
-     * @return Traceable
-     */
-    public function setUpdatedBy(UserInterface $updatedBy)
-    {
-        $this->updatedBy = $updatedBy;
-        return $this;
-    }
-
-
-
 }

@@ -5,8 +5,6 @@ use Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable;
 
 trait BaseEntity
 {
-    use Traceable;
-    
     public function __toString()
     {
         if (method_exists(get_class($this), 'getName'))

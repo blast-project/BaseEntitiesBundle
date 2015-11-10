@@ -9,6 +9,7 @@ use Knp\DoctrineBehaviors\Reflection\ClassAnalyzer;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Monolog\Logger;
+use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
 
 class AddressableListener implements LoggerAwareInterface, EventSubscriber
 {
@@ -52,14 +53,13 @@ class AddressableListener implements LoggerAwareInterface, EventSubscriber
 
         // addressName
         $metadata->mapField([
-            'fieldName' => 'addressName',
+            'fieldName' => 'name',
             'type'      => 'string',
-            'nullable'  => true
         ]);
 
         // addressDescription
         $metadata->mapField([
-            'fieldName' => 'addressDescription',
+            'fieldName' => 'description',
             'type'      => 'string',
             'nullable'  => true
         ]);
@@ -73,7 +73,7 @@ class AddressableListener implements LoggerAwareInterface, EventSubscriber
 
         // postalCode
         $metadata->mapField([
-            'fieldName' => 'postalCode',
+            'fieldName' => 'zip',
             'type'      => 'string',
             'length'    => 5,
             'nullable'  => true
@@ -128,11 +128,11 @@ class AddressableListener implements LoggerAwareInterface, EventSubscriber
             'nullable'  => true
         ]);
 
-        // addressConfirmed
+        // confirmed
         $metadata->mapField([
-            'fieldName' => 'addressConfirmed',
+            'fieldName' => 'confirmed',
             'type'      => 'boolean',
-            'nullable'  => true
+            'default'   => true,
         ]);
 
         $this->logger->debug(
