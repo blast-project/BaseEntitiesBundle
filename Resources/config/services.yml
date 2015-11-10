@@ -6,7 +6,7 @@ services:
         tags:
             - { name: doctrine.event_listener, event: loadClassMetadata }
         calls:
-            - [setClassAnalyser, [%knp.doctrine_behaviors.reflection.class_analyzer.class%]]
+            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Traceable doctrine mapping and behavior
     librinfo.base_entities.listener.traceable:
@@ -27,7 +27,6 @@ services:
         calls:
             - [setLogger,[@logger]]
             - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
-            - [setClassAnalyser, [%knp.doctrine_behaviors.reflection.class_analyzer.class%]]
 
 # Service that manages Treeable doctrine mapping
     librinfo.base_entities.listener.treeable:

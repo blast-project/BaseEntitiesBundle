@@ -43,7 +43,7 @@ class MappingListener implements EventSubscriber
             $metadata->table['name'] = $newname;
         }
 
-        if ($this->hasTrait($metadata->getReflectionClass(), 'Librinfo\BaseEntitiesBundle\Entity\Traits\BaseEntity'))
+        if ($this->hasTrait($metadata->getReflectionClass(), 'Librinfo\BaseEntitiesBundle\Entity\Traits\Idable'))
         {
             $metadata->mapField([
                 'id'         => true,

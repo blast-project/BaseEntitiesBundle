@@ -18,6 +18,6 @@ trait ClassChecker
 
     public function hasTrait($object, $traitFQDN)
     {
-        return $this->classAnalyzer->hasTrait($object, $traitFQDN, true);
+        return $this->classAnalyzer->hasTrait($object, $traitFQDN);
     }
 }
