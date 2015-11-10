@@ -10,7 +10,7 @@
     "require-dev": {
         "libre-informatique/core-bundle": "dev-interfaces_and_traits",
         "libre-informatique/user-bundle": "dev-master"
-    }
+    },
     "license": "GPL-3.0",
     "keywords": [
         "e-venement",
