@@ -1,10 +1,13 @@
 parameters:
     librinfo:
         Librinfo\BaseEntitiesBundle\Entity\Traits\Addressable:
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    zip: ~
+                    city: ~
+                    country: ~
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
-                    name: ~
-                    email: ~
                     zip: ~
                     city: ~
                     country: ~
@@ -31,6 +34,9 @@ parameters:
 
 
         Librinfo\BaseEntitiesBundle\Entity\Traits\Emailable:
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    email: ~
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     email: ~
@@ -46,6 +52,9 @@ parameters:
 
 
         Librinfo\BaseEntitiesBundle\Entity\Traits\Nameable:
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    name: ~
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     name: ~
@@ -57,6 +66,9 @@ parameters:
 
 
         Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable:
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    createdAt: ~
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     Specifics:
@@ -74,6 +86,8 @@ parameters:
 
 
         Librinfo\BaseEntitiesBundle\Entity\Traits\BaseEntity:
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                remove: [id]
             Sonata\AdminBundle\Form\FormMapper:
                 remove: [id]
             Sonata\AdminBundle\Datagrid\DatagridMapper:
