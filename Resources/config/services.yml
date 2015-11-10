@@ -1,7 +1,6 @@
 services:
 
-# Service that manage Entity / Table naming convention
-
+# Service that manages Entity / Table naming convention
     librinfo.base_entities.listener.mapping:
         class: Librinfo\BaseEntitiesBundle\EventListener\MappingListener
         tags:
@@ -9,8 +8,7 @@ services:
         calls:
             - [setClassAnalyser, [%knp.doctrine_behaviors.reflection.class_analyzer.class%]]
 
-# Service that manage Traceable doctrine mapping and behavior
-
+# Service that manages Traceable doctrine mapping and behavior
     librinfo.base_entities.listener.traceable:
         class: Librinfo\BaseEntitiesBundle\EventListener\TraceableListener
         tags:
@@ -21,8 +19,7 @@ services:
             - [setUserClass, [%librinfo.user_bundle.user.class%]]
             - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
-# Service that manage Addressable doctrine mapping
-
+# Service that manages Addressable doctrine mapping
     librinfo.base_entities.listener.addressable:
         class: Librinfo\BaseEntitiesBundle\EventListener\AddressableListener
         tags:
@@ -32,10 +29,27 @@ services:
             - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
             - [setClassAnalyser, [%knp.doctrine_behaviors.reflection.class_analyzer.class%]]
 
-# Service that manage Addressable doctrine mapping
-
+# Service that manages Treeable doctrine mapping
     librinfo.base_entities.listener.treeable:
         class: Librinfo\BaseEntitiesBundle\EventListener\TreeableListener
+        tags:
+            - { name: doctrine.event_subscriber }
+        calls:
+            - [setLogger,[@logger]]
+            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+
+# Service that manages Nameable doctrine mapping
+    librinfo.base_entities.listener.nameable:
+        class: Librinfo\BaseEntitiesBundle\EventListener\NameableListener
+        tags:
+            - { name: doctrine.event_subscriber }
+        calls:
+            - [setLogger,[@logger]]
+            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+
+# Service that manages Emailable doctrine mapping
+    librinfo.base_entities.listener.emailable:
+        class: Librinfo\BaseEntitiesBundle\EventListener\EmailableListener
         tags:
             - { name: doctrine.event_subscriber }
         calls:

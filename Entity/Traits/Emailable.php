@@ -2,7 +2,7 @@
 
 namespace Librinfo\BaseEntitiesBundle\Entity\Traits;
 
-trait Addressable
+trait Emailable
 {
     /**
      * @var string
@@ -30,7 +30,7 @@ trait Addressable
     /**
      * @param string $email
      *
-     * @return Addressable
+     * @return Emailable
      */
     public function setEmail($email)
     {
@@ -49,7 +49,7 @@ trait Addressable
     /**
      * @param boolean $emailNpai
      *
-     * @return Addressable
+     * @return Emailable
      */
     public function setEmailNpai($emailNpai)
     {
@@ -68,7 +68,7 @@ trait Addressable
     /**
      * @param boolean $emailNoNewsletter
      *
-     * @return Addressable
+     * @return Emailable
      */
     public function setEmailNoNewsletter($emailNoNewsletter)
     {

@@ -2,6 +2,8 @@
 
 namespace Librinfo\BaseEntitiesBundle\Entity\Traits;
 
+use Librinfo\BaseEntitiesBundle\Entity\Traits\Nameable;
+
 trait Addressable
 {
     use Nameable;

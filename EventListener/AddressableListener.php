@@ -87,27 +87,6 @@ class AddressableListener implements LoggerAwareInterface, EventSubscriber
             'nullable'  => true
         ]);
 
-        // email
-        $metadata->mapField([
-            'fieldName' => 'email',
-            'type'      => 'string',
-            'nullable'  => true
-        ]);
-
-        // emailNpai
-        $metadata->mapField([
-            'fieldName' => 'emailNpai',
-            'type'      => 'boolean',
-            'nullable'  => true
-        ]);
-
-        // emailNoNewsletter
-        $metadata->mapField([
-            'fieldName' => 'emailNoNewsletter',
-            'type'      => 'boolean',
-            'nullable'  => true
-        ]);
-
         // vcardUid
         $metadata->mapField([
             'fieldName' => 'vcardUid',

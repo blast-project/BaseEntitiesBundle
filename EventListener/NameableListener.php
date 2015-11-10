@@ -39,18 +39,16 @@ class NameableListener implements LoggerAwareInterface, EventSubscriber
         if (!$this->hasTrait($metadata->getReflectionClass(), 'Librinfo\BaseEntitiesBundle\Entity\Traits\Nameable'))
             return; // return if current entity doesn't use Nameable trait
 
-        $this->logger->debug(
-            "[NameableListener] Entering NameableListner for « loadClassMetadata » event"
-        );
+        $this->logger->debug("[NameableListener] Entering NameableListener for « loadClassMetadata » event");
 
-        // setting default mapping configuration for Traceable
+        // setting default mapping configuration for Nameable
 
-        // addressName
+        // name
         $metadata->mapField([
             'fieldName' => 'name',
             'type'      => 'string',
         ]);
-
+        
         $this->logger->debug(
             "[NameableListener] Added Nameable mapping metadata to Entity",
             ['class' => $metadata->getName()]
