@@ -2,11 +2,9 @@
 
 namespace Librinfo\BaseEntitiesBundle\EventListener\Traits;
 
-use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
-use Monolog\Logger;
 
-trait ClassChecker
+trait Logger
 {
     /**
      * @var LoggerInterface

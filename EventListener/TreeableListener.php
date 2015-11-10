@@ -5,8 +5,8 @@ namespace Librinfo\BaseEntitiesBundle\EventListener;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Psr\Log\LoggerAwareInterface;
 use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
+use Psr\Log\LoggerAwareInterface;
 use Librinfo\BaseEntitiesBundle\EventListener\Traits\Logger;
 
 class TreeableListener implements LoggerAwareInterface, EventSubscriber

@@ -5,12 +5,10 @@ namespace Librinfo\BaseEntitiesBundle\EventListener;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Knp\DoctrineBehaviors\Reflection\ClassAnalyzer;
-use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerInterface;
-use Monolog\Logger;
-use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
 use Librinfo\BaseEntitiesBundle\EventListener\Traits\Logger;
+use Psr\Log\LoggerAwareInterface;
+use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
+
 
 class EmailableListener implements LoggerAwareInterface, EventSubscriber
 {

@@ -2,20 +2,33 @@
 
 namespace Librinfo\BaseEntitiesBundle\EventListener;
 
+use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\Id\UuidGenerator;
+use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
-use Knp\DoctrineBehaviors\ORM\Tree\TreeSubscriber;
-use Knp\DoctrineBehaviors\Reflection\ClassAnalyzer;
+use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
 
-class MappingListener
+class MappingListener implements EventSubscriber
 {
+    use ClassChecker;
+
+    /**
+     * Returns an array of events this subscriber wants to listen to.
+     *
+     * @return array
+     */
+    public function getSubscribedEvents()
+    {
+        return [
+            'loadClassMetadata'
+        ];
+    }
+
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
-
-        $eventArgs->getEntityManager()->getEventManager()->addEventSubscriber(
-            new TreeSubscriber(new ClassAnalyzer(), true, 'Librinfo\BaseEntitiesBundle\Entity\Traits\TreeEntity')
-        );
-
+        /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
+
         $namingStrategy = $eventArgs
             ->getEntityManager()
             ->getConfiguration()
@@ -30,6 +43,15 @@ class MappingListener
             $metadata->table['name'] = $newname;
         }
 
-
+        if ($this->hasTrait($metadata->getReflectionClass(), 'Librinfo\BaseEntitiesBundle\Entity\Traits\BaseEntity'))
+        {
+            $metadata->mapField([
+                'id'         => true,
+                'fieldName'  => "id",
+                'type'       => "guid",
+                'columnName' => "id",
+            ]);
+            $metadata->setIdGenerator(new UuidGenerator());
+        }
     }
 }

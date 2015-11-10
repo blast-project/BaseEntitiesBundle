@@ -7,16 +7,15 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Knp\DoctrineBehaviors\Reflection\ClassAnalyzer;
+use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
 use Psr\Log\LoggerAwareInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
-use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
 use Librinfo\BaseEntitiesBundle\EventListener\Traits\Logger;
 
 class TraceableListener implements LoggerAwareInterface, EventSubscriber
 {
     use ClassChecker, Logger;
-    
+
     /**
      * @var TokenStorage
      */
@@ -101,7 +100,7 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
         );
 
         $now = new DateTime('NOW');
-        $entity->setCreatedDate($now);
+        $entity->setCreatedAt($now);
     }
 
     /**
@@ -121,7 +120,7 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
         );
 
         $now = new DateTime('NOW');
-        $entity->setLastUpdateDate($now);
+        $entity->setUpdatedAt($now);
     }
 
     /**

@@ -5,7 +5,6 @@ namespace Librinfo\BaseEntitiesBundle\EventListener;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Knp\DoctrineBehaviors\Reflection\ClassAnalyzer;
 use Psr\Log\LoggerAwareInterface;
 use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
 use Librinfo\BaseEntitiesBundle\EventListener\Traits\Logger;

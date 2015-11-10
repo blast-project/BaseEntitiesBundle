@@ -6,6 +6,8 @@ services:
         class: Librinfo\BaseEntitiesBundle\EventListener\MappingListener
         tags:
             - { name: doctrine.event_listener, event: loadClassMetadata }
+        calls:
+            - [setClassAnalyser, [%knp.doctrine_behaviors.reflection.class_analyzer.class%]]
 
 # Service that manage Traceable doctrine mapping and behavior
 

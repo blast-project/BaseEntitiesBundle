@@ -42,12 +42,12 @@ parameters:
                     Specifics:
                         Misc:
                             createdAt:
-                                type: text
+                                type: datetime
                                 read_only: true
                                 disabled: true
                                 required: false
                             updatedAt:
-                                type: text
+                                type: datetime
                                 read_only: true
                                 disabled: true
                                 required: false

@@ -154,7 +154,7 @@ trait Addressable
      *
      * @return Addressable
      */
-    public function setdescription($description)
+    public function setDescription($description)
     {
         $this->description = $description;
         return $this;

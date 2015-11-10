@@ -3,12 +3,11 @@
 namespace Librinfo\BaseEntitiesBundle\Entity\Traits;
 
 use DateTime;
-//use Librinfo\UserBundle\Entity\Traits\Traceable;
 
 trait Traceable
 {
     use \Librinfo\UserBundle\Entity\Traits\Traceable;
-    
+
     /**
      * @var DateTime
      */
@@ -51,7 +50,7 @@ trait Traceable
      *
      * @return Traceable
      */
-    public function setLastUpdatedAt(DateTime $lastUpdatedAt)
+    public function setUpdatedAt(DateTime $lastUpdatedAt)
     {
         $this->updatedAt = $lastUpdatedAt;
         return $this;
