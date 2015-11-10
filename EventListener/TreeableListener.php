@@ -2,75 +2,59 @@
 
 namespace Librinfo\BaseEntitiesBundle\EventListener;
 
+use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerInterface;
+use Monolog\Logger;
 
-class TreeableListener
+class TreeableListener implements LoggerAwareInterface, EventSubscriber
 {
+    /**
+     * @var Logger
+     */
+    private $logger;
+
+    use ClassChecker;
+
+    /**
+     * Returns an array of events this subscriber wants to listen to.
+     *
+     * @return array
+     */
+    public function getSubscribedEvents()
+    {
+        return [
+            'loadClassMetadata'
+        ];
+    }
+
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
 
-        $namingStrategy = $eventArgs
-            ->getEntityManager()
-            ->getConfiguration()
-            ->getNamingStrategy();
+        if (!$this->hasTrait($metadata->getReflectionClass(), 'Knp\DoctrineBehaviors\Model\Tree\Node'))
+            return; // return if current entity doesn't use Addressable trait
 
-//        var_dump($metadata->getReflectionClass()->getInterfaces());
-        if (!array_key_exists('Librinfo\BaseEntitiesBundle\Entity\TreeableInterface', $metadata->getReflectionClass()->getInterfaces()))
-            return;
+        $this->logger->debug(
+            "[TreeableListener] Entering TreeableListener for « loadClassMetadata » event"
+        );
 
-//        var_dump($metadata);
+        $metadata->setCustomRepositoryClass('Librinfo\BaseEntitiesBundle\Entity\Repository\TreeableRepository');
 
-        $metadata->setCustomRepositoryClass('Gedmo\Tree\Entity\Repository\NestedTreeRepository');
+    }
 
-//        $metadata->mapField([
-//            'fieldName' => 'lft',
-//            'type'      => 'integer'
-//        ]);
-//
-//        $metadata->mapField([
-//            'fieldName' => 'rgt',
-//            'type'      => 'integer'
-//        ]);
-//
-//        $metadata->mapField([
-//            'fieldName' => 'root',
-//            'type'      => 'integer'
-//        ]);
-//
-//        $metadata->mapField([
-//            'fieldName' => 'lvl',
-//            'type'      => 'integer'
-//        ]);
-//
-//        $metadata->mapManyToOne([
-//            'targetEntity' => $metadata->getReflectionClass()->getName(),
-//            'fieldName'    => 'parent',
-//            'inversedBy'   => 'children',
-//            'joinColumn'   => [
-//                'name'                 => 'parent_id',
-//                'referencedColumnName' => 'id',
-//                'onDelete'             => 'CASCADE'
-//            ],
-//            'gedmo'        => [
-//                'treeParent'
-//            ]
-//        ]);
-//
-//        $metadata->mapOneToMany([
-//            'targetEntity' => $metadata->getReflectionClass()->getName(),
-//            'fieldName'    => 'children',
-//            'mappedBy'     => 'parent',
-//            'orderBy'      => [
-//                'lft' => 'ASC'
-//            ]
-//        ]);
-
-//        $evm = new \Doctrine\Common\EventManager();
-//        $treeListener = new \Gedmo\Tree\TreeListener();
-//        $evm->addEventSubscriber($treeListener);
-
+    /**
+     * Sets a logger instance on the object
+     *
+     * @param LoggerInterface $logger
+     *
+     * @return null
+     */
+    public function setLogger(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
     }
 }
