@@ -7,18 +7,12 @@ use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Knp\DoctrineBehaviors\Reflection\ClassAnalyzer;
 use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerInterface;
-use Monolog\Logger;
 use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
+use Librinfo\BaseEntitiesBundle\EventListener\Traits\Logger;
 
 class AddressableListener implements LoggerAwareInterface, EventSubscriber
 {
-    /**
-     * @var Logger
-     */
-    private $logger;
-
-    use ClassChecker;
+    use ClassChecker, Logger;
 
     /**
      * Returns an array of events this subscriber wants to listen to.
@@ -46,16 +40,10 @@ class AddressableListener implements LoggerAwareInterface, EventSubscriber
             return; // return if current entity doesn't use Addressable trait
 
         $this->logger->debug(
-            "[AddressableListner] Entering AddressableListner for « loadClassMetadata » event"
+            "[AddressableListener] Entering AddressableListener for « loadClassMetadata » event"
         );
 
         // setting default mapping configuration for Traceable
-
-        // addressName
-        $metadata->mapField([
-            'fieldName' => 'name',
-            'type'      => 'string',
-        ]);
 
         // addressDescription
         $metadata->mapField([
@@ -71,7 +59,7 @@ class AddressableListener implements LoggerAwareInterface, EventSubscriber
             'nullable'  => true
         ]);
 
-        // postalCode
+        // zip
         $metadata->mapField([
             'fieldName' => 'zip',
             'type'      => 'string',
@@ -136,21 +124,9 @@ class AddressableListener implements LoggerAwareInterface, EventSubscriber
         ]);
 
         $this->logger->debug(
-            "[AddressableListner] Added Addressable mapping metadata to Entity",
+            "[AddressableListener] Added Addressable mapping metadata to Entity",
             ['class' => $metadata->getName()]
         );
 
-    }
-
-    /**
-     * Sets a logger instance on the object
-     *
-     * @param LoggerInterface $logger
-     *
-     * @return null
-     */
-    public function setLogger(LoggerInterface $logger)
-    {
-        $this->logger = $logger;
     }
 }

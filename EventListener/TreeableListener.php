@@ -6,17 +6,12 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerInterface;
-use Monolog\Logger;
+use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
+use Librinfo\BaseEntitiesBundle\EventListener\Traits\Logger;
 
 class TreeableListener implements LoggerAwareInterface, EventSubscriber
 {
-    /**
-     * @var Logger
-     */
-    private $logger;
-
-    use ClassChecker;
+    use ClassChecker, Logger;
 
     /**
      * Returns an array of events this subscriber wants to listen to.
@@ -44,17 +39,5 @@ class TreeableListener implements LoggerAwareInterface, EventSubscriber
 
         $metadata->setCustomRepositoryClass('Librinfo\BaseEntitiesBundle\Entity\Repository\TreeableRepository');
 
-    }
-
-    /**
-     * Sets a logger instance on the object
-     *
-     * @param LoggerInterface $logger
-     *
-     * @return null
-     */
-    public function setLogger(LoggerInterface $logger)
-    {
-        $this->logger = $logger;
     }
 }

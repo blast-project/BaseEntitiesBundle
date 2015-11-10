@@ -4,11 +4,8 @@ namespace Librinfo\BaseEntitiesBundle\Entity\Traits;
 
 trait Addressable
 {
-    /**
-     * @var string
-     */
-    private $name;
-
+    use Nameable;
+    
     /**
      * @var string
      */
@@ -42,46 +39,12 @@ trait Addressable
     /**
      * @var string
      */
-    private $email;
-
-    /**
-     * @var boolean
-     */
-    private $emailNpai = false;
-
-    /**
-     * @var boolean
-     */
-    private $emailNoNewsletter = false;
-
-    /**
-     * @var string
-     */
     private $vcardUid;
 
     /**
      * @var boolean
      */
     private $confirmed = true;
-
-    /**
-     * @param string $name
-     *
-     * @return Addressable
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
 
     /**
      * @return string
@@ -175,63 +138,6 @@ trait Addressable
     public function setNpai($npai)
     {
         $this->npai = $npai;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param string $email
-     *
-     * @return Addressable
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isEmailNpai()
-    {
-        return $this->emailNpai;
-    }
-
-    /**
-     * @param boolean $emailNpai
-     *
-     * @return Addressable
-     */
-    public function setEmailNpai($emailNpai)
-    {
-        $this->emailNpai = $emailNpai;
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isEmailNoNewsletter()
-    {
-        return $this->emailNoNewsletter;
-    }
-
-    /**
-     * @param boolean $emailNoNewsletter
-     *
-     * @return Addressable
-     */
-    public function setEmailNoNewsletter($emailNoNewsletter)
-    {
-        $this->emailNoNewsletter = $emailNoNewsletter;
         return $this;
     }
 

@@ -8,19 +8,15 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Knp\DoctrineBehaviors\Reflection\ClassAnalyzer;
-use Monolog\Logger;
 use Psr\Log\LoggerAwareInterface;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
+use Librinfo\BaseEntitiesBundle\EventListener\Traits\Logger;
 
 class TraceableListener implements LoggerAwareInterface, EventSubscriber
 {
-    /**
-     * @var Logger
-     */
-    private $logger;
-
+    use ClassChecker, Logger;
+    
     /**
      * @var TokenStorage
      */
@@ -30,8 +26,6 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
      * @var string
      */
     private $userClass;
-
-    use ClassChecker;
 
     /**
      * Returns an array of events this subscriber wants to listen to.
@@ -61,11 +55,11 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
             return; // return if current entity doesn't use Traceable trait
 
         $this->logger->debug(
-            "[TraceableListner] Entering TraceableListner for « loadClassMetadata » event"
+            "[TraceableListener] Entering TraceableListener for « loadClassMetadata » event"
         );
 
         $this->logger->debug(
-            "[TraceableListner] Using « " . $this->userClass . " » as User class"
+            "[TraceableListener] Using « " . $this->userClass . " » as User class"
         );
 
         // setting default mapping configuration for Traceable
@@ -85,7 +79,7 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
         ]);
 
         $this->logger->debug(
-            "[TraceableListner] Added Traceable mapping metadata to Entity",
+            "[TraceableListener] Added Traceable mapping metadata to Entity",
             ['class' => $metadata->getName()]
         );
     }
@@ -103,7 +97,7 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
             return;
 
         $this->logger->debug(
-            "[TraceableListner] Entering TraceableListner for « prePersist » event"
+            "[TraceableListener] Entering TraceableListener for « prePersist » event"
         );
 
         $now = new DateTime('NOW');
@@ -123,23 +117,11 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
             return;
 
         $this->logger->debug(
-            "[TraceableListner] Entering TraceableListner for « preUpdate » event"
+            "[TraceableListener] Entering TraceableListener for « preUpdate » event"
         );
 
         $now = new DateTime('NOW');
         $entity->setLastUpdateDate($now);
-    }
-
-    /**
-     * Sets a logger instance on the object
-     *
-     * @param LoggerInterface $logger
-     *
-     * @return null
-     */
-    public function setLogger(LoggerInterface $logger)
-    {
-        $this->logger = $logger;
     }
 
     /**
