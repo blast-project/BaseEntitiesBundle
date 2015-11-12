@@ -6,8 +6,6 @@ use DateTime;
 
 trait Traceable
 {
-    use \Librinfo\UserBundle\Entity\Traits\Traceable;
-
     /**
      * @var DateTime
      */

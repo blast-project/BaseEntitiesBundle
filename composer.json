@@ -6,8 +6,7 @@
         "php": ">=5.3.0",
         "symfony/symfony": "2.7.*",
         "knplabs/doctrine-behaviors": "~1.1",
-        "libre-informatique/core-bundle": "dev-interfaces_and_traits",
-        "libre-informatique/user-bundle": "dev-master"
+        "libre-informatique/core-bundle": "dev-interfaces_and_traits"
     },
     "license": "GPL-3.0",
     "keywords": [
