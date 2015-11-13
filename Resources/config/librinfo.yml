@@ -85,7 +85,7 @@ parameters:
                                 required: false
 
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\BaseEntity:
+        Librinfo\BaseEntitiesBundle\Entity\Traits\Idable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove: [id]
             Sonata\AdminBundle\Form\FormMapper:
