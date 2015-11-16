@@ -30,14 +30,20 @@ class TreeableListener implements LoggerAwareInterface, EventSubscriber
         /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
 
-        if (!$this->hasTrait($metadata->getReflectionClass(), 'Knp\DoctrineBehaviors\Model\Tree\Node'))
+        if (!$this->hasTrait($metadata->getReflectionClass(), 'Librinfo\BaseEntitiesBundle\Entity\Traits\Treeable'))
             return; // return if current entity doesn't use Addressable trait
 
         $this->logger->debug(
             "[TreeableListener] Entering TreeableListener for « loadClassMetadata » event"
         );
 
-        $metadata->setCustomRepositoryClass('Librinfo\BaseEntitiesBundle\Entity\Repository\TreeableRepository');
+        if (!$metadata->hasField('materializedPath'))
+            $metadata->mapField([
+                'fieldName' => 'materializedPath',
+                'type'      => 'string',
+                'length'    => 255
+            ]);
 
+        $metadata->setCustomRepositoryClass('Librinfo\BaseEntitiesBundle\Entity\Repository\TreeableRepository');
     }
 }
