@@ -41,7 +41,14 @@ class TreeableListener implements LoggerAwareInterface, EventSubscriber
             $metadata->mapField([
                 'fieldName' => 'materializedPath',
                 'type'      => 'string',
-                'length'    => 255
+                'length'    => 2048
+            ]);
+
+        if (!$metadata->hasField('sortMaterializedPath'))
+            $metadata->mapField([
+                'fieldName' => 'sortMaterializedPath',
+                'type'      => 'string',
+                'length'    => 2048
             ]);
 
         $metadata->setCustomRepositoryClass('Librinfo\BaseEntitiesBundle\Entity\Repository\TreeableRepository');
