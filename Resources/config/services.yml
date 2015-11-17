@@ -1,5 +1,11 @@
 services:
 
+# ###################################################################################
+#
+#                             DOCTRINE BEHAVIORS
+#
+# ###################################################################################
+
 # Service that manages Entity / Table naming convention
     librinfo.base_entities.listener.mapping:
         class: Librinfo\BaseEntitiesBundle\EventListener\MappingListener
@@ -54,3 +60,23 @@ services:
         calls:
             - [setLogger,[@logger]]
             - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+
+
+# ###################################################################################
+#
+#                          SYMFONY CUSTOM FORM TYPES
+#
+# ###################################################################################
+
+    librinfo_base_entities.form.type.treeable:
+        class: Librinfo\BaseEntitiesBundle\Form\Type\TreeableFormType
+        calls:
+            - [setEntityManager, ['@doctrine.orm.entity_manager']]
+        tags:
+            - { name: form.type, alias: treeable }
+    librinfo_base_entities.form.type.treeable_choice:
+        class: Librinfo\BaseEntitiesBundle\Form\Type\TreeableChoiceFormType
+        calls:
+            - [setEntityManager, ['@doctrine.orm.entity_manager']]
+        tags:
+            - { name: form.type, alias: treeable_choice }

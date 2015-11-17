@@ -14,7 +14,8 @@ class TreeableRepository extends EntityRepository implements TreeableRepositoryI
      */
     public function getRootNodesWithTree()
     {
-        $all = $this->findAll();
+//        $all = $this->findAll();
+        $all = $this->findBy([],['sortMaterializedPath'=>'ASC']);
         $allRootNodes = array();
         foreach ($all as $node)
         {
