@@ -1,6 +1,5 @@
 # SymfonyLibrinfoBaseEntitiesBundle
 
-<<<<<<< HEAD
 ## Installation
 
 ### Prequiresites
@@ -58,4 +57,3 @@ Edit your app/AppKernel.php file and add your "libre-informatique/base-entities-
         );
     }
 ```
->>>>>>> origin/master
