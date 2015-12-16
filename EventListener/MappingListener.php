@@ -43,15 +43,19 @@ class MappingListener implements EventSubscriber
             $metadata->table['name'] = $newname;
         }
 
-        if ($this->hasTrait($metadata->getReflectionClass(), 'Librinfo\BaseEntitiesBundle\Entity\Traits\Idable'))
-        {
-            $metadata->mapField([
-                'id'         => true,
-                'fieldName'  => "id",
-                'type'       => "guid",
-                'columnName' => "id",
-            ]);
-            $metadata->setIdGenerator(new UuidGenerator());
-        }
+        $reflectionClass = $metadata->getReflectionClass();
+
+        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Idable')) {
+            return;
+        } // return if current entity doesn't use Idable trait          
+        
+
+        $metadata->mapField([
+            'id'         => true,
+            'fieldName'  => "id",
+            'type'       => "guid",
+            'columnName' => "id",
+        ]);
+        $metadata->setIdGenerator(new UuidGenerator());
     }
 }

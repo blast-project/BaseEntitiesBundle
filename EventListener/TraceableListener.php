@@ -50,7 +50,9 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
         /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
 
-        if (!$this->hasTrait($metadata->getReflectionClass(), 'Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable'))
+        $reflectionClass = $metadata->getReflectionClass();
+
+        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable'))
             return; // return if current entity doesn't use Traceable trait
 
         $this->logger->debug(

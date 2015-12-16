@@ -30,8 +30,10 @@ class TreeableListener implements LoggerAwareInterface, EventSubscriber
         /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
 
-        if (!$this->hasTrait($metadata->getReflectionClass(), 'Librinfo\BaseEntitiesBundle\Entity\Traits\Treeable'))
-            return; // return if current entity doesn't use Addressable trait
+        $reflectionClass = $metadata->getReflectionClass();
+
+        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Treeable'))
+            return; // return if current entity doesn't use Treeable trait
 
         $this->logger->debug(
             "[TreeableListener] Entering TreeableListener for « loadClassMetadata » event"

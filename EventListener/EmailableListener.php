@@ -34,9 +34,11 @@ class EmailableListener implements LoggerAwareInterface, EventSubscriber
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         /** @var ClassMetadata $metadata */
-        $metadata = $eventArgs->getClassMetadata();
+        $metadata = $eventArgs->getClassMetadata();        
+       
+        $reflectionClass = $metadata->getReflectionClass();
 
-        if (!$this->hasTrait($metadata->getReflectionClass(), 'Librinfo\BaseEntitiesBundle\Entity\Traits\Emailable'))
+        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Emailable'))
             return; // return if current entity doesn't use Emailable trait
 
         $this->logger->debug(
