@@ -52,6 +52,15 @@ services:
             - [setLogger,[@logger]]
             - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
+# Service that manages Labelable doctrine mapping
+    librinfo.base_entities.listener.labelable:
+        class: Librinfo\BaseEntitiesBundle\EventListener\LabelableListener
+        tags:
+            - { name: doctrine.event_subscriber }
+        calls:
+            - [setLogger,[@logger]]
+            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+
 # Service that manages Emailable doctrine mapping
     librinfo.base_entities.listener.emailable:
         class: Librinfo\BaseEntitiesBundle\EventListener\EmailableListener

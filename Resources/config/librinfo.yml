@@ -44,7 +44,8 @@ parameters:
                 add:
                     General:
                         '':
-                            email: ~
+                            email:
+                                type: email
                     Specifics:
                         Email:
                             emailNpai: ~
@@ -63,6 +64,18 @@ parameters:
                     General:
                         '':
                             name: ~
+        Librinfo\BaseEntitiesBundle\Entity\Traits\Labelable:
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    label: ~
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    label: ~
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    General:
+                        '':
+                            label: ~
 
 
         Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable:
