@@ -49,7 +49,7 @@ class NameableListener implements LoggerAwareInterface, EventSubscriber
         $metadata->mapField([
             'fieldName' => 'name',
             'type'      => 'string',
-            'nullable'  => true,
+            //'nullable'  => true,
         ]);
         
         $this->logger->debug(
