@@ -46,6 +46,7 @@ parameters:
                         '':
                             email:
                                 type: email
+                                required: false
                     Specifics:
                         Email:
                             emailNpai: ~

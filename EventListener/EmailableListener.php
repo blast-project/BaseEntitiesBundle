@@ -34,7 +34,7 @@ class EmailableListener implements LoggerAwareInterface, EventSubscriber
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         /** @var ClassMetadata $metadata */
-        $metadata = $eventArgs->getClassMetadata();        
+        $metadata = $eventArgs->getClassMetadata();
        
         $reflectionClass = $metadata->getReflectionClass();
 
@@ -51,21 +51,21 @@ class EmailableListener implements LoggerAwareInterface, EventSubscriber
         $metadata->mapField([
             'fieldName' => 'email',
             'type'      => 'string',
-            'nullable'  => true
+            'nullable'  => true,
         ]);
 
         // emailNpai
         $metadata->mapField([
             'fieldName' => 'emailNpai',
             'type'      => 'boolean',
-            'nullable'  => true
+            'nullable'  => true,
         ]);
 
         // emailNoNewsletter
         $metadata->mapField([
             'fieldName' => 'emailNoNewsletter',
             'type'      => 'boolean',
-            'nullable'  => true
+            'nullable'  => true,
         ]);
 
         $this->logger->debug(
