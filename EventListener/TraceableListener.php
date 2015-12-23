@@ -103,6 +103,7 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
 
         $now = new DateTime('NOW');
         $entity->setCreatedAt($now);
+        $entity->setUpdatedAt($now);
     }
 
     /**
