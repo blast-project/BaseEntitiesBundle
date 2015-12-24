@@ -5,7 +5,7 @@ namespace Librinfo\BaseEntitiesBundle\Form\Type;
 use Doctrine\ORM\EntityManager;
 use Librinfo\BaseEntitiesBundle\Entity\Repository\TreeableRepositoryInterface;
 use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
-use Symfony\Component\Form\AbstractType;
+use Librinfo\CoreBundle\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\View\ChoiceView;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 
-class TreeableFormType extends AbstractType
+class TreeableType extends AbstractType
 {
 
     /**
@@ -90,11 +90,6 @@ class TreeableFormType extends AbstractType
     public function getParent()
     {
         return 'entity';
-    }
-
-    public function getName()
-    {
-        return 'treeable';
     }
 
     public function setEntityManager(EntityManager $em)

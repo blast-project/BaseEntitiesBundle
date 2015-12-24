@@ -11,6 +11,8 @@ parameters:
                     zip: ~
                     city: ~
                     country: ~
+            Sonata\AdminBundle\Show\ShowMapper:
+                _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     General:
@@ -40,6 +42,8 @@ parameters:
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     email: ~
+            Sonata\AdminBundle\Show\ShowMapper:
+                _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     General:
@@ -60,11 +64,14 @@ parameters:
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     name: ~
+            Sonata\AdminBundle\Show\ShowMapper:
+                _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     General:
                         '':
                             name: ~
+
         Librinfo\BaseEntitiesBundle\Entity\Traits\Labelable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
@@ -72,6 +79,8 @@ parameters:
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     label: ~
+            Sonata\AdminBundle\Show\ShowMapper:
+                _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     General:
@@ -83,6 +92,12 @@ parameters:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     createdAt: ~
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    Specifics:
+                        Misc:
+                            createdAt: ~
+                            updatedAt: ~
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     Specifics:
@@ -104,14 +119,19 @@ parameters:
         Librinfo\BaseEntitiesBundle\Entity\Traits\Idable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove: [id]
+            Sonata\AdminBundle\Show\ShowMapper:
+                _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
                 remove: [id]
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 remove: [id]
+
         Librinfo\BaseEntitiesBundle\Entity\Traits\Treeable:
+            Sonata\AdminBundle\Show\ShowMapper:
+                _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     General:
                         '':
                             parentNode:
-                                type: treeable
+                                type: librinfo_baseentities_treeable
