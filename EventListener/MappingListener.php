@@ -30,11 +30,11 @@ class MappingListener implements EventSubscriber
         $metadata = $eventArgs->getClassMetadata();
 
         $namingStrategy = $eventArgs
-            ->getEntityManager()
-            ->getConfiguration()
-            ->getNamingStrategy();
+                ->getEntityManager()
+                ->getConfiguration()
+                ->getNamingStrategy();
 
-        if ($namingStrategy->classToTableName($metadata->getName()) == $metadata->table['name'])
+        if ( $namingStrategy->classToTableName($metadata->getName()) == $metadata->table['name'] )
         {
             $newname = $metadata->name;
             $newname = str_replace('Bundle\\Entity', '', $newname);
@@ -43,17 +43,21 @@ class MappingListener implements EventSubscriber
             $metadata->table['name'] = $newname;
         }
 
+        // Do not generate id mapping twice for entities that extend a MappedSuperclass
+        if ($metadata->isMappedSuperclass)
+            return;
+
         $reflectionClass = $metadata->getReflectionClass();
 
-        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Idable')) {
+        if ( !$reflectionClass || !$this->hasTrait($reflectionClass, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Idable') )
+        {
             return;
-        } // return if current entity doesn't use Idable trait          
-        
+        } // return if current entity doesn't use Idable trait
 
         $metadata->mapField([
-            'id'         => true,
-            'fieldName'  => "id",
-            'type'       => "guid",
+            'id' => true,
+            'fieldName' => "id",
+            'type' => "guid",
             'columnName' => "id",
         ]);
         $metadata->setIdGenerator(new UuidGenerator());
