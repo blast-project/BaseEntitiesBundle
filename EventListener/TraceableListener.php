@@ -69,14 +69,12 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
         $metadata->mapField([
             'fieldName' => 'createdAt',
             'type'      => 'datetime',
-            'nullable'  => true
         ]);
 
         // updatedAt
         $metadata->mapField([
             'fieldName' => 'updatedAt',
             'type'      => 'datetime',
-            'nullable'  => true
         ]);
 
         $this->logger->debug(
