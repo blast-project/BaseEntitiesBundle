@@ -14,6 +14,7 @@ trait ClassChecker
     public function setClassAnalyser($classAnalyzer)
     {
         $this->classAnalyzer = new $classAnalyzer;
+        return $this;
     }
 
     public function hasTrait($object, $traitFQDN)
