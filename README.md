@@ -57,3 +57,16 @@ Edit your app/AppKernel.php file and add your "libre-informatique/base-entities-
         );
     }
 ```
+
+Learn how to use the ```libre-informatique/base-entities-bundle```
+==================================================================
+
+Doctrine Behaviors provided by the bundle
+-----------------------------------------
+
+Learn how to use them, how they work, and by extension learn how to create new behaviors shaped to your needs, [reading the specific documentation](Resources/doc/base_entities_management.md).
+
+Specific Form Types
+-------------------
+
+The bundle provides some form types, learn more about this, [reading the specific documentation](Resources/doc/README-FormTypes.md).
