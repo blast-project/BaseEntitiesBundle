@@ -46,13 +46,6 @@ class AddressableListener implements LoggerAwareInterface, EventSubscriber
 
         // setting default mapping configuration for Traceable
 
-        // addressDescription
-        $metadata->mapField([
-            'fieldName' => 'description',
-            'type'      => 'string',
-            'nullable'  => true
-        ]);
-
         // address
         $metadata->mapField([
             'fieldName' => 'address',

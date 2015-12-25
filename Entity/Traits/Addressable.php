@@ -11,11 +11,6 @@ trait Addressable
     /**
      * @var string
      */
-    private $description;
-
-    /**
-     * @var string
-     */
     private $address;
 
     /**
@@ -140,25 +135,6 @@ trait Addressable
     public function setNpai($npai)
     {
         $this->npai = $npai;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param string $description
-     *
-     * @return Addressable
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
         return $this;
     }
 

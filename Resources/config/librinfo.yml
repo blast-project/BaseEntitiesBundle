@@ -25,7 +25,6 @@ parameters:
                             country: ~
                     Specifics:
                         Communication:
-                            description: ~
                             vcard_uid:
                                 type: text
                                 read_only: true
@@ -71,6 +70,18 @@ parameters:
                     General:
                         '':
                             name: ~
+
+        Librinfo\BaseEntitiesBundle\Entity\Traits\Descriptible:
+            Sonata\AdminBundle\Show\ShowMapper:
+                _copy: Sonata\AdminBundle\Form\FormMapper
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    General:
+                        Description:
+                            description:
+                                type: textarea
+                                required: false
+                                label: ' '
 
         Librinfo\BaseEntitiesBundle\Entity\Traits\Labelable:
             Sonata\AdminBundle\Datagrid\ListMapper:
