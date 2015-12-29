@@ -41,8 +41,7 @@ parameters:
                         type: email
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
-                    email:
-                        type: email
+                    email: ~
             Sonata\AdminBundle\Show\ShowMapper:
                 _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
@@ -82,7 +81,6 @@ parameters:
                         Description:
                             description:
                                 type: textarea
-                                required: false
                                 label: ' '
 
         Librinfo\BaseEntitiesBundle\Entity\Traits\Labelable:
