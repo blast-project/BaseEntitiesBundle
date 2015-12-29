@@ -37,10 +37,12 @@ parameters:
         Librinfo\BaseEntitiesBundle\Entity\Traits\Emailable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
-                    email: ~
+                    email:
+                        type: email
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
-                    email: ~
+                    email:
+                        type: email
             Sonata\AdminBundle\Show\ShowMapper:
                 _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
