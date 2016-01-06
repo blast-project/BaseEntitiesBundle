@@ -82,7 +82,6 @@ parameters:
                             description:
                                 type: textarea
                                 label: ' '
-                                required: false
 
         Librinfo\BaseEntitiesBundle\Entity\Traits\Labelable:
             Sonata\AdminBundle\Datagrid\ListMapper:
