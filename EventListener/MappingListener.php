@@ -55,13 +55,8 @@ class MappingListener implements EventSubscriber
 
         $reflectionClass = $metadata->getReflectionClass();
 
-        if ( !$reflectionClass || !$this->hasTrait($reflectionClass, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Idable') )
-        {
-            return;
-        } // return if current entity doesn't use Idable trait
-
         // return if the current entity doesn't use Idable trait
-        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Idable'))
+        if ( !$reflectionClass || !$this->hasTrait($reflectionClass, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Idable') )
             return;
 
         $metadata->mapField([

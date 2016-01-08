@@ -5,6 +5,11 @@ namespace Librinfo\BaseEntitiesBundle\Entity;
 abstract class SearchIndexEntity
 {
     /**
+     * @var int
+     */
+    protected $id;
+
+    /**
      * @var string
      */
     protected $keyword;
@@ -12,11 +17,11 @@ abstract class SearchIndexEntity
     /**
      * @var string
      */
-    private $field;
+    protected $field;
 
 
     /**
      * @var string
      */
-    private $object_id;
+    protected $object;
 }

@@ -20,7 +20,7 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
         calls:
-            - [setLogger,[@logger]]
+            - [setLogger, [@logger]]
             - [setTokenStorage, [@security.token_storage]]
             - [setUserClass, [%librinfo.user_bundle.user.class%]]
             - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
@@ -31,7 +31,7 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
         calls:
-            - [setLogger,[@logger]]
+            - [setLogger, [@logger]]
             - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Treeable doctrine mapping
@@ -40,7 +40,7 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
         calls:
-            - [setLogger,[@logger]]
+            - [setLogger, [@logger]]
             - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Nameable doctrine mapping
@@ -49,7 +49,7 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
         calls:
-            - [setLogger,[@logger]]
+            - [setLogger, [@logger]]
             - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Labelable doctrine mapping
@@ -58,7 +58,7 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
         calls:
-            - [setLogger,[@logger]]
+            - [setLogger, [@logger]]
             - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Emailable doctrine mapping
@@ -67,18 +67,26 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
         calls:
-            - [setLogger,[@logger]]
+            - [setLogger, [@logger]]
             - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
-# Service that manages Emailable doctrine mapping
+# Service that manages Descriptible doctrine mapping
     librinfo.base_entities.listener.descriptible:
         class: Librinfo\BaseEntitiesBundle\EventListener\DescriptibleListener
         tags:
             - { name: doctrine.event_subscriber }
         calls:
-            - [setLogger,[@logger]]
+            - [setLogger, [@logger]]
             - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
+# Service that manages Searchable doctrine mapping
+    librinfo.base_entities.listener.searchable:
+        class: Librinfo\BaseEntitiesBundle\EventListener\SearchableListener
+        tags:
+            - { name: doctrine.event_subscriber }
+        calls:
+            - [setLogger, [@logger]]
+            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # ###################################################################################
 #

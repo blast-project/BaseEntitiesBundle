@@ -1,9 +1,11 @@
 Librinfo\BaseEntitiesBundle\Entity\SearchIndexEntity:
-#    type: mappedSuperclass
-    type: entity
+    type: mappedSuperclass
     id:
-        object_id:
-            type: guid
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
         field:
             type: string
             length: 255
