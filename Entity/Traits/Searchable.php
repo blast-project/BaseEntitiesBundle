@@ -4,6 +4,7 @@ namespace Librinfo\BaseEntitiesBundle\Entity\Traits;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Librinfo\BaseEntitiesBundle\Entity\SearchIndexEntity;
+use Librinfo\BaseEntitiesBundle\SearchAnalyser\SearchAnalyser;
 
 trait Searchable
 {
@@ -38,5 +39,17 @@ trait Searchable
         $this->searchIndexes = $searchIndexes;
 
         return $this;
+    }
+
+    /**
+     * @param string $field
+     * @return array
+     * @throws \Exception
+     */
+    public function analyseField($field)
+    {
+        if (!isset($this->$field))
+            throw new \Exception("Property $field does not exist.");
+        return SearchAnalyser::analyse($this->$field);
     }
 }

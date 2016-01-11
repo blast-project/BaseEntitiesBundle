@@ -3,6 +3,7 @@
 namespace Librinfo\BaseEntitiesBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
@@ -14,7 +15,7 @@ use Librinfo\CoreBundle\DependencyInjection\LibrinfoCoreExtension;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class LibrinfoBaseEntitiesExtension extends LibrinfoCoreExtension
+class LibrinfoBaseEntitiesExtension extends LibrinfoCoreExtension //implements PrependExtensionInterface
 {
     /**
      * {@inheritdoc}
@@ -27,6 +28,9 @@ class LibrinfoBaseEntitiesExtension extends LibrinfoCoreExtension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
 
+        // TODO : this does not work. WHY ?
+        //$loader->load('config.yml');
+
         // Loading KnpDoctrineBehaviors services
         try
         {
@@ -34,7 +38,7 @@ class LibrinfoBaseEntitiesExtension extends LibrinfoCoreExtension
             $loader->load('orm-services.yml');
         }
         catch (\Exception $e) { }
-        
+
         $this->mergeParameter('librinfo', $container, __DIR__.'/../Resources/config');
     }
 }

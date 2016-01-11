@@ -106,3 +106,12 @@ services:
             - [setEntityManager, ['@doctrine.orm.entity_manager']]
         tags:
             - { name: form.type, alias: librinfo_baseentities_treeablechoice }
+
+# ###################################################################################
+#
+#                          SEARCH ANALYZER
+#
+# ###################################################################################
+
+    librinfo.base_entities.search_analyser:
+        class: Librinfo\BaseEntitiesBundle\SearchAnalyser\SearchAnalyser
