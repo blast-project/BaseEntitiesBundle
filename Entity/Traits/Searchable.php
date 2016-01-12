@@ -48,7 +48,8 @@ trait Searchable
      */
     public function analyseField($field)
     {
-        if (!isset($this->$field))
+        $reflClass = new \ReflectionClass($this);
+        if (!$reflClass->hasProperty($field))
             throw new \Exception("Property $field does not exist.");
         return SearchAnalyser::analyse($this->$field);
     }

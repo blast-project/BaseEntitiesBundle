@@ -6,6 +6,8 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\PreFlushEventArgs;
+use Doctrine\ORM\Event\OnFlushEventArgs;
 use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
 use Librinfo\BaseEntitiesBundle\EventListener\Traits\Logger;
 use Librinfo\BaseEntitiesBundle\Entity\SearchIndexEntity;
@@ -24,8 +26,10 @@ class SearchableListener implements EventSubscriber
     {
         return [
             'loadClassMetadata',
-            'postPersist',
-            'postUpdate',
+            //'prePersist',
+            //'preUpdate',
+            //'preFlush',
+            'onFlush',
         ];
     }
 
@@ -66,47 +70,64 @@ class SearchableListener implements EventSubscriber
         }
     }
 
-    public function postUpdate(LifecycleEventArgs $args)
+
+    public function onFlush(OnFlushEventArgs $args)
     {
-        $this->index($args);
-    }
+        $em = $args->getEntityManager();
+        $uow = $em->getUnitOfWork();
 
-    public function postPersist(LifecycleEventArgs $args)
-    {
-        $this->index($args);
-    }
-
-    public function index(LifecycleEventArgs $args)
-    {
-
-        $entity = $args->getEntity();
-
-        if ( $this->hasTrait($entity, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Searchable') )
-        {
-            $em = $args->getEntityManager();
-
-            // delete old keywords for this entity
-            $indexes = $entity->getSearchIndexes();
-            foreach ($indexes as $index)
-                $em->remove($index);
-
-            // generate and save new keywords for this entity
-            $reflClass = new \ReflectionClass($entity);
-            $indexClass = $reflClass->getName() . 'SearchIndex';
-            $fields = $indexClass::$fields;
-            foreach ( $fields as $field )
+        foreach ($uow->getScheduledEntityInsertions() as $entity)
+            if ( $this->hasTrait($entity, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Searchable') )
             {
-                $keywords = $entity->analyseField($field);
-                foreach ( $keywords as $keyword )
-                {
-                    $index = new $indexClass();
-                    $index->setObject($entity);
-                    $index->setField($field);
-                    $index->setKeyword($keyword);
-                    $em->persist($index);
-                }
+                $this->createSearchIndexes($em, $entity);
             }
-            $em->flush();
+
+        foreach ($uow->getScheduledEntityUpdates() as $entity)
+            if ( $this->hasTrait($entity, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Searchable') )
+            {
+                $this->deleteSearchIndexes($em, $entity);
+                $this->createSearchIndexes($em, $entity);
+            }
+
+        foreach ($uow->getScheduledEntityDeletions() as $entity)
+            if ( $this->hasTrait($entity, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Searchable') )
+            {
+                $this->deleteSearchIndexes($em, $entity);
+            }
+    }
+
+    private function deleteSearchIndexes($em, $entity)
+    {
+        $reflClass = new \ReflectionClass($entity);
+        $indexClass = $reflClass->getName() . 'SearchIndex';
+
+        // delete old keywords
+        $sql = "DELETE $indexClass p WHERE p.object = :entity";
+        $query = $em->createQuery($sql)->setParameter('entity', $entity);
+        $query->execute();
+    }
+
+
+    private function createSearchIndexes($em, $entity)
+    {
+        $uow = $em->getUnitOfWork();
+        $reflClass = new \ReflectionClass($entity);
+        $indexClass = $reflClass->getName() . 'SearchIndex';
+        $classMetadata = $em->getClassMetadata($indexClass);
+
+        $fields = $indexClass::$fields;
+        foreach ( $fields as $field )
+        {
+            $keywords = $entity->analyseField($field);
+            foreach ( $keywords as $keyword )
+            {
+                $index = new $indexClass();
+                $index->setObject($entity);
+                $index->setField($field);
+                $index->setKeyword($keyword);
+                $em->persist($index);
+                $uow->computeChangeSet($classMetadata, $index);
+            }
         }
     }
 

@@ -36,6 +36,9 @@ class SearchAnalyser
         // remove multiple spaces
         $text = preg_replace('/\s+/', ' ',$text);
 
-        return explode(' ', $text);
+        if ($text)
+            return explode(' ', $text);
+
+        return [];
     }
 }
