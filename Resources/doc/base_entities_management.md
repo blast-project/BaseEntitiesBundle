@@ -207,3 +207,41 @@ class TraceableListener implements EventSubscriber
 ```
 
 This is quite trivial, this event listener appends data before persisting entities that use Traceable trait.
+
+## Searchable trait
+
+The searchable trait creates a database index (on a distinct table) for searching entities by keywords.
+The keywords are automatically updated each time an entity is created / updated / deleted.
+
+To enable this functionnality on an entity :
+- add the Searchable trait to the entity :
+```php
+namespace MyBundle\Entity;
+
+use Librinfo\BaseEntitiesBundle\Entity\Traits\Searchable;
+
+class Contact
+{
+    use Searchable;
+    [...]
+}
+```
+
+- Create a search index entity that extends SearchIndexEntity (the name must be the entity name suffixed by "SearchIndex") and specify the fields that need to be indexed :
+
+```php
+namespace MyBundle\Entity;
+
+use Librinfo\BaseEntitiesBundle\Entity\SearchIndexEntity;
+
+class ContactSearchIndex extends SearchIndexEntity
+{
+    public static $fields = ['name', 'description', 'address', 'city', 'country', 'email', 'url'];
+}
+```
+
+```yml
+# MyBundle/Resources/doctrine/ContactSearchIndex.orm.yml
+MyBundle\Entity\ContactSearchIndex:
+    type: entity
+```
