@@ -245,3 +245,7 @@ class ContactSearchIndex extends SearchIndexEntity
 MyBundle\Entity\ContactSearchIndex:
     type: entity
 ```
+
+This bundle comes with a ```librinfo:update:search``` console command to batch-update the search indexes :
+
+``` php app/console librinfo:update:search MyBundle:MyEntity ```
