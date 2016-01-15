@@ -38,7 +38,6 @@ class Yaml extends File implements Driver
     public function readExtendedMetadata($meta, array &$config)
     {
         $mapping = $this->_getMapping($meta->name);
-        dump('yaml: ' . $meta->name);
 
         // Entities that have the Loggable trait don't need the librinfo:loggable entry in the yaml file
         if ( ClassAnalyzer::hasTrait($meta->name, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Loggable') )
