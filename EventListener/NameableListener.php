@@ -51,7 +51,7 @@ class NameableListener implements LoggerAwareInterface, EventSubscriber
             'type'      => 'string',
             //'nullable'  => true,
         ]);
-        
+
         $this->logger->debug(
             "[NameableListener] Added Nameable mapping metadata to Entity",
             ['class' => $metadata->getName()]
