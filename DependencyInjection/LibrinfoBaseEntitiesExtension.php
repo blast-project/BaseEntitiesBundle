@@ -31,8 +31,10 @@ class LibrinfoBaseEntitiesExtension extends LibrinfoCoreExtension
             'emailable',
             'descriptible',
             'searchable',
-            //'loggable',
+            'loggable',
         ];
+
+        $useLoggable = false;
 
         foreach ( $availableListeners as $listenerName )
         {
@@ -43,6 +45,8 @@ class LibrinfoBaseEntitiesExtension extends LibrinfoCoreExtension
                 if ( !empty($listeners[$listenerName]) && $container->hasDefinition($serviceId) ) {
                     $definition = $container->getDefinition($serviceId);
                     $definition->addTag('doctrine.event_subscriber', ['connection' => $connection]);
+                    if ( $listenerName == 'loggable' )
+                        $useLoggable = true;
                 }
             }
 
@@ -52,8 +56,17 @@ class LibrinfoBaseEntitiesExtension extends LibrinfoCoreExtension
                 if ( !empty($listeners['$listenerName']) && $container->hasDefinition($serviceId) ) {
                     $definition = $container->getDefinition($serviceId);
                     $definition->addTag('doctrine_mongodb.odm..event_subscriber', ['connection' => $connection]);
+                    if ( $listenerName == 'loggable' )
+                        $useLoggable = true;
                 }
             }
+        }
+
+        if (  $useLoggable )
+        {
+            $container->getDefinition('librinfo.base_entities.listener.logger')
+                ->setPublic(true)
+                ->addTag('kernel.event_subscriber');
         }
 
         // Loading KnpDoctrineBehaviors services

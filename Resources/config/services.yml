@@ -12,7 +12,7 @@ services:
         class: Librinfo\BaseEntitiesBundle\EventListener\NamingListener
         calls:
             - [setLogger, [@logger]]
-            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]] 
+            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages GUID doctrine mapping
     librinfo.base_entities.listener.guidable:
@@ -78,6 +78,25 @@ services:
         calls:
             - [setLogger, [@logger]]
             - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+
+# Service that manages Loggable doctrine behaviour
+    librinfo.base_entities.listener.loggable:
+        class: Librinfo\BaseEntitiesBundle\Loggable\LoggableListener
+        calls:
+            - [setAnnotationReader, [@annotation_reader]]
+
+# ###################################################################################
+#
+#                          SYMFONY EVENT LISTENERS
+#
+# ###################################################################################
+
+# Service that injects user information into the Loggable listener
+    librinfo.base_entities.listener.logger:
+        class: Librinfo\BaseEntitiesBundle\Loggable\LoggerListener
+        public: false
+        arguments: [@librinfo.base_entities.listener.loggable]
+
 
 # ###################################################################################
 #
