@@ -3,15 +3,16 @@
 namespace Librinfo\BaseEntitiesBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
-use Doctrine\ORM\Id\UuidGenerator;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
+use Librinfo\BaseEntitiesBundle\EventListener\Traits\Logger;
+use Psr\Log\LoggerAwareInterface;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
-class NamingListener implements EventSubscriber
+class NamingListener implements LoggerAwareInterface, EventSubscriber
 {
-    use ClassChecker;
+    use ClassChecker, Logger;
 
     /**
      * Returns an array of events this subscriber wants to listen to.
@@ -29,6 +30,8 @@ class NamingListener implements EventSubscriber
     {
         /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
+
+        $this->logger->debug("[NamingListener] Entering NamingListener for « loadClassMetadata » event");
 
         $namingStrategy = $eventArgs
                 ->getEntityManager()
@@ -48,6 +51,11 @@ class NamingListener implements EventSubscriber
             $fqdn = $mapping['sourceEntity'].'__'.$rc->getShortName();
             $metadata->associationMappings[$field]['joinTable']['name'] = $this->buildTableName($fqdn);
         }
+
+        $this->logger->debug(
+            "[NamingListener] Added table naming strategy to Entity",
+            ['class' => $metadata->getName()]
+        );
     }
 
     protected static function buildTableName($class)

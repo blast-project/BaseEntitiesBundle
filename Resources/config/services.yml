@@ -10,11 +10,15 @@ services:
 # Service that manages Table naming convention
     librinfo.base_entities.listener.naming:
         class: Librinfo\BaseEntitiesBundle\EventListener\NamingListener
+        calls:
+            - [setLogger, [@logger]]
+            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]] 
 
 # Service that manages GUID doctrine mapping
     librinfo.base_entities.listener.guidable:
         class: Librinfo\BaseEntitiesBundle\EventListener\GuidableListener
         calls:
+            - [setLogger, [@logger]]
             - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Traceable doctrine mapping and behavior

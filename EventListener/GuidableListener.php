@@ -7,11 +7,12 @@ use Doctrine\ORM\Id\UuidGenerator;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Librinfo\BaseEntitiesBundle\EventListener\Traits\Logger;
+use Psr\Log\LoggerAwareInterface;
 
-class GuidableListener implements EventSubscriber
+class GuidableListener implements LoggerAwareInterface, EventSubscriber
 {
-    use ClassChecker;
+    use ClassChecker, Logger;
 
     /**
      * Returns an array of events this subscriber wants to listen to.
@@ -34,6 +35,8 @@ class GuidableListener implements EventSubscriber
         if ($metadata->isMappedSuperclass)
             return;
 
+        $this->logger->debug("[GuidableListener] Entering GuidableListener for « loadClassMetadata » event");
+
         $reflectionClass = $metadata->getReflectionClass();
 
         // return if the current entity doesn't use Guidable trait
@@ -47,5 +50,10 @@ class GuidableListener implements EventSubscriber
             'columnName' => "id",
         ]);
         $metadata->setIdGenerator(new UuidGenerator());
+
+        $this->logger->debug(
+            "[GuidableListener] Added Guidable mapping metadata to Entity",
+            ['class' => $metadata->getName()]
+        );
     }
 }
