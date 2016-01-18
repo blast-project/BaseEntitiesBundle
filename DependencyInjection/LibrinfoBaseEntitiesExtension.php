@@ -70,13 +70,13 @@ class LibrinfoBaseEntitiesExtension extends LibrinfoCoreExtension
         }
 
         // Loading KnpDoctrineBehaviors services
-        // TODO: remove this ???
-        try
-        {
-            $KnpLoader = new Loader\YamlFileLoader($container, new FileLocator($container->getParameter('kernel.root_dir') . "/../vendor/knplabs/doctrine-behaviors/config/"));
-            $KnpLoader->load('orm-services.yml');
-        }
-        catch (\Exception $e) { }
+        // do we really need this ???
+//        try
+//        {
+//            $KnpLoader = new Loader\YamlFileLoader($container, new FileLocator($container->getParameter('kernel.root_dir') . "/../vendor/knplabs/doctrine-behaviors/config/"));
+//            $KnpLoader->load('orm-services.yml');
+//        }
+//        catch (\Exception $e) { }
 
         // TODO: move this to new LibrinfoAdmin bundle
         $this->mergeParameter('librinfo', $container, __DIR__.'/../Resources/config');
