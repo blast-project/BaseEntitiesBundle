@@ -3,19 +3,11 @@
 namespace Librinfo\BaseEntitiesBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
-use Symfony\Component\Yaml\Yaml;
 use Librinfo\CoreBundle\DependencyInjection\LibrinfoCoreExtension;
 
-/**
- * This is the class that loads and manages your bundle configuration
- *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
- */
-class LibrinfoBaseEntitiesExtension extends LibrinfoCoreExtension //implements PrependExtensionInterface
+class LibrinfoBaseEntitiesExtension extends LibrinfoCoreExtension
 {
     /**
      * {@inheritdoc}
@@ -28,17 +20,51 @@ class LibrinfoBaseEntitiesExtension extends LibrinfoCoreExtension //implements P
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
 
-        // TODO : this does not work. WHY ?
-        //$loader->load('config.yml');
+        $availableListeners = [
+            //'uuidable',
+            'traceable',
+            'addressable',
+            'treeable',
+            'nameable',
+            'labelable',
+            'emailable',
+            'descriptible',
+            'searchable',
+            //'loggable',
+        ];
+
+        foreach ( $availableListeners as $listenerName )
+        {
+            $serviceId = 'librinfo.base_entities.listener.' . $listenerName;
+
+            // enable doctrine ORM event subscribers
+            foreach ( $config['orm'] as $connection => $listeners ) {
+                if ( !empty($listeners[$listenerName]) && $container->hasDefinition($serviceId) ) {
+                    $definition = $container->getDefinition($serviceId);
+                    $definition->addTag('doctrine.event_subscriber', ['connection' => $connection]);
+                }
+            }
+
+            // enable doctrine ODM event subscribers
+            // TODO : not tested
+            foreach ( $config['mongodb'] as $connection => $listeners ) {
+                if ( !empty($listeners['$listenerName']) && $container->hasDefinition($serviceId) ) {
+                    $definition = $container->getDefinition($serviceId);
+                    $definition->addTag('doctrine_mongodb.odm..event_subscriber', ['connection' => $connection]);
+                }
+            }
+        }
 
         // Loading KnpDoctrineBehaviors services
+        // TODO: remove this ???
         try
         {
-            $loader = new Loader\YamlFileLoader($container, new FileLocator($container->getParameter('kernel.root_dir') . "/../vendor/knplabs/doctrine-behaviors/config/"));
-            $loader->load('orm-services.yml');
+            $KnpLoader = new Loader\YamlFileLoader($container, new FileLocator($container->getParameter('kernel.root_dir') . "/../vendor/knplabs/doctrine-behaviors/config/"));
+            $KnpLoader->load('orm-services.yml');
         }
         catch (\Exception $e) { }
 
+        // TODO: move this to new LibrinfoAdmin bundle
         $this->mergeParameter('librinfo', $container, __DIR__.'/../Resources/config');
     }
 }

@@ -21,19 +21,40 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('librinfo_base_entities');
 
         $rootNode
-            ->children()
-                ->arrayNode('doctrine')
-                    ->children()
-                        ->arrayNode('orm')
-                            ->children()
-                                ->scalarNode('class_metadata_factory_name')->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
+            ->append($this->getVendorNode('orm'))
+            ->append($this->getVendorNode('mongodb')) // not tested yet
             ->end()
         ;
 
         return $treeBuilder;
+    }
+
+    /**
+     * @param string $name
+     */
+    private function getVendorNode($name)
+    {
+        $treeBuilder = new TreeBuilder();
+        $node = $treeBuilder->root($name);
+
+        $node
+            ->useAttributeAsKey('id')
+            ->prototype('array')
+                ->children()
+                    ->scalarNode('uuidable')->defaultFalse()->end()
+                    ->scalarNode('traceable')->defaultFalse()->end()
+                    ->scalarNode('addressable')->defaultFalse()->end()
+                    ->scalarNode('treeable')->defaultFalse()->end()
+                    ->scalarNode('nameable')->defaultFalse()->end()
+                    ->scalarNode('labelable')->defaultFalse()->end()
+                    ->scalarNode('emailable')->defaultFalse()->end()
+                    ->scalarNode('descriptible')->defaultFalse()->end()
+                    ->scalarNode('searchable')->defaultFalse()->end()
+                    ->scalarNode('loggable')->defaultFalse()->end()
+                ->end()
+            ->end()
+        ;
+
+        return $node;
     }
 }

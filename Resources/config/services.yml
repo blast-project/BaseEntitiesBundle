@@ -4,6 +4,7 @@ services:
 #
 #                             DOCTRINE BEHAVIORS
 #
+# doctrine.event_subscriber tags are added in LibrinfoBaseEntitiesExtension.php
 # ###################################################################################
 
 # Service that manages Entity / Table naming convention
@@ -17,8 +18,6 @@ services:
 # Service that manages Traceable doctrine mapping and behavior
     librinfo.base_entities.listener.traceable:
         class: Librinfo\BaseEntitiesBundle\EventListener\TraceableListener
-        tags:
-            - { name: doctrine.event_subscriber }
         calls:
             - [setLogger, [@logger]]
             - [setTokenStorage, [@security.token_storage]]
@@ -28,8 +27,6 @@ services:
 # Service that manages Addressable doctrine mapping
     librinfo.base_entities.listener.addressable:
         class: Librinfo\BaseEntitiesBundle\EventListener\AddressableListener
-        tags:
-            - { name: doctrine.event_subscriber }
         calls:
             - [setLogger, [@logger]]
             - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
@@ -37,8 +34,6 @@ services:
 # Service that manages Treeable doctrine mapping
     librinfo.base_entities.listener.treeable:
         class: Librinfo\BaseEntitiesBundle\EventListener\TreeableListener
-        tags:
-            - { name: doctrine.event_subscriber }
         calls:
             - [setLogger, [@logger]]
             - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
@@ -46,8 +41,6 @@ services:
 # Service that manages Nameable doctrine mapping
     librinfo.base_entities.listener.nameable:
         class: Librinfo\BaseEntitiesBundle\EventListener\NameableListener
-        tags:
-            - { name: doctrine.event_subscriber }
         calls:
             - [setLogger, [@logger]]
             - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
@@ -55,8 +48,6 @@ services:
 # Service that manages Labelable doctrine mapping
     librinfo.base_entities.listener.labelable:
         class: Librinfo\BaseEntitiesBundle\EventListener\LabelableListener
-        tags:
-            - { name: doctrine.event_subscriber }
         calls:
             - [setLogger, [@logger]]
             - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
@@ -64,8 +55,6 @@ services:
 # Service that manages Emailable doctrine mapping
     librinfo.base_entities.listener.emailable:
         class: Librinfo\BaseEntitiesBundle\EventListener\EmailableListener
-        tags:
-            - { name: doctrine.event_subscriber }
         calls:
             - [setLogger, [@logger]]
             - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
@@ -73,8 +62,6 @@ services:
 # Service that manages Descriptible doctrine mapping
     librinfo.base_entities.listener.descriptible:
         class: Librinfo\BaseEntitiesBundle\EventListener\DescriptibleListener
-        tags:
-            - { name: doctrine.event_subscriber }
         calls:
             - [setLogger, [@logger]]
             - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
@@ -82,8 +69,6 @@ services:
 # Service that manages Searchable doctrine mapping
     librinfo.base_entities.listener.searchable:
         class: Librinfo\BaseEntitiesBundle\EventListener\SearchableListener
-        tags:
-            - { name: doctrine.event_subscriber }
         calls:
             - [setLogger, [@logger]]
             - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
