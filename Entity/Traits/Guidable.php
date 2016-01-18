@@ -2,9 +2,7 @@
 
 namespace Librinfo\BaseEntitiesBundle\Entity\Traits;
 
-use Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable;
-
-trait Idable
+trait Guidable
 {
     /**
      * @var string

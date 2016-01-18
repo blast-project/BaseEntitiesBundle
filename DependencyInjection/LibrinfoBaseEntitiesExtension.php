@@ -21,7 +21,8 @@ class LibrinfoBaseEntitiesExtension extends LibrinfoCoreExtension
         $loader->load('services.yml');
 
         $availableListeners = [
-            //'uuidable',
+            'naming',
+            'guidable',
             'traceable',
             'addressable',
             'treeable',
