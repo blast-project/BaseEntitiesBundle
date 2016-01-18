@@ -20,65 +20,15 @@ class LibrinfoBaseEntitiesExtension extends LibrinfoCoreExtension
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
 
-        $availableListeners = [
-            'naming',
-            'guidable',
-            'traceable',
-            'addressable',
-            'treeable',
-            'nameable',
-            'labelable',
-            'emailable',
-            'descriptible',
-            'searchable',
-            'loggable',
-        ];
-
-        $useLoggable = false;
-
-        foreach ( $availableListeners as $listenerName )
-        {
-            $serviceId = 'librinfo.base_entities.listener.' . $listenerName;
-
-            // enable doctrine ORM event subscribers
-            foreach ( $config['orm'] as $connection => $listeners ) {
-                if ( !empty($listeners[$listenerName]) && $container->hasDefinition($serviceId) ) {
-                    $definition = $container->getDefinition($serviceId);
-                    $definition->addTag('doctrine.event_subscriber', ['connection' => $connection]);
-                    if ( $listenerName == 'loggable' )
-                        $useLoggable = true;
-                }
-            }
-
-            // enable doctrine ODM event subscribers
-            // TODO : not tested
-            foreach ( $config['mongodb'] as $connection => $listeners ) {
-                if ( !empty($listeners['$listenerName']) && $container->hasDefinition($serviceId) ) {
-                    $definition = $container->getDefinition($serviceId);
-                    $definition->addTag('doctrine_mongodb.odm..event_subscriber', ['connection' => $connection]);
-                    if ( $listenerName == 'loggable' )
-                        $useLoggable = true;
-                }
-            }
-        }
-
-        if (  $useLoggable )
-        {
-            $container->getDefinition('librinfo.base_entities.listener.logger')
-                ->setPublic(true)
-                ->addTag('kernel.event_subscriber');
-        }
-
         // Loading KnpDoctrineBehaviors services
-        // do we really need this ???
-//        try
-//        {
-//            $KnpLoader = new Loader\YamlFileLoader($container, new FileLocator($container->getParameter('kernel.root_dir') . "/../vendor/knplabs/doctrine-behaviors/config/"));
-//            $KnpLoader->load('orm-services.yml');
-//        }
-//        catch (\Exception $e) { }
+        // TODO : do we really need this ? (use treeable from Gedmo Doctrine Extensions ?)
+        try
+        {
+            $KnpLoader = new Loader\YamlFileLoader($container, new FileLocator($container->getParameter('kernel.root_dir') . "/../vendor/knplabs/doctrine-behaviors/config/"));
+            $KnpLoader->load('orm-services.yml');
+        }
+        catch (\Exception $e) { }
 
-        // TODO: move this to new LibrinfoAdmin bundle
         $this->mergeParameter('librinfo', $container, __DIR__.'/../Resources/config');
     }
 }
