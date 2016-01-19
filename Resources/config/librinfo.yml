@@ -1,6 +1,6 @@
 parameters:
     librinfo:
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Addressable:
+        Librinfo\DoctrineBundle\Entity\Traits\Addressable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     zip: ~
@@ -34,7 +34,7 @@ parameters:
                             npai: ~
 
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Emailable:
+        Librinfo\DoctrineBundle\Entity\Traits\Emailable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     email:
@@ -57,7 +57,7 @@ parameters:
                             emailNoNewsletter: ~
 
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Nameable:
+        Librinfo\DoctrineBundle\Entity\Traits\Nameable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     name: ~
@@ -72,7 +72,7 @@ parameters:
                         '':
                             name: ~
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Descriptible:
+        Librinfo\DoctrineBundle\Entity\Traits\Descriptible:
             Sonata\AdminBundle\Show\ShowMapper:
                 _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
@@ -83,7 +83,7 @@ parameters:
                                 type: textarea
                                 label: ' '
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Labelable:
+        Librinfo\DoctrineBundle\Entity\Traits\Labelable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     label: ~
@@ -99,7 +99,7 @@ parameters:
                             label: ~
 
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable:
+        Librinfo\DoctrineBundle\Entity\Traits\Traceable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     createdAt: ~
@@ -127,7 +127,7 @@ parameters:
                                 dp_side_by_side: true
 
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Guidable:
+        Librinfo\DoctrineBundle\Entity\Traits\Guidable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove: [id]
             Sonata\AdminBundle\Show\ShowMapper:
@@ -137,7 +137,7 @@ parameters:
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 remove: [id]
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Treeable:
+        Librinfo\DoctrineBundle\Entity\Traits\Treeable:
             Sonata\AdminBundle\Show\ShowMapper:
                 _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
