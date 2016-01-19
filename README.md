@@ -1,25 +1,9 @@
 # SymfonyLibrinfoBaseEntitiesBundle
 
-## Installation
-
-### Prequiresites
-
-* having a working Symfony2 environment
-* having created a working Symfony2 app (including your DB and your DB link)
-* having composer installed (here in ```/usr/local/bin/composer```, having ```/usr/local/bin``` in your path)
-
-### Downloading
-
-```
-  $ composer require libre-informatique/base-entities-bundle dev-master
-```
-
-Going further :
-
-* [Base Entities Management](Resources/doc/base_entities_management.md)
-    * Explains how BaseEntities behaviors are implemented into Symfony 2.
-=======
-This bundle provides base behaviors for Doctrine Entities in Libre Informatique Symfony2 projects.
+This bundle provides some tools for a better integration of
+[LibrinfoDoctrineBundle](https://github.com/libre-informatique/SymfonyLibrinfoDoctrineBundle)
+behaviours in
+[Sonata Admin](https://sonata-project.org/bundles/admin/master/doc/index.html)
 
 Installation
 ============
@@ -50,7 +34,8 @@ Edit your app/AppKernel.php file and add your "libre-informatique/base-entities-
             // ...
 
             // The libre-informatique bundles
-            new Knp\DoctrineBehaviors\Bundle\DoctrineBehaviorsBundle(),
+            new Librinfo\BaseEntitiesBundle\LibrinfoCoreBundle(),
+            new Librinfo\BaseEntitiesBundle\LibrinfoDoctrineBundle(),
             new Librinfo\BaseEntitiesBundle\LibrinfoBaseEntitiesBundle(),
 
             // your personal bundles
@@ -60,11 +45,6 @@ Edit your app/AppKernel.php file and add your "libre-informatique/base-entities-
 
 Learn how to use the ```libre-informatique/base-entities-bundle```
 ==================================================================
-
-Doctrine Behaviors provided by the bundle
------------------------------------------
-
-Learn how to use them, how they work, and by extension learn how to create new behaviors shaped to your needs, [reading the specific documentation](Resources/doc/base_entities_management.md).
 
 Specific Form Types
 -------------------
