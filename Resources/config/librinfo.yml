@@ -1,5 +1,10 @@
 parameters:
     librinfo:
+        configuration:
+            templates:
+                list:
+                    sort_rank: LibrinfoBaseEntitiesBundle:CRUD:list_field_sort_rank.html.twig
+
         Librinfo\DoctrineBundle\Entity\Traits\Addressable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
@@ -146,3 +151,16 @@ parameters:
                         '':
                             parentNode:
                                 type: librinfo_baseentities_treeable
+
+
+        Librinfo\DoctrineBundle\Entity\Traits\Sortable:
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    sortRank:
+                        type: sort_rank
+                    _extra_templates: [LibrinfoBaseEntitiesBundle:CRUD:list_extra_sortable.html.twig]
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    General:
+                        '':
+                            sortRank: ~

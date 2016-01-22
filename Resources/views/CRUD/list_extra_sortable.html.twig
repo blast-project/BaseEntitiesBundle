@@ -1,0 +1,54 @@
+{#
+
+This file is part of Libre Informatique packages..
+
+(c) Marcos BEZERRA DE MENEZES <marcos.bezerra@libre-informatique.fr>
+(c) Libre Informatique [http://www.libre-informatique.fr/]
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+<script>
+$(".content table.sonata-ba-list tbody").sortable({
+    cursor: 'move',
+    delay: 150,
+    update: function(event, ui) {
+        var prev = ui.item.prev();
+        var next = ui.item.next();
+
+        var prevRank = (prev.length > 0) ?
+            parseInt( prev.find('td.sonata-ba-list-field-sort_rank').eq(0).text() ) : 0;
+        var nextRank = (prev.length > 0) ?
+            parseInt( prev.find('td.sonata-ba-list-field-sort_rank').eq(0).text() ) : 0;
+
+        console.log(prev);
+        console.log(prevRank);
+        console.log(ui.item);
+        console.log(next);
+
+        var url = '{{ path('librinfo_base_entities_move_sortable') }}';
+        console.log(url);
+
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: {admin_code: '{{ admin.code }}' },
+            success: function(json){
+                if ( json.reload )
+                  location.reload();
+
+                if ( !json.rank )
+                  alert('An error occurred (02)', 'error');
+                $('.sf_admin_list [name="ids[]"][value='+json.id+']').closest('.sf_admin_row').find('.sf_admin_list_td_rank').text(json.rank);
+                $('#sf_admin_footer [name="nb_seats"]').change();
+            },
+            error: function(){
+                alert('An error occurred (01)', 'error');
+                //location.reload();
+            }
+        });
+    }
+});
+</script>
