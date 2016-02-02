@@ -35,7 +35,7 @@ parameters:
                                 read_only: true
                                 disabled: true
                                 required: false
-                        Address:
+                        form_group_address:
                             npai: ~
 
 
@@ -57,7 +57,7 @@ parameters:
                                 type: email
                                 required: false
                     form_group_specifics:
-                        Email:
+                        form_group_email:
                             emailNpai: ~
                             emailNoNewsletter: ~
 
@@ -83,10 +83,9 @@ parameters:
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     form_group_general:
-                        Description:
+                        form_group_description:
                             description:
                                 type: textarea
-                                label: ' '
 
         Librinfo\DoctrineBundle\Entity\Traits\Labelable:
             Sonata\AdminBundle\Datagrid\ListMapper:
