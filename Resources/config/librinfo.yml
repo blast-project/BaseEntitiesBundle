@@ -20,16 +20,16 @@ parameters:
                 _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
                 add:
-                    General:
-                        Address:
+                    form_group_general:
+                        form_group_address:
                             address:
                                 type: textarea
                                 required: false
                             zip: ~
                             city: ~
                             country: ~
-                    Specifics:
-                        Communication:
+                    form_group_specifics:
+                        form_group_communication:
                             vcard_uid:
                                 type: text
                                 read_only: true
@@ -51,12 +51,12 @@ parameters:
                 _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
                 add:
-                    General:
+                    form_group_general:
                         '':
                             email:
                                 type: email
                                 required: false
-                    Specifics:
+                    form_group_specifics:
                         Email:
                             emailNpai: ~
                             emailNoNewsletter: ~
@@ -73,7 +73,7 @@ parameters:
                 _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
                 add:
-                    General:
+                    form_group_general:
                         '':
                             name: ~
 
@@ -82,7 +82,7 @@ parameters:
                 _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
                 add:
-                    General:
+                    form_group_general:
                         Description:
                             description:
                                 type: textarea
@@ -99,7 +99,7 @@ parameters:
                 _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
                 add:
-                    General:
+                    form_group_general:
                         '':
                             label: ~
 
@@ -110,14 +110,14 @@ parameters:
                     createdAt: ~
             Sonata\AdminBundle\Show\ShowMapper:
                 add:
-                    Specifics:
-                        Misc:
+                    form_group_specifics:
+                        form_group_misc:
                             createdAt: ~
                             updatedAt: ~
             Sonata\AdminBundle\Form\FormMapper:
                 add:
-                    Specifics:
-                        Misc:
+                    form_group_specifics:
+                        form_group_misc:
                             createdAt:
                                 type: sonata_type_datetime_picker
                                 read_only: true
@@ -147,7 +147,7 @@ parameters:
                 _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
                 add:
-                    General:
+                    form_group_general:
                         '':
                             parentNode:
                                 type: librinfo_baseentities_treeable
@@ -161,6 +161,6 @@ parameters:
                     _extra_templates: [LibrinfoBaseEntitiesBundle:CRUD:list_extra_sortable.html.twig]
             Sonata\AdminBundle\Show\ShowMapper:
                 add:
-                    General:
+                    form_group_general:
                         '':
                             sortRank: ~

@@ -27,8 +27,15 @@ class SortableController extends CoreController
      */
     public function moveSortableItemAction(Request $request)
     {
+        /**
+         * @var \Sonata\AdminBundle\Admin $admin
+         */
+        $admin = new \Sonata\AdminBundle\Admin();
         $admin = $this->container->get('sonata.admin.pool')->getInstance($request->get('admin_code'));
         $admin->setRequest($request);
+
+        //$class = $admin->
+
 
         return new JsonResponse(array(
             'status' => 'OK',
