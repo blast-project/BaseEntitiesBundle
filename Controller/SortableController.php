@@ -3,15 +3,11 @@
 namespace Librinfo\BaseEntitiesBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CoreController;
-use Symfony\Component\HttpFoundation\Response;
-
-use Librinfo\BaseEntitiesBundle\Entity\Repository\SearchableRepository;
-
-use Sonata\AdminBundle\Admin\AdminInterface;
-use Symfony\Component\Form\FormInterface;
+use Librinfo\DoctrineBundle\Entity\Repository\SortableRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Doctrine\ORM\Mapping\ClassMetadata;
 
 class SortableController extends CoreController
 {
@@ -27,18 +23,24 @@ class SortableController extends CoreController
      */
     public function moveSortableItemAction(Request $request)
     {
-        /**
-         * @var \Sonata\AdminBundle\Admin $admin
-         */
-        $admin = new \Sonata\AdminBundle\Admin();
         $admin = $this->container->get('sonata.admin.pool')->getInstance($request->get('admin_code'));
-        $admin->setRequest($request);
+        $class = $admin->getClass();
 
-        //$class = $admin->
+        $id = $request->get('id');
+        $prev_rank = (int) $request->get('prev_rank');
+        $next_rank = (int) $request->get('next_rank');
 
+        $em = $this->getDoctrine()->getEntityManager();
+        $meta = new ClassMetadata($class);
+        $repo = new SortableRepository($em, $meta);
+        if ($prev_rank)
+            $new_rank = $repo->moveObjectAfter($id, $prev_rank);
+        elseif ($next_rank)
+            $new_rank = $repo->moveObjectBefore($id, $next_rank);
 
         return new JsonResponse(array(
-            'status' => 'OK',
+            'status' => $new_rank ? 'OK' : 'KO',
+            'new_rank' => $new_rank,
             'class'   => $admin->getClass(),
         ));
     }

@@ -158,8 +158,3 @@ parameters:
                     sortRank:
                         type: sort_rank
                     _extra_templates: [LibrinfoBaseEntitiesBundle:CRUD:list_extra_sortable.html.twig]
-            Sonata\AdminBundle\Show\ShowMapper:
-                add:
-                    form_group_general:
-                        '':
-                            sortRank: ~
