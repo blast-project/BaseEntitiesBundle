@@ -3,8 +3,7 @@
 namespace Librinfo\BaseEntitiesBundle\Form\Type;
 
 use Doctrine\ORM\EntityManager;
-use Librinfo\BaseEntitiesBundle\Entity\Repository\TreeableRepositoryInterface;
-use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
+use Librinfo\DoctrineBundle\Entity\Repository\TreeableRepositoryInterface;
 use Librinfo\CoreBundle\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\View\ChoiceView;
 use Symfony\Component\Form\FormBuilderInterface;
