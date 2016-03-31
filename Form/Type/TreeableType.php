@@ -11,6 +11,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Librinfo\BaseEntitiesBundle\Form\DataTransformer\ModelToIdTransformer;
 
 class TreeableType extends AbstractType
 {
@@ -27,6 +28,17 @@ class TreeableType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        // TODO :
+//        if ($options['multiple']) {
+//            $builder->addViewTransformer(new ModelsToArrayTransformer($options['choice_list'], $options['model_manager'], $options['class']), true);
+//            $builder->addEventSubscriber(new MergeCollectionListener($options['model_manager']));
+//        }
+//        else ...
+
+        $builder->resetViewTransformers();
+        $builder->addViewTransformer(new ModelToIdTransformer($this->em, $options['class']), true);
+        
+
         $builder->addEventListener(FormEvents::POST_SET_DATA, function (FormEvent $event)
         {
             $form = $event->getForm();
@@ -95,4 +107,4 @@ class TreeableType extends AbstractType
     {
         $this->em = $em;
     }
-}
+    }
