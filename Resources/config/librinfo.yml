@@ -86,6 +86,7 @@ parameters:
                         form_group_description:
                             description:
                                 type: textarea
+                                required: false
 
         Librinfo\DoctrineBundle\Entity\Traits\Labelable:
             Sonata\AdminBundle\Datagrid\ListMapper:
