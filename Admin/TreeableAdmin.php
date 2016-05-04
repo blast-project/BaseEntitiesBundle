@@ -38,5 +38,19 @@ abstract class TreeableAdmin extends CoreAdmin
 
         return $object;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getObject($id)
+    {
+        $object = parent::getObject($id);
+
+        $parent_node_id = $object->getParentNodeId();
+        $parent_node = $this->getModelManager()->find($this->getClass(), $parent_node_id);
+        $object->setParentNode($parent_node);
+
+        return $object;
+    }
 }
 
