@@ -79,7 +79,10 @@ parameters:
 
         Librinfo\DoctrineBundle\Entity\Traits\Descriptible:
             Sonata\AdminBundle\Show\ShowMapper:
-                _copy: Sonata\AdminBundle\Form\FormMapper
+                add:
+                    form_group_general:
+                        form_group_description:
+                            description: ~
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     form_group_general:
@@ -110,14 +113,14 @@ parameters:
                     createdAt: ~
             Sonata\AdminBundle\Show\ShowMapper:
                 add:
-                    form_group_specifics:
-                        form_group_misc:
+                    form_tab_history:
+                        form_group_history:
                             createdAt: ~
                             updatedAt: ~
             Sonata\AdminBundle\Form\FormMapper:
                 add:
-                    form_group_specifics:
-                        form_group_misc:
+                    form_tab_history:
+                        form_group_history:
                             createdAt:
                                 type: sonata_type_datetime_picker
                                 read_only: true
