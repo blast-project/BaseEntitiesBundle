@@ -28,6 +28,7 @@ parameters:
                             zip: ~
                             city: ~
                             country: ~
+                            npai: ~
                     form_group_specifics:
                         form_group_communication:
                             vcard_uid:
@@ -35,8 +36,7 @@ parameters:
                                 read_only: true
                                 disabled: true
                                 required: false
-                        form_group_address:
-                            npai: ~
+
 
 
         Librinfo\DoctrineBundle\Entity\Traits\Emailable:
