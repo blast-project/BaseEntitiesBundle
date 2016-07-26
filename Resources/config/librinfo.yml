@@ -21,7 +21,7 @@ parameters:
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     form_group_general:
-                        form_group_address:
+                        form_group_main_address:
                             address:
                                 type: textarea
                                 required: false
