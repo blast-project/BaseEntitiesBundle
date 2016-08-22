@@ -27,8 +27,6 @@ abstract class TreeableAdmin extends CoreAdmin
         else
             $object->setParentNode(null);
 
-        $object->setSortMaterializedPath($object->getRealMaterializedPath());
-
         $this->postPersist($object);
         foreach ($this->extensions as $extension)
             $extension->postPersist($this, $object);
