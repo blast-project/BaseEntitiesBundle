@@ -107,7 +107,6 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Knp\DoctrineBehaviors\Reflection\ClassAnalyzer;
 
 class TraceableListener implements EventSubscriber
 {

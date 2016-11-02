@@ -22,12 +22,12 @@ class LibrinfoBaseEntitiesExtension extends LibrinfoCoreExtension
 
         // Loading KnpDoctrineBehaviors services
         // TODO : do we really need this ? (use treeable from Gedmo Doctrine Extensions ?)
-        try
-        {
-            $KnpLoader = new Loader\YamlFileLoader($container, new FileLocator($container->getParameter('kernel.root_dir') . "/../vendor/knplabs/doctrine-behaviors/config/"));
-            $KnpLoader->load('orm-services.yml');
-        }
-        catch (\Exception $e) { }
+//        try
+//        {
+//            $KnpLoader = new Loader\YamlFileLoader($container, new FileLocator($container->getParameter('kernel.root_dir') . "/../vendor/knplabs/doctrine-behaviors/config/"));
+//            $KnpLoader->load('orm-services.yml');
+//        }
+//        catch (\Exception $e) { }
 
         $this->mergeParameter('librinfo', $container, __DIR__.'/../Resources/config');
     }
