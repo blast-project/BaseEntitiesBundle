@@ -2,6 +2,8 @@
 
 namespace Librinfo\BaseEntitiesBundle\Entity\Traits;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 trait NestedTreeable {
     
     /**
@@ -180,5 +182,9 @@ trait NestedTreeable {
     public function getTreeParent()
     {
         return $this->treeParent;
+    }
+    
+    public function initCollections(){
+        $this->treeChildren = new ArrayCollection();
     }
 }
