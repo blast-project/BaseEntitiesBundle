@@ -8,7 +8,7 @@ Trait NestedTreeableAdmin
     {
         $proxyQuery = parent::createQuery($context);
         // Default Alias is "o"
-        $proxyQuery->addOrderBy('o.treeRoot', 'DESC');
+        $proxyQuery->addOrderBy('o.treeRoot', 'ASC');
         $proxyQuery->addOrderBy('o.treeLft', 'ASC');
 
         return $proxyQuery;
