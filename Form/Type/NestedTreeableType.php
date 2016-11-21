@@ -24,8 +24,7 @@ class NestedTreeableType extends AbstractType
 
         $choices = [];
         foreach ($view->vars['choices'] as $choice) {
-            if( $object_id )
-                if ( $choice->data->getId() == $object_id ||  $choice->data->getTreeRoot()->getId() == $object_id)
+                if ( $object_id && $choice->data->getId() == $object_id )
                     $choice->attr['disabled'] = 'disabled';
             
             $choices[] = $choice;
