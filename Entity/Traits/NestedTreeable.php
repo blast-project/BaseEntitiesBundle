@@ -40,7 +40,7 @@ trait NestedTreeable {
      * Set treeLft
      *
      * @param integer $treeLft
-     * @return PlantCategory
+     * @return mixed $this
      */
     public function setTreeLft($treeLft)
     {
@@ -63,7 +63,7 @@ trait NestedTreeable {
      * Set treeRgt
      *
      * @param integer $treeRgt
-     * @return PlantCategory
+     * @return mixed $this
      */
     public function setTreeRgt($treeRgt)
     {
@@ -86,7 +86,7 @@ trait NestedTreeable {
      * Set treeLvl
      *
      * @param integer $treeLvl
-     * @return PlantCategory
+     * @return mixed $this
      */
     public function setTreeLvl($treeLvl)
     {
@@ -108,10 +108,10 @@ trait NestedTreeable {
     /**
      * Add treeTreeChildren
      *
-     * @param \Librinfo\VarietiesBundle\Entity\PlantCategory $treeChild
-     * @return PlantCategory
+     * @param Object $treeChild
+     * @return mixed $this
      */
-    public function addTreeChild(\Librinfo\VarietiesBundle\Entity\PlantCategory $treeChild)
+    public function addTreeChild($treeChild)
     {
         $this->treeChildren[] = $treeChild;
 
@@ -121,9 +121,9 @@ trait NestedTreeable {
     /**
      * Remove treeChild
      *
-     * @param \Librinfo\VarietiesBundle\Entity\PlantCategory $treeChild
+     * @param Object $treeChild
      */
-    public function removeTreeChild(\Librinfo\VarietiesBundle\Entity\PlantCategory $treeChild)
+    public function removeTreeChild($treeChild)
     {
         $this->treeChildren->removeElement($treeChild);
     }
@@ -141,10 +141,10 @@ trait NestedTreeable {
     /**
      * Set treeRoot
      *
-     * @param \Librinfo\VarietiesBundle\Entity\PlantCategory $treeRoot
-     * @return PlantCategory
+     * @param Object $treeRoot
+     * @return mixed $this
      */
-    public function setTreeRoot(\Librinfo\VarietiesBundle\Entity\PlantCategory $treeRoot = null)
+    public function setTreeRoot($treeRoot = null)
     {
         $this->treeRoot = $treeRoot;
 
@@ -154,7 +154,7 @@ trait NestedTreeable {
     /**
      * Get treeRoot
      *
-     * @return \Librinfo\VarietiesBundle\Entity\PlantCategory 
+     * @return Object
      */
     public function getTreeRoot()
     {
@@ -164,10 +164,10 @@ trait NestedTreeable {
     /**
      * Set treeParent
      *
-     * @param \Librinfo\VarietiesBundle\Entity\PlantCategory $treeParent
-     * @return PlantCategory
+     * @param Object $treeParent
+     * @return mixed
      */
-    public function setTreeParent(\Librinfo\VarietiesBundle\Entity\PlantCategory $treeParent = null)
+    public function setTreeParent($treeParent = null)
     {
         $this->treeParent = $treeParent;
 
@@ -177,7 +177,7 @@ trait NestedTreeable {
     /**
      * Get treeParent
      *
-     * @return \Librinfo\VarietiesBundle\Entity\PlantCategory 
+     * @return object
      */
     public function getTreeParent()
     {
