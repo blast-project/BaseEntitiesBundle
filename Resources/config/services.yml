@@ -2,7 +2,7 @@ services:
 
 # SYMFONY CUSTOM FORM TYPES
 
-    librinfo_base_entities.form.type.librinfo_baseentities_treeable:
+    librinfo_base_entities.form.type.librinfo_treeable:
         class: Librinfo\BaseEntitiesBundle\Form\Type\TreeableType
         tags:
-            - { name: form.type, alias: librinfo_baseentities_treeable }
+            - { name: form.type, alias: librinfo_treeable }

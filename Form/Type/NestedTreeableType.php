@@ -5,13 +5,17 @@ namespace Librinfo\BaseEntitiesBundle\Form\Type;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Doctrine\ORM\EntityManager;
 use Librinfo\CoreBundle\Form\AbstractType;
 
 class TreeableType extends AbstractType
 {
+
     /**
      * @var EntityManager
      */
@@ -106,10 +110,5 @@ class TreeableType extends AbstractType
     public function setEntityManager(EntityManager $em)
     {
         $this->em = $em;
-    }
-    
-    public function getBlockPrefix()
-    {
-        return 'librinfo_treeable';
     }
  }
