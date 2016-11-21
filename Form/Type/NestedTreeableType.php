@@ -2,39 +2,32 @@
 
 namespace Librinfo\BaseEntitiesBundle\Form\Type;
 
-
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Doctrine\ORM\EntityManager;
 use Librinfo\CoreBundle\Form\AbstractType;
 
-class TreeableType extends AbstractType
+class NestedTreeableType extends AbstractType
 {
-
     /**
      * @var EntityManager
      */
     protected $em;
-
+    
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         parent::buildView($view, $form, $options);
 
-        $object_id = ($view->vars['name'] == 'parentNode') ? $form->getParent()->getData()->getId() : null;
+        $object_id = ($view->vars['name'] == 'treeParent') ? $form->getParent()->getData()->getId() : null;
+
         $choices = [];
         foreach ($view->vars['choices'] as $choice) {
-            $choice->attr['data-node-level'] = $choice->data->getNodeLevel();
-            if ( $object_id && $choice->data->getId() == $object_id )
-                $choice->attr['disabled'] = 'disabled';
-            if ( $choice->data->isRootNode() ) {
-                $admin = $this->getAdmin($options);
-                $choice->label = $admin->trans('parent_root_node_label');
-            }
+            if( $object_id )
+                if ( $choice->data->getId() == $object_id ||  $choice->data->getTreeRoot()->getId() == $object_id)
+                    $choice->attr['disabled'] = 'disabled';
+            
             $choices[] = $choice;
         }
         $view->vars['choices'] = $choices;
@@ -42,24 +35,20 @@ class TreeableType extends AbstractType
 
     public static function createChoiceLabel($choice)
     {
-        $level = $choice->getNodeLevel() - 1;
-        return str_repeat('- - ', $level) . (string) $choice;
+        $level = $choice->getTreeLvl();
+        return str_repeat('- ', $level) . (string) $choice;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'min_node_level' => 0,
-            'max_node_level' => 0,
-            'choice_label' => array(TreeableType::class, 'createChoiceLabel')
+            'choice_label' => array(NestedTreeableType::class, 'createChoiceLabel')
         ));
 
         $query_builder = function (Options $options) {
-            $min = $options['min_node_level'];
-            $max = $options['max_node_level'];
             return $options['em']
                     ->getRepository($options['class'])
-                    ->createOrderedQB($min, $max);
+                    ->getNodesHierarchyQueryBuilder();
         };
         $resolver->setDefault('query_builder', $query_builder);
 
@@ -76,32 +65,6 @@ class TreeableType extends AbstractType
         $resolver->setNormalizer('query_builder', $queryBuilderNormalizer);
     }
 
-    /**
-     * @param array $options
-     *
-     * @return FieldDescriptionInterface
-     *
-     * @throws \RuntimeException
-     */
-    protected function getFieldDescription(array $options)
-    {
-        if (!isset($options['sonata_field_description'])) {
-            throw new \RuntimeException('Please provide a valid `sonata_field_description` option');
-        }
-
-        return $options['sonata_field_description'];
-    }
-
-    /**
-     * @param array $options
-     *
-     * @return AdminInterface
-     */
-    protected function getAdmin(array $options)
-    {
-        return $this->getFieldDescription($options)->getAdmin();
-    }
-
     public function getParent()
     {
         return 'entity';
@@ -110,5 +73,10 @@ class TreeableType extends AbstractType
     public function setEntityManager(EntityManager $em)
     {
         $this->em = $em;
+    }
+    
+    public function getBlockPrefix()
+    {
+        return 'librinfo_nested_treeable';
     }
  }

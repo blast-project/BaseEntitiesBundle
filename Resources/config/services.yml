@@ -6,3 +6,8 @@ services:
         class: Librinfo\BaseEntitiesBundle\Form\Type\TreeableType
         tags:
             - { name: form.type, alias: librinfo_treeable }
+            
+    librinfo_base_entities.form.type.librinfo_nested_treeable:
+        class: Librinfo\BaseEntitiesBundle\Form\Type\NestedTreeableType
+        tags:
+            - { name: form.type, alias: librinfo_nested_treeable }
