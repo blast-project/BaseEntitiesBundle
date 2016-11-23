@@ -42,6 +42,47 @@ Edit your app/AppKernel.php file and add your "libre-informatique/base-entities-
         );
     }
 ```
+### Configuring the bundle
+
+Activate the listeners you need in your application  (add those lines to ```app/config/config.yml```) :
+
+```yml
+# Enable LibrinfoDocrineBundle event listeners
+librinfo_doctrine:
+    orm:
+        default:
+            naming: true
+            guidable: true
+            traceable: true
+            addressable: true
+            treeable: true
+            nameable: true
+            labelable: true
+            emailable: true
+            descriptible: true
+            searchable: true
+            loggable: true
+```
+
+Add/remove the needed behaviours for each orm connection used by your application.
+
+## Learn how to use the bundle
+
+### Doctrine Behaviors provided by the bundle
+
+- naming: provides a database table naming based on your vendor / bundle / entity
+- guidable: provides GUID primary keys to your entities
+- traceable: provides createdAt / updatedAt fields and doctrine listeners to your entities
+- addressable: provides address fields to your entities (address, city, zip, country...)
+- treeable: provides tree structure to your entities
+- nameable: provides a name field to your entities
+- labelable: provides a label field to your entities
+- emailable: provides email related fields to your entities
+- descriptible: provides a description field to your entities
+- searchable: provides a search index based on a selection of fields
+- loggable:  tracks your entities changes and is able to manage versions
+
+Learn how to use them, how they work, and by extension learn how to create new behaviors shaped to your needs, [reading the specific documentation](Resources/doc/base_entities_management.md).
 
 Learn how to use the ```libre-informatique/base-entities-bundle```
 ==================================================================
