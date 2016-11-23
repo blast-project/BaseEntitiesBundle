@@ -12,7 +12,7 @@ use Gedmo\Mapping\Driver\AbstractAnnotationDriver;
  * extension.
  *
  * It changes the behaviour of the original Loggable extension:
- * - the prefix used is "librinfo" instead of "gedmo"
+ * - the prefix used is "blast" instead of "gedmo"
  * - all fields are versioned by default unless they are tagged unversioned
  * - marks fields from traits as versioned
  *

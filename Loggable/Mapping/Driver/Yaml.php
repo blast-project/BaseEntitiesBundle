@@ -14,7 +14,7 @@ use Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer;
  * extension.
  *
  * It changes the behaviour of the original Loggable extension:
- * - the prefix used is "librinfo" instead of "gedmo"
+ * - the prefix used is "blast" instead of "gedmo"
  * - all fields are versioned by default unless they are tagged unversioned
  * - marks fields from traits as versioned
  *
@@ -39,14 +39,14 @@ class Yaml extends File implements Driver
     {
         $mapping = $this->_getMapping($meta->name);
 
-        // Entities that have the Loggable trait don't need the librinfo:loggable entry in the yaml file
+        // Entities that have the Loggable trait don't need the blast:loggable entry in the yaml file
         if ( ClassAnalyzer::hasTrait($meta->name, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Loggable') )
         {
             $config['loggable'] = true;
         }
 
-        elseif (isset($mapping['librinfo'])) {
-            $classMapping = $mapping['librinfo'];
+        elseif (isset($mapping['blast'])) {
+            $classMapping = $mapping['blast'];
             if (isset($classMapping['loggable'])) {
                 $config['loggable'] = true;
                 if (isset ($classMapping['loggable']['logEntryClass'])) {
@@ -63,7 +63,7 @@ class Yaml extends File implements Driver
 
         if ( isset($mapping['fields']) )
             foreach ( $mapping['fields'] as $field => $fieldMapping )
-                if ( !isset($fieldMapping['librinfo']) || !in_array('unversioned', $fieldMapping['librinfo']) )
+                if ( !isset($fieldMapping['blast']) || !in_array('unversioned', $fieldMapping['blast']) )
                 {
                     // fields cannot be overrided and throws mapping exception
                     if ( $meta->isCollectionValuedAssociation($field) )
@@ -73,7 +73,7 @@ class Yaml extends File implements Driver
 
         if (isset($mapping['attributeOverride']))
             foreach ($mapping['attributeOverride'] as $field => $fieldMapping)
-                if ( !isset($fieldMapping['librinfo']) || !in_array('unversioned', $fieldMapping['librinfo']) )
+                if ( !isset($fieldMapping['blast']) || !in_array('unversioned', $fieldMapping['blast']) )
                 {
                     // fields cannot be overrided and throws mapping exception
                     if ($meta->isCollectionValuedAssociation($field))
@@ -83,7 +83,7 @@ class Yaml extends File implements Driver
 
         if (isset($mapping['manyToOne']))
             foreach ($mapping['manyToOne'] as $field => $fieldMapping)
-                if ( !isset($fieldMapping['librinfo']) || !in_array('unversioned', $fieldMapping['librinfo']) )
+                if ( !isset($fieldMapping['blast']) || !in_array('unversioned', $fieldMapping['blast']) )
                 {
                     // fields cannot be overrided and throws mapping exception
                     if ($meta->isCollectionValuedAssociation($field))
@@ -93,7 +93,7 @@ class Yaml extends File implements Driver
 
         if (isset($mapping['oneToOne']))
             foreach ($mapping['oneToOne'] as $field => $fieldMapping)
-                if ( !isset($fieldMapping['librinfo']) || !in_array('unversioned', $fieldMapping['librinfo']) )
+                if ( !isset($fieldMapping['blast']) || !in_array('unversioned', $fieldMapping['blast']) )
                 {
                      // fields cannot be overrided and throws mapping exception
                     if ($meta->isCollectionValuedAssociation($field))
