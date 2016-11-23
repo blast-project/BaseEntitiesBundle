@@ -1,0 +1,2 @@
+Librinfo\BaseEntitiesBundle\Entity\GenericEntity:
+    type: mappedSuperclass
