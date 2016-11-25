@@ -24,14 +24,14 @@ services:
         class: Librinfo\BaseEntitiesBundle\EventListener\NamingListener
         calls:
             - [setLogger, [@logger]]
-            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages GUID doctrine mapping
     librinfo.base_entities.listener.guidable:
         class: Librinfo\BaseEntitiesBundle\EventListener\GuidableListener
         calls:
             - [setLogger, [@logger]]
-            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Traceable doctrine mapping and behavior
     librinfo.base_entities.listener.traceable:
@@ -40,63 +40,63 @@ services:
             - [setLogger, [@logger]]
             - [setTokenStorage, [@security.token_storage]]
             - [setUserClass, [%librinfo.user_bundle.user.class%]]
-            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Addressable doctrine mapping
     librinfo.base_entities.listener.addressable:
         class: Librinfo\BaseEntitiesBundle\EventListener\AddressableListener
         calls:
             - [setLogger, [@logger]]
-            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Treeable doctrine mapping
     librinfo.base_entities.listener.treeable:
         class: Librinfo\BaseEntitiesBundle\EventListener\TreeableListener
         calls:
             - [setLogger, [@logger]]
-            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages NestedTreeable doctrine mapping
     librinfo.base_entities.listener.nested_treeable:
         class: Librinfo\BaseEntitiesBundle\EventListener\NestedTreeableListener
         calls:
             - [setLogger, [@logger]]
-            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Nameable doctrine mapping
     librinfo.base_entities.listener.nameable:
         class: Librinfo\BaseEntitiesBundle\EventListener\NameableListener
         calls:
             - [setLogger, [@logger]]
-            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Labelable doctrine mapping
     librinfo.base_entities.listener.labelable:
         class: Librinfo\BaseEntitiesBundle\EventListener\LabelableListener
         calls:
             - [setLogger, [@logger]]
-            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Emailable doctrine mapping
     librinfo.base_entities.listener.emailable:
         class: Librinfo\BaseEntitiesBundle\EventListener\EmailableListener
         calls:
             - [setLogger, [@logger]]
-            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Descriptible doctrine mapping
     librinfo.base_entities.listener.descriptible:
         class: Librinfo\BaseEntitiesBundle\EventListener\DescriptibleListener
         calls:
             - [setLogger, [@logger]]
-            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Searchable doctrine mapping
     librinfo.base_entities.listener.searchable:
         class: Librinfo\BaseEntitiesBundle\EventListener\SearchableListener
         calls:
             - [setLogger, [@logger]]
-            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Loggable doctrine behaviour
     librinfo.base_entities.listener.loggable:
@@ -109,14 +109,14 @@ services:
         class: Librinfo\BaseEntitiesBundle\EventListener\SortableListener
         calls:
             - [setLogger, [@logger]]
-            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Normalize doctrine behaviour
     librinfo.base_entities.listener.normalize:
         class: Librinfo\BaseEntitiesBundle\EventListener\NormalizeListener
         calls:
             - [setLogger, [@logger]]
-            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages GUID doctrine mapping for Sylius entities
 # TODO: put this in a Sylius bundle
@@ -124,7 +124,7 @@ services:
         class: Librinfo\BaseEntitiesBundle\EventListener\SyliusGuidableListener
         calls:
             - [setLogger, [@logger]]
-            - [setClassAnalyser, [Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # ###################################################################################
 #

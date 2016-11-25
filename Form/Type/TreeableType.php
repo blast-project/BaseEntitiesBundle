@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\Options;
 use Doctrine\ORM\EntityManager;
-use Librinfo\CoreBundle\Form\AbstractType;
+use Blast\CoreBundle\Form\AbstractType;
 
 class TreeableType extends AbstractType
 {

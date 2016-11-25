@@ -2,7 +2,7 @@
 
 namespace Librinfo\BaseEntitiesBundle\EventListener\Traits;
 
-use Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer;
+use Blast\CoreBundle\Tools\Reflection\ClassAnalyzer;
 
 trait ClassChecker
 {

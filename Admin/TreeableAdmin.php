@@ -2,7 +2,7 @@
 
 namespace Librinfo\BaseEntitiesBundle\Admin;
 
-use Librinfo\CoreBundle\Admin\CoreAdmin;
+use Blast\CoreBundle\Admin\CoreAdmin;
 
 abstract class TreeableAdmin extends CoreAdmin
 {

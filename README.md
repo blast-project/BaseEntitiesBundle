@@ -34,7 +34,7 @@ Edit your app/AppKernel.php file and add your "libre-informatique/base-entities-
             // ...
 
             // The libre-informatique bundles
-            new Librinfo\BaseEntitiesBundle\LibrinfoCoreBundle(),
+            new Librinfo\BaseEntitiesBundle\BlastCoreBundle(),
             new Librinfo\BaseEntitiesBundle\LibrinfoDoctrineBundle(),
             new Librinfo\BaseEntitiesBundle\LibrinfoBaseEntitiesBundle(),
 

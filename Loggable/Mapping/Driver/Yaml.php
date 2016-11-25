@@ -5,7 +5,7 @@ namespace Librinfo\BaseEntitiesBundle\Loggable\Mapping\Driver;
 use Gedmo\Mapping\Driver\File;
 use Gedmo\Mapping\Driver;
 use Gedmo\Exception\InvalidMappingException;
-use Librinfo\CoreBundle\Tools\Reflection\ClassAnalyzer;
+use Blast\CoreBundle\Tools\Reflection\ClassAnalyzer;
 
 /**
  * This is a yaml mapping driver for Loggable
