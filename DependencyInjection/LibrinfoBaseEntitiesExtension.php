@@ -5,9 +5,9 @@ namespace Librinfo\BaseEntitiesBundle\DependencyInjection;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Loader;
-use Blast\CoreBundle\DependencyInjection\LibrinfoCoreExtension;
+use Blast\CoreBundle\DependencyInjection\BlastCoreExtension;
 
-class LibrinfoBaseEntitiesExtension extends LibrinfoCoreExtension
+class LibrinfoBaseEntitiesExtension extends BlastCoreExtension
 {
     private $entityManagers   = array();
     private $documentManagers = array();
