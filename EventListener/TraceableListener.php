@@ -22,11 +22,6 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
     private $tokenStorage;
 
     /**
-     * @var string
-     */
-    private $userClass;
-
-    /**
      * Returns an array of events this subscriber wants to listen to.
      *
      * @return array
@@ -137,13 +132,5 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
     public function setTokenStorage(TokenStorage $tokenStorage)
     {
         $this->tokenStorage = $tokenStorage;
-    }
-
-    /**
-     * @param string $userClass
-     */
-    public function setUserClass($userClass)
-    {
-        $this->userClass = $userClass;
     }
 }
