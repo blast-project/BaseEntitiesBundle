@@ -3,8 +3,6 @@
 namespace Librinfo\BaseEntitiesBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\Config\FileLocator;
-use Symfony\Component\DependencyInjection\Loader;
 use Blast\CoreBundle\DependencyInjection\BlastCoreExtension;
 
 class LibrinfoBaseEntitiesExtension extends BlastCoreExtension
@@ -15,14 +13,8 @@ class LibrinfoBaseEntitiesExtension extends BlastCoreExtension
     /**
      * {@inheritdoc}
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function loadListeners(ContainerBuilder $container, array $config)
     {
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
-
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('services.yml');
-
         $availableListeners = [
             'naming',
             'guidable',
@@ -77,6 +69,8 @@ class LibrinfoBaseEntitiesExtension extends BlastCoreExtension
                 ->setPublic(true)
                 ->addTag('kernel.event_subscriber');
         }
+        
+        return $this;
     }
 
     public function configValidate(ContainerBuilder $container)
