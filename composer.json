@@ -3,7 +3,6 @@
     "type": "symfony-bundle",
     "description": "Base behaviors for Doctrine Entities in Libre Informatique Symfony2 projects",
     "require": {
-        "symfony/symfony": "2.8.*",
         "blast-project/core-bundle": "dev-master",
         "stof/doctrine-extensions-bundle": "^1.2"
     },
@@ -32,7 +31,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Librinfo\\BaseEntitiesBundle\\": ""
+            "Blast\\BaseEntitiesBundle\\": ""
         }
     },
     "suggest": {
