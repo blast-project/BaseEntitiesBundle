@@ -1,4 +1,4 @@
-# SymfonyLibrinfoBaseEntitiesBundle
+# SymfonyBlastBaseEntitiesBundle
 
 This bundle provides some tools for a better integration of
 [LibrinfoDoctrineBundle](https://github.com/libre-informatique/SymfonyLibrinfoDoctrineBundle)
@@ -34,9 +34,9 @@ Edit your app/AppKernel.php file and add your "libre-informatique/base-entities-
             // ...
 
             // The libre-informatique bundles
-            new Librinfo\BaseEntitiesBundle\BlastCoreBundle(),
-            new Librinfo\BaseEntitiesBundle\LibrinfoDoctrineBundle(),
-            new Librinfo\BaseEntitiesBundle\LibrinfoBaseEntitiesBundle(),
+            new Blast\BaseEntitiesBundle\BlastCoreBundle(),
+            new Blast\BaseEntitiesBundle\LibrinfoDoctrineBundle(),
+            new Blast\BaseEntitiesBundle\BlastBaseEntitiesBundle(),
 
             // your personal bundles
         );

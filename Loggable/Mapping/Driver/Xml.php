@@ -1,6 +1,6 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Loggable\Mapping\Driver;
+namespace Blast\BaseEntitiesBundle\Loggable\Mapping\Driver;
 
 use Gedmo\Mapping\Driver\Xml as BaseXml;
 use Gedmo\Exception\InvalidMappingException;

@@ -3,9 +3,9 @@ parameters:
         configuration:
             templates:
                 list:
-                    sort_rank: LibrinfoBaseEntitiesBundle:CRUD:list_field_sort_rank.html.twig
+                    sort_rank: BlastBaseEntitiesBundle:CRUD:list_field_sort_rank.html.twig
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Addressable:
+        Blast\BaseEntitiesBundle\Entity\Traits\Addressable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     zip: ~
@@ -39,7 +39,7 @@ parameters:
 
 
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Emailable:
+        Blast\BaseEntitiesBundle\Entity\Traits\Emailable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     email:
@@ -62,7 +62,7 @@ parameters:
                             emailNoNewsletter: ~
 
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Nameable:
+        Blast\BaseEntitiesBundle\Entity\Traits\Nameable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     name: ~
@@ -77,7 +77,7 @@ parameters:
                         '':
                             name: ~
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Descriptible:
+        Blast\BaseEntitiesBundle\Entity\Traits\Descriptible:
             Sonata\AdminBundle\Show\ShowMapper:
                 add:
                     form_group_general:
@@ -91,7 +91,7 @@ parameters:
                                 type: textarea
                                 required: false
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Labelable:
+        Blast\BaseEntitiesBundle\Entity\Traits\Labelable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     label: ~
@@ -107,7 +107,7 @@ parameters:
                             label: ~
 
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable:
+        Blast\BaseEntitiesBundle\Entity\Traits\Traceable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     createdAt: ~
@@ -135,7 +135,7 @@ parameters:
                                 dp_side_by_side: true
 
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Guidable:
+        Blast\BaseEntitiesBundle\Entity\Traits\Guidable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove: [id]
             Sonata\AdminBundle\Show\ShowMapper:
@@ -145,7 +145,7 @@ parameters:
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 remove: [id]
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Treeable:
+        Blast\BaseEntitiesBundle\Entity\Traits\Treeable:
             Sonata\AdminBundle\Show\ShowMapper:
                 _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
@@ -156,16 +156,16 @@ parameters:
                                 type: librinfo_baseentities_treeable
 
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Sortable:
+        Blast\BaseEntitiesBundle\Entity\Traits\Sortable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     sortRank:
                         type: sort_rank
-                    _extra_templates: [LibrinfoBaseEntitiesBundle:CRUD:list_extra_sortable.html.twig]
+                    _extra_templates: [BlastBaseEntitiesBundle:CRUD:list_extra_sortable.html.twig]
         
        ### DOCTRINE ### 
         
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Emailable:
+        Blast\BaseEntitiesBundle\Entity\Traits\Emailable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     email:
@@ -186,7 +186,7 @@ parameters:
                             emailNoNewsletter: ~
 
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Nameable:
+        Blast\BaseEntitiesBundle\Entity\Traits\Nameable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     name:
@@ -202,7 +202,7 @@ parameters:
                         '':
                             name: ~
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Descriptible:
+        Blast\BaseEntitiesBundle\Entity\Traits\Descriptible:
             Sonata\AdminBundle\Show\ShowMapper:
                 _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
@@ -213,7 +213,7 @@ parameters:
                                 type: textarea
                                 label: ''
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Labelable:
+        Blast\BaseEntitiesBundle\Entity\Traits\Labelable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     label: ~
@@ -229,7 +229,7 @@ parameters:
                             label: ~
 
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable:
+        Blast\BaseEntitiesBundle\Entity\Traits\Traceable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     createdAt: ~
@@ -257,7 +257,7 @@ parameters:
                                 dp_side_by_side: true
 
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Guidable:
+        Blast\BaseEntitiesBundle\Entity\Traits\Guidable:
             Sonata\AdminBundle\Datagrid\ListMapper:
                 remove: [id]
             Sonata\AdminBundle\Show\ShowMapper:
@@ -267,7 +267,7 @@ parameters:
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 remove: [id]
 
-        Librinfo\BaseEntitiesBundle\Entity\Traits\Treeable:
+        Blast\BaseEntitiesBundle\Entity\Traits\Treeable:
             Sonata\AdminBundle\Show\ShowMapper:
                 _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:

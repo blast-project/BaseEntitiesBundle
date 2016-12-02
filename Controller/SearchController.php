@@ -1,6 +1,6 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Controller;
+namespace Blast\BaseEntitiesBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CoreController;
 use Sonata\AdminBundle\Admin\AdminInterface;
@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Librinfo\BaseEntitiesBundle\Entity\Repository\SearchableRepository;
+use Blast\BaseEntitiesBundle\Entity\Repository\SearchableRepository;
 
 class SearchController extends CoreController
 {

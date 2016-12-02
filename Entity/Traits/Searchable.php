@@ -1,10 +1,10 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Entity\Traits;
+namespace Blast\BaseEntitiesBundle\Entity\Traits;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Librinfo\BaseEntitiesBundle\Entity\SearchIndexEntity;
-use Librinfo\BaseEntitiesBundle\SearchAnalyser\SearchAnalyser;
+use Blast\BaseEntitiesBundle\Entity\SearchIndexEntity;
+use Blast\BaseEntitiesBundle\SearchAnalyser\SearchAnalyser;
 
 trait Searchable
 {

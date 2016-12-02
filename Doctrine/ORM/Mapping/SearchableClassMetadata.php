@@ -1,6 +1,6 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Doctrine\ORM\Mapping;
+namespace Blast\BaseEntitiesBundle\Doctrine\ORM\Mapping;
 
 use \Doctrine\ORM\Mapping\ClassMetadata;
 

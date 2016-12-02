@@ -1,5 +1,5 @@
 {
-    "name": "libre-informatique/base-entities-bundle",
+    "name": "blast-project/base-entities-bundle",
     "type": "symfony-bundle",
     "description": "Base behaviors for Doctrine Entities in Libre Informatique Symfony2 projects",
     "require": {
@@ -15,11 +15,15 @@
         "doctrine",
         "sonata admin"
     ],
-    "homepage": "https://github.com/libre-informatique/SymfonyLibrinfoBaseEntitiesBundle",
+    "homepage": "https://github.com/blast-project/BaseEntitiesBundle",
     "authors": [
         {
             "name": "Baptiste SIMON",
             "email": "baptiste.simon@libre-informatique.fr"
+        },
+        {
+            "name": "Romain SANCHEZ",
+            "email": "romain.sanchez@libre-informatique.fr"
         },
         {
             "name": "Libre Informatique",

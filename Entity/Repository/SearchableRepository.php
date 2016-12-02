@@ -1,10 +1,10 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Entity\Repository;
+namespace Blast\BaseEntitiesBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Librinfo\BaseEntitiesBundle\SearchAnalyser\SearchAnalyser;
+use Blast\BaseEntitiesBundle\SearchAnalyser\SearchAnalyser;
 
 use Doctrine\ORM\EntityRepository;
 

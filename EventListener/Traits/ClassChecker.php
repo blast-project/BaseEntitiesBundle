@@ -1,6 +1,6 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\EventListener\Traits;
+namespace Blast\BaseEntitiesBundle\EventListener\Traits;
 
 use Blast\CoreBundle\Tools\Reflection\ClassAnalyzer;
 

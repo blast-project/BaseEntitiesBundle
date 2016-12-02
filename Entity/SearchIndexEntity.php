@@ -1,6 +1,6 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Entity;
+namespace Blast\BaseEntitiesBundle\Entity;
 
 abstract class SearchIndexEntity
 {

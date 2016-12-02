@@ -1,9 +1,9 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Entity\Traits;
+namespace Blast\BaseEntitiesBundle\Entity\Traits;
 
-use Librinfo\BaseEntitiesBundle\Entity\Traits\Guidable;
-use Librinfo\BaseEntitiesBundle\Entity\Traits\Stringable;
+use Blast\BaseEntitiesBundle\Entity\Traits\Guidable;
+use Blast\BaseEntitiesBundle\Entity\Traits\Stringable;
 
 trait BaseEntity
 {

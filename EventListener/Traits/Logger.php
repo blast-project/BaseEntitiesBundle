@@ -1,6 +1,6 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\EventListener\Traits;
+namespace Blast\BaseEntitiesBundle\EventListener\Traits;
 
 use Psr\Log\LoggerInterface;
 

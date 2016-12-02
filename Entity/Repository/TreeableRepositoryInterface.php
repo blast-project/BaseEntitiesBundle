@@ -1,9 +1,9 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Entity\Repository;
+namespace Blast\BaseEntitiesBundle\Entity\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use Librinfo\BaseEntitiesBundle\Entity\Traits\Tree\NodeInterface;
+use Blast\BaseEntitiesBundle\Entity\Traits\Tree\NodeInterface;
 
 interface TreeableRepositoryInterface
 {

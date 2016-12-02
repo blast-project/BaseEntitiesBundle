@@ -16,7 +16,7 @@ Traits have been introduced in PHP since version 5.4.0.
 In a Traits, we will define the default implementation of methods and/or attributes.
 
 ```php
-namespace Librinfo\BaseEntitiesBundle\Entity\Traits;
+namespace Blast\BaseEntitiesBundle\Entity\Traits;
 
 trait BaseEntity
 {
@@ -40,7 +40,7 @@ See the previous Entity using this Trait :
 ```php
 namespace Librinfo\CRMBundle\Entity;
 
-use Librinfo\BaseEntitiesBundle\Entity\Traits\BaseEntity;
+use Blast\BaseEntitiesBundle\Entity\Traits\BaseEntity;
 
 /**
  * Category
@@ -73,7 +73,7 @@ you just have to override it as if it where a parent class.
 ```php
 namespace Librinfo\CRMBundle\Entity;
 
-use Librinfo\BaseEntitiesBundle\Entity\Traits\BaseEntity;
+use Blast\BaseEntitiesBundle\Entity\Traits\BaseEntity;
 
 /**
  * Category
@@ -100,7 +100,7 @@ We're using standard Doctrine EventSubscriber to manage BaseEntities behaviors.
 Here's a simplified example of Traceable EventSubscriber :
 
 ```php
-namespace Librinfo\BaseEntitiesBundle\EventListener;
+namespace Blast\BaseEntitiesBundle\EventListener;
 
 use DateTime;
 use Doctrine\Common\EventSubscriber;
@@ -134,7 +134,7 @@ class TraceableListener implements EventSubscriber
         /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
 
-        if (!$this->hasTrait($metadata->getReflectionClass(), 'Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable'))
+        if (!$this->hasTrait($metadata->getReflectionClass(), 'Blast\BaseEntitiesBundle\Entity\Traits\Traceable'))
             return; // return if current entity doesn't use Traceable trait
 
         // [...]
@@ -191,7 +191,7 @@ class TraceableListener implements EventSubscriber
     {
         $entity = $eventArgs->getObject();
 
-        if (!$this->hasTrait($entity, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Traceable'))
+        if (!$this->hasTrait($entity, 'Blast\BaseEntitiesBundle\Entity\Traits\Traceable'))
             return;
 
         $user = $this->tokenStorage->getToken()->getUser(); // Using SF 2.6 TokenStorage service to retreive current user
@@ -217,7 +217,7 @@ To enable this functionnality on an entity :
 ```php
 namespace MyBundle\Entity;
 
-use Librinfo\BaseEntitiesBundle\Entity\Traits\Searchable;
+use Blast\BaseEntitiesBundle\Entity\Traits\Searchable;
 
 class Contact
 {
@@ -231,7 +231,7 @@ class Contact
 ```php
 namespace MyBundle\Entity;
 
-use Librinfo\BaseEntitiesBundle\Entity\SearchIndexEntity;
+use Blast\BaseEntitiesBundle\Entity\SearchIndexEntity;
 
 class ContactSearchIndex extends SearchIndexEntity
 {

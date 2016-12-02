@@ -1,8 +1,8 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Entity\Repository\Tree;
+namespace Blast\BaseEntitiesBundle\Entity\Repository\Tree;
 
-use Librinfo\BaseEntitiesBundle\Entity\Traits\Tree\NodeInterface;
+use Blast\BaseEntitiesBundle\Entity\Traits\Tree\NodeInterface;
 use Doctrine\ORM\QueryBuilder;
 
 trait Tree

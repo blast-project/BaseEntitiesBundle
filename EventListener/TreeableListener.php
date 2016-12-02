@@ -1,13 +1,13 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\EventListener;
+namespace Blast\BaseEntitiesBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
+use Blast\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
 use Psr\Log\LoggerAwareInterface;
-use Librinfo\BaseEntitiesBundle\EventListener\Traits\Logger;
+use Blast\BaseEntitiesBundle\EventListener\Traits\Logger;
 
 class TreeableListener implements LoggerAwareInterface, EventSubscriber
 {
@@ -32,7 +32,7 @@ class TreeableListener implements LoggerAwareInterface, EventSubscriber
 
         $reflectionClass = $metadata->getReflectionClass();
 
-        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Treeable'))
+        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\Treeable'))
             return; // return if current entity doesn't use Treeable trait
 
         $this->logger->debug(
@@ -54,6 +54,6 @@ class TreeableListener implements LoggerAwareInterface, EventSubscriber
             ]);
 
         if ( !$metadata->customRepositoryClassName )
-            $metadata->setCustomRepositoryClass('Librinfo\BaseEntitiesBundle\Entity\Repository\TreeableRepository');
+            $metadata->setCustomRepositoryClass('Blast\BaseEntitiesBundle\Entity\Repository\TreeableRepository');
     }
 }

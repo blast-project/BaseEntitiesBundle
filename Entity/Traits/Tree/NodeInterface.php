@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Librinfo\BaseEntitiesBundle\Entity\Traits\Tree;
+namespace Blast\BaseEntitiesBundle\Entity\Traits\Tree;
 
 use Doctrine\Common\Collections\Collection;
 

@@ -1,12 +1,12 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle;
+namespace Blast\BaseEntitiesBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Librinfo\BaseEntitiesBundle\DependencyInjection\Compiler\ValidateExtensionConfigurationPass;
+use Blast\BaseEntitiesBundle\DependencyInjection\Compiler\ValidateExtensionConfigurationPass;
 
-class LibrinfoBaseEntitiesBundle extends Bundle
+class BlastBaseEntitiesBundle extends Bundle
 {
     /**
      * {@inheritdoc}

@@ -1,6 +1,6 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Entity\Traits;
+namespace Blast\BaseEntitiesBundle\Entity\Traits;
 
 use Doctrine\Common\Collections\ArrayCollection;
 

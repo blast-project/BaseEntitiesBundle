@@ -1,6 +1,6 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Form\Type;
+namespace Blast\BaseEntitiesBundle\Form\Type;
 
 
 use Symfony\Component\Form\FormInterface;

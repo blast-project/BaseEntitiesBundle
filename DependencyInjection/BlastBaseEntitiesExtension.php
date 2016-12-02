@@ -1,11 +1,11 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\DependencyInjection;
+namespace Blast\BaseEntitiesBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Blast\CoreBundle\DependencyInjection\BlastCoreExtension;
 
-class LibrinfoBaseEntitiesExtension extends BlastCoreExtension
+class BlastBaseEntitiesExtension extends BlastCoreExtension
 {
     private $entityManagers   = array();
     private $documentManagers = array();
@@ -37,7 +37,7 @@ class LibrinfoBaseEntitiesExtension extends BlastCoreExtension
 
         foreach ( $availableListeners as $listenerName )
         {
-            $serviceId = 'librinfo.base_entities.listener.' . $listenerName;
+            $serviceId = 'blast_base_entities.listener.' . $listenerName;
 
             // enable doctrine ORM event subscribers
             foreach ( $config['orm'] as $connection => $listeners ) {
@@ -65,7 +65,7 @@ class LibrinfoBaseEntitiesExtension extends BlastCoreExtension
 
         if ( $useLoggable )
         {
-            $container->getDefinition('librinfo.base_entities.listener.logger')
+            $container->getDefinition('blast_base_entities.listener.logger')
                 ->setPublic(true)
                 ->addTag('kernel.event_subscriber');
         }

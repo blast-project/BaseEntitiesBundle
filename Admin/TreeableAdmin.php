@@ -1,6 +1,6 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Admin;
+namespace Blast\BaseEntitiesBundle\Admin;
 
 use Blast\CoreBundle\Admin\CoreAdmin;
 

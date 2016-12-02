@@ -1,6 +1,6 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Entity\Traits;
+namespace Blast\BaseEntitiesBundle\Entity\Traits;
 
 /**
  * Classes that have the loggable trait will be versioned in database.

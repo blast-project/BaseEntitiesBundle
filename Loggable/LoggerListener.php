@@ -1,6 +1,6 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Loggable;
+namespace Blast\BaseEntitiesBundle\Loggable;
 
 use Gedmo\Loggable\LoggableListener;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

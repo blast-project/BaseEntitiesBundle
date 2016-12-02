@@ -1,13 +1,13 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\EventListener;
+namespace Blast\BaseEntitiesBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Psr\Log\LoggerAwareInterface;
-use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
-use Librinfo\BaseEntitiesBundle\EventListener\Traits\Logger;
+use Blast\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
+use Blast\BaseEntitiesBundle\EventListener\Traits\Logger;
 
 class LabelableListener implements LoggerAwareInterface, EventSubscriber
 {
@@ -37,7 +37,7 @@ class LabelableListener implements LoggerAwareInterface, EventSubscriber
 
         $reflectionClass = $metadata->getReflectionClass();
 
-        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Labelable'))
+        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\Labelable'))
             return; // return if current entity doesn't use Labelable trait
 
         $this->logger->debug("[LabelableListener] Entering LabelableListener for « loadClassMetadata » event");

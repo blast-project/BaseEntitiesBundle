@@ -18,14 +18,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Librinfo\BaseEntitiesBundle\Command;
+namespace Blast\BaseEntitiesBundle\Command;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Doctrine\Bundle\DoctrineBundle\Command\DoctrineCommand;
-use Librinfo\BaseEntitiesBundle\Entity\Traits\Searchable;
-use Librinfo\BaseEntitiesBundle\Entity\Repository\SearchableRepository;
+use Blast\BaseEntitiesBundle\Entity\Traits\Searchable;
+use Blast\BaseEntitiesBundle\Entity\Repository\SearchableRepository;
 
 
 /**
@@ -44,7 +44,7 @@ class UpdateSearchCommand extends DoctrineCommand
     protected function configure()
     {
         $this
-            ->setName('librinfo:update:search')
+            ->setName('blast:update:search')
             ->setDescription('Batch update of search indexes')
             ->addArgument('name', InputArgument::REQUIRED, 'Entity FQDN class name or Doctrine alias')
             ->setHelp(<<<EOT
@@ -78,7 +78,7 @@ EOT
         // Check if the entity has the Searchable trait
         $reflector = new \ReflectionClass($name);
         $traits = $reflector->getTraitNames();
-        if ( ! in_array('Librinfo\DoctrineBundle\Entity\Traits\Searchable', $traits) ) {
+        if ( ! in_array('Blast\BaseEntitiesBundle\Entity\Traits\Searchable', $traits) ) {
             throw new \RuntimeException(sprintf('%s class doesn\'t have the Searchable trait.', $reflector->getName()));
         }
 

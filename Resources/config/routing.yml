@@ -1,6 +1,6 @@
-librinfo_base_entities_move_sortable:
+blast_base_entities_move_sortable:
     path: /base_entities/move-sortable-item
-    defaults:  { _controller: LibrinfoBaseEntitiesBundle:Sortable:moveSortableItem }
+    defaults:  { _controller: BlastBaseEntitiesBundle:Sortable:moveSortableItem }
 searchable_admin_retrieve_autocomplete_items:
     path: /doctrine-search/get-searchable-autocomplete-items
-    defaults:  { _controller: LibrinfoBaseEntitiesBundle:Search:retrieveAutocompleteItems }
+    defaults:  { _controller: BlastBaseEntitiesBundle:Search:retrieveAutocompleteItems }

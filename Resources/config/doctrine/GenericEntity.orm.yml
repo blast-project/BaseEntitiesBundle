@@ -1,2 +1,2 @@
-Librinfo\BaseEntitiesBundle\Entity\GenericEntity:
+Blast\BaseEntitiesBundle\Entity\GenericEntity:
     type: mappedSuperclass

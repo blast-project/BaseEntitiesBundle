@@ -1,6 +1,6 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Entity\Repository;
+namespace Blast\BaseEntitiesBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

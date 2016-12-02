@@ -1,13 +1,13 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\EventListener;
+namespace Blast\BaseEntitiesBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
-use Librinfo\BaseEntitiesBundle\EventListener\Traits\Logger;
+use Blast\BaseEntitiesBundle\EventListener\Traits\Logger;
 use Psr\Log\LoggerAwareInterface;
-use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
+use Blast\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
 
 
 class NormalizeListener implements LoggerAwareInterface, EventSubscriber

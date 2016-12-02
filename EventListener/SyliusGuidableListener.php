@@ -1,13 +1,13 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\EventListener;
+namespace Blast\BaseEntitiesBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Id\UuidGenerator;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
-use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
-use Librinfo\BaseEntitiesBundle\EventListener\Traits\Logger;
+use Blast\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
+use Blast\BaseEntitiesBundle\EventListener\Traits\Logger;
 use Psr\Log\LoggerAwareInterface;
 
 /**

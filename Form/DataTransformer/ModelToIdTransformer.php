@@ -12,7 +12,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Librinfo\BaseEntitiesBundle\Form\DataTransformer;
+namespace Blast\BaseEntitiesBundle\Form\DataTransformer;
 
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\DataTransformerInterface;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Loggable\Mapping\Event\Adapter;
+namespace Blast\BaseEntitiesBundle\Loggable\Mapping\Event\Adapter;
 
 use Gedmo\Mapping\Event\Adapter\ODM as BaseAdapterODM;
 use Gedmo\Loggable\Mapping\Event\LoggableAdapter;

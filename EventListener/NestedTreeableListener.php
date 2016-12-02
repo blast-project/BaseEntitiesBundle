@@ -1,14 +1,14 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\EventListener;
+namespace Blast\BaseEntitiesBundle\EventListener;
 
 use Psr\Log\LoggerAwareInterface;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\EventArgs;
 use Gedmo\Tree\TreeListener;
-use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
+use Blast\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
 
-use Librinfo\BaseEntitiesBundle\EventListener\Traits\Logger;
+use Blast\BaseEntitiesBundle\EventListener\Traits\Logger;
 
 class NestedTreeableListener extends TreeListener implements LoggerAwareInterface, EventSubscriber
 {
@@ -32,7 +32,7 @@ class NestedTreeableListener extends TreeListener implements LoggerAwareInterfac
         $reflectionClass = $meta->getReflectionClass();
         
 
-        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Librinfo\BaseEntitiesBundle\Entity\Traits\NestedTreeable'))
+        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\NestedTreeable'))
             return; // return if current entity doesn't use NestedTreeable trait
 
         $this->logger->debug(

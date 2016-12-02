@@ -1,6 +1,6 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Admin\Traits;
+namespace Blast\BaseEntitiesBundle\Admin\Traits;
 
 Trait NestedTreeableAdmin
 {   

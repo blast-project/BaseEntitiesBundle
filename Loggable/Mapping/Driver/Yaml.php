@@ -1,6 +1,6 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Loggable\Mapping\Driver;
+namespace Blast\BaseEntitiesBundle\Loggable\Mapping\Driver;
 
 use Gedmo\Mapping\Driver\File;
 use Gedmo\Mapping\Driver;
@@ -40,7 +40,7 @@ class Yaml extends File implements Driver
         $mapping = $this->_getMapping($meta->name);
 
         // Entities that have the Loggable trait don't need the blast:loggable entry in the yaml file
-        if ( ClassAnalyzer::hasTrait($meta->name, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Loggable') )
+        if ( ClassAnalyzer::hasTrait($meta->name, 'Blast\BaseEntitiesBundle\Entity\Traits\Loggable') )
         {
             $config['loggable'] = true;
         }
@@ -120,24 +120,24 @@ class Yaml extends File implements Driver
     public function addTraitsMetadata($meta, array &$config)
     {
         // add versioned fields for entities that have the Nameable trait
-        if ( ClassAnalyzer::hasTrait($meta->name, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Nameable' ) )
+        if ( ClassAnalyzer::hasTrait($meta->name, 'Blast\BaseEntitiesBundle\Entity\Traits\Nameable' ) )
         {
             $config['versioned'][] = 'name';
         }
         // add versioned fields for entities that have the Descriptible trait
-        if ( ClassAnalyzer::hasTrait($meta->name, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Descriptible' ) )
+        if ( ClassAnalyzer::hasTrait($meta->name, 'Blast\BaseEntitiesBundle\Entity\Traits\Descriptible' ) )
         {
             $config['versioned'][] = 'description';
         }
         // add versioned fields for entities that have the Emailable trait
-        if ( ClassAnalyzer::hasTrait($meta->name, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Emailable' ) )
+        if ( ClassAnalyzer::hasTrait($meta->name, 'Blast\BaseEntitiesBundle\Entity\Traits\Emailable' ) )
         {
             $config['versioned'][] = 'email';
             $config['versioned'][] = 'emailNpai';
             $config['versioned'][] = 'emailNoNewsletter';
         }
         // add versioned fields for entities that have the Addressable trait
-        if ( ClassAnalyzer::hasTrait($meta->name, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Addressable' ) )
+        if ( ClassAnalyzer::hasTrait($meta->name, 'Blast\BaseEntitiesBundle\Entity\Traits\Addressable' ) )
         {
             $config['versioned'][] = 'address';
             $config['versioned'][] = 'zip';

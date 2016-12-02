@@ -1,15 +1,15 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\EventListener;
+namespace Blast\BaseEntitiesBundle\EventListener;
 
 use Doctrine\Common\EventArgs;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Psr\Log\LoggerAwareInterface;
-use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
-use Librinfo\BaseEntitiesBundle\EventListener\Traits\Logger;
-use Librinfo\BaseEntitiesBundle\Entity\Repository\SortableRepository;
+use Blast\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
+use Blast\BaseEntitiesBundle\EventListener\Traits\Logger;
+use Blast\BaseEntitiesBundle\Entity\Repository\SortableRepository;
 
 class SortableListener implements LoggerAwareInterface, EventSubscriber
 {
@@ -42,7 +42,7 @@ class SortableListener implements LoggerAwareInterface, EventSubscriber
 
         $reflectionClass = $metadata->getReflectionClass();
 
-        if ( !$reflectionClass || !$this->hasTrait($reflectionClass, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Sortable') )
+        if ( !$reflectionClass || !$this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\Sortable') )
             return; // return if current entity doesn't use Sortable trait
 
         $this->logger->debug("[SortableListener] Entering SortableListener for « loadClassMetadata » event");
@@ -80,7 +80,7 @@ class SortableListener implements LoggerAwareInterface, EventSubscriber
 
         $reflectionClass = $meta->getReflectionClass();
 
-        if ( !$reflectionClass || !$this->hasTrait($reflectionClass, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Sortable') )
+        if ( !$reflectionClass || !$this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\Sortable') )
             return; // return if current entity doesn't use Sortable trait
 
         if ( $object->getSortRank() )

@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Librinfo\BaseEntitiesBundle\Entity\Traits\Tree;
+namespace Blast\BaseEntitiesBundle\Entity\Traits\Tree;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Librinfo\BaseEntitiesBundle\Entity\Traits\Tree\NodeInterface;
+use Blast\BaseEntitiesBundle\Entity\Traits\Tree\NodeInterface;
 
 /*
  * @author     Florian Klein <florian.klein@free.fr>

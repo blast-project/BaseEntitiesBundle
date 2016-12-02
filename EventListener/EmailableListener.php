@@ -1,13 +1,13 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\EventListener;
+namespace Blast\BaseEntitiesBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Librinfo\BaseEntitiesBundle\EventListener\Traits\Logger;
+use Blast\BaseEntitiesBundle\EventListener\Traits\Logger;
 use Psr\Log\LoggerAwareInterface;
-use Librinfo\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
+use Blast\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
 
 
 class EmailableListener implements LoggerAwareInterface, EventSubscriber
@@ -38,12 +38,12 @@ class EmailableListener implements LoggerAwareInterface, EventSubscriber
 
         $reflectionClass = $metadata->getReflectionClass();
 
-        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Emailable'))
+        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\Emailable'))
             return; // return if current entity doesn't use Emailable trait
 
         // Check if parents already have the Emailable trait
         foreach ($metadata->parentClasses as $parent)
-            if ($this->classAnalyzer->hasTrait($parent, 'Librinfo\BaseEntitiesBundle\Entity\Traits\Emailable'))
+            if ($this->classAnalyzer->hasTrait($parent, 'Blast\BaseEntitiesBundle\Entity\Traits\Emailable'))
                 return;
 
         $this->logger->debug(

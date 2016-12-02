@@ -1,6 +1,6 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Loggable\Mapping\Driver;
+namespace Blast\BaseEntitiesBundle\Loggable\Mapping\Driver;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Gedmo\Exception\InvalidMappingException;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Doctrine\ORM\Driver;
+namespace Blast\BaseEntitiesBundle\Doctrine\ORM\Driver;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver;

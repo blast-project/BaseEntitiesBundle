@@ -1,6 +1,6 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Controller;
+namespace Blast\BaseEntitiesBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CoreController;
 use Librinfo\DoctrineBundle\Entity\Repository\SortableRepository;

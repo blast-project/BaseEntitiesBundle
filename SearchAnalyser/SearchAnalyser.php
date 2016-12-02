@@ -1,6 +1,6 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\SearchAnalyser;
+namespace Blast\BaseEntitiesBundle\SearchAnalyser;
 
 use Behat\Transliterator\Transliterator;
 

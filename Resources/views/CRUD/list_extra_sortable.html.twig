@@ -32,7 +32,7 @@ $(".content table.sonata-ba-list tbody").sortable({
         var nextRank = parseInt( ui.item.next().find('td.sonata-ba-list-field-sort_rank').text() );
 
         $.ajax({
-            url: '{{ path('librinfo_base_entities_move_sortable') }}',
+            url: '{{ path('blast_base_entities_move_sortable') }}',
             type: 'post',
             data: {
                 admin_code: '{{ admin.code }}',

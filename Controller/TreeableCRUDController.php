@@ -1,6 +1,6 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Controller;
+namespace Blast\BaseEntitiesBundle\Controller;
 
 use Librinfo\CRMBundle\Entity\Category;
 use Sonata\AdminBundle\Controller\CRUDController;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Librinfo\BaseEntitiesBundle\Entity\Traits;
+namespace Blast\BaseEntitiesBundle\Entity\Traits;
 
-use Librinfo\BaseEntitiesBundle\Entity\Traits\Tree\Node;
-use Librinfo\BaseEntitiesBundle\Entity\Traits\Tree\NodeInterface;
+use Blast\BaseEntitiesBundle\Entity\Traits\Tree\Node;
+use Blast\BaseEntitiesBundle\Entity\Traits\Tree\NodeInterface;
 
 trait Treeable
 {
