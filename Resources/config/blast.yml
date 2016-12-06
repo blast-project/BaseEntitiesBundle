@@ -137,13 +137,16 @@ parameters:
 
         Blast\BaseEntitiesBundle\Entity\Traits\Guidable:
             Sonata\AdminBundle\Datagrid\ListMapper:
-                remove: [id]
+                remove:
+                    id: ~
             Sonata\AdminBundle\Show\ShowMapper:
                 _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
-                remove: [id]
+                remove:
+                    id: ~
             Sonata\AdminBundle\Datagrid\DatagridMapper:
-                remove: [id]
+                remove:
+                    id: ~
 
         Blast\BaseEntitiesBundle\Entity\Traits\Treeable:
             Sonata\AdminBundle\Show\ShowMapper:
@@ -259,13 +262,16 @@ parameters:
 
         Blast\BaseEntitiesBundle\Entity\Traits\Guidable:
             Sonata\AdminBundle\Datagrid\ListMapper:
-                remove: [id]
+                remove:
+                    id: ~
             Sonata\AdminBundle\Show\ShowMapper:
                 _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
-                remove: [id]
+                remove:
+                    id: ~
             Sonata\AdminBundle\Datagrid\DatagridMapper:
-                remove: [id]
+                remove:
+                    id: ~
 
         Blast\BaseEntitiesBundle\Entity\Traits\Treeable:
             Sonata\AdminBundle\Show\ShowMapper:
