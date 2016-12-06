@@ -76,6 +76,6 @@ class NestedTreeableType extends AbstractType
     
     public function getBlockPrefix()
     {
-        return 'librinfo_nested_treeable';
+        return 'blast_nested_treeable';
     }
  }

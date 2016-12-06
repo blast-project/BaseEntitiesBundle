@@ -1,16 +1,4 @@
 services:
-
-# SYMFONY CUSTOM FORM TYPES
-
-    blast_base_entities.form.type.librinfo_treeable:
-        class: Blast\BaseEntitiesBundle\Form\Type\TreeableType
-        tags:
-            - { name: form.type, alias: librinfo_treeable }
-            
-    blast_base_entities.form.type.librinfo_nested_treeable:
-        class: Blast\BaseEntitiesBundle\Form\Type\NestedTreeableType
-        tags:
-            - { name: form.type, alias: librinfo_nested_treeable }
             
 # ###################################################################################
 #
@@ -144,18 +132,23 @@ services:
 #
 # ###################################################################################
 
-    blast_base_entities.form.type.librinfo_baseentities_treeable:
+    blast_base_entities.form.type.treeable:
         class: Blast\BaseEntitiesBundle\Form\Type\TreeableType
         calls:
             - [setEntityManager, ['@doctrine.orm.entity_manager']]
         tags:
-            - { name: form.type, alias: librinfo_baseentities_treeable }
-    blast_base_entities.form.type.librinfo_baseentities_treeablechoice:
+            - { name: form.type, alias: blast_treeable }
+    blast_base_entities.form.type.treeablechoice:
         class: Blast\BaseEntitiesBundle\Form\Type\TreeableChoiceType
         calls:
             - [setEntityManager, ['@doctrine.orm.entity_manager']]
         tags:
-            - { name: form.type, alias: librinfo_baseentities_treeablechoice }
+            - { name: form.type, alias: blast_treeablechoice }
+            
+    blast_base_entities.form.type.nested_treeable:
+        class: Blast\BaseEntitiesBundle\Form\Type\NestedTreeableType
+        tags:
+            - { name: form.type, alias: blast_nested_treeable }
 
 # ###################################################################################
 #
