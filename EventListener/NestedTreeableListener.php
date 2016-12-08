@@ -30,7 +30,7 @@ class NestedTreeableListener extends TreeListener implements LoggerAwareInterfac
     {
         $meta = $eventArgs->getClassMetadata();
         $reflectionClass = $meta->getReflectionClass();
-        
+
 
         if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\NestedTreeable'))
             return; // return if current entity doesn't use NestedTreeable trait
@@ -42,7 +42,7 @@ class NestedTreeableListener extends TreeListener implements LoggerAwareInterfac
         $ea = $this->getEventAdapter($eventArgs);
         $om = $ea->getObjectManager();
         $fqcn = $reflectionClass->getName();
-        
+
         self::$configurations['Tree'] = [
             $fqcn => [
                 'strategy'         => 'nested',
@@ -56,7 +56,7 @@ class NestedTreeableListener extends TreeListener implements LoggerAwareInterfac
                 'useObjectClass'   => $fqcn
             ]
         ];
-        
+
         if (!$meta->hasField('treeLft'))
             $meta->mapField([
                 'fieldName' => 'treeLft',
@@ -70,14 +70,14 @@ class NestedTreeableListener extends TreeListener implements LoggerAwareInterfac
                 'type'      => 'integer',
                 'gedmo'     => 'treeRight'
             ]);
-        
+
         if (!$meta->hasField('treeLvl'))
             $meta->mapField([
                 'fieldName' => 'treeLvl',
                 'type'      => 'integer',
                 'gedmo'     => 'treeLevel'
             ]);
-        
+
         if(!$meta->hasAssociation('treeChildren'))
             $meta->mapOneToMany([
                 'fieldName'    => 'treeChildren',
@@ -86,7 +86,7 @@ class NestedTreeableListener extends TreeListener implements LoggerAwareInterfac
                 'orderBy'      => ['treeLft' => 'ASC'],
                 'cascade'      => ['persist', 'remove']
             ]);
-        
+
         if(!$meta->hasAssociation('treeRoot'))
             $meta->mapManyToOne([
                 'fieldName'    => 'treeRoot',
@@ -111,10 +111,10 @@ class NestedTreeableListener extends TreeListener implements LoggerAwareInterfac
                     ],
                 'gedmo'       => 'treeParent'
             ]);
-        
+
         if ( !$meta->customRepositoryClassName )
             $meta->setCustomRepositoryClass('Gedmo\Tree\Entity\Repository\NestedTreeRepository');
-        
+
         if (isset(self::$configurations[$this->name][$meta->name]) && self::$configurations[$this->name][$meta->name]) {
             $this->getStrategy($om, $meta->name)->processMetadataLoad($om, $meta);
         }
