@@ -1,9 +1,19 @@
 <?php
 
+/*
+ * This file is part of the BLAST package <http://blast.libre-informatique.fr>.
+ *
+ * Copyright (C) 2015-2016 Libre Informatique
+ *
+ * This file is licenced under the GNU GPL v3.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Blast\CoreBundle\DependencyInjection\BlastCoreExtension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class BlastBaseEntitiesExtension extends BlastCoreExtension
 {
@@ -18,7 +28,7 @@ class BlastBaseEntitiesExtension extends BlastCoreExtension
         $availableListeners = [
             'naming',
             'guidable',
-            'traceable',
+            'timestampable',
             'addressable',
             'treeable',
             'nested_treeable',
@@ -69,7 +79,7 @@ class BlastBaseEntitiesExtension extends BlastCoreExtension
                 ->setPublic(true)
                 ->addTag('kernel.event_subscriber');
         }
-        
+
         return $this;
     }
 

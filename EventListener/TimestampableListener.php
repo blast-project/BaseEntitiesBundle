@@ -1,18 +1,28 @@
 <?php
 
+/*
+ * This file is part of the BLAST package <http://blast.libre-informatique.fr>.
+ *
+ * Copyright (C) 2015-2016 Libre Informatique
+ *
+ * This file is licenced under the GNU GPL v3.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\EventListener;
 
+use Blast\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
+use Blast\BaseEntitiesBundle\EventListener\Traits\Logger;
 use DateTime;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Blast\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
 use Psr\Log\LoggerAwareInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
-use Blast\BaseEntitiesBundle\EventListener\Traits\Logger;
 
-class TraceableListener implements LoggerAwareInterface, EventSubscriber
+class TimestampableListener implements LoggerAwareInterface, EventSubscriber
 {
     use ClassChecker, Logger;
 
@@ -36,7 +46,7 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
     }
 
     /**
-     * define Traceable mapping at runtime
+     * define Timestampable mapping at runtime
      *
      * @param LoadClassMetadataEventArgs $eventArgs
      */
@@ -47,19 +57,19 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
 
         $reflectionClass = $metadata->getReflectionClass();
 
-        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\Traceable'))
-            return; // return if current entity doesn't use Traceable trait
+        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\Timestampable'))
+            return; // return if current entity doesn't use Timestampable trait
 
-        // Check if parents already have the Traceable trait
+        // Check if parents already have the Timestampable trait
         foreach ($metadata->parentClasses as $parent)
-            if ($this->classAnalyzer->hasTrait($parent, 'Blast\BaseEntitiesBundle\Entity\Traits\Traceable'))
+            if ($this->classAnalyzer->hasTrait($parent, 'Blast\BaseEntitiesBundle\Entity\Traits\Timestampable'))
                 return;
 
         $this->logger->debug(
-            "[TraceableListener] Entering TraceableListener for « loadClassMetadata » event"
+            "[TimestampableListener] Entering TimestampableListener for « loadClassMetadata » event"
         );
 
-        // setting default mapping configuration for Traceable
+        // setting default mapping configuration for Timestampable
 
         // createdAt
         $metadata->mapField([
@@ -74,13 +84,13 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
         ]);
 
         $this->logger->debug(
-            "[TraceableListener] Added Traceable mapping metadata to Entity",
+            "[TimestampableListener] Added Timestampable mapping metadata to Entity",
             ['class' => $metadata->getName()]
         );
     }
 
     /**
-     * sets Traceable dateTime and user information when persisting entity
+     * sets Timestampable dateTime and user information when persisting entity
      *
      * @param LifecycleEventArgs $eventArgs
      */
@@ -88,11 +98,11 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
     {
         $entity = $eventArgs->getObject();
 
-        if (!$this->hasTrait($entity, 'Blast\BaseEntitiesBundle\Entity\Traits\Traceable'))
+        if (!$this->hasTrait($entity, 'Blast\BaseEntitiesBundle\Entity\Traits\Timestampable'))
             return;
 
         $this->logger->debug(
-            "[TraceableListener] Entering TraceableListener for « prePersist » event"
+            "[TimestampableListener] Entering TimestampableListener for « prePersist » event"
         );
 
         $now = new DateTime('NOW');
@@ -101,7 +111,7 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
     }
 
     /**
-     * sets Traceable dateTime and user information when updating entity
+     * sets Timestampable dateTime and user information when updating entity
      *
      * @param LifecycleEventArgs $eventArgs
      */
@@ -109,11 +119,11 @@ class TraceableListener implements LoggerAwareInterface, EventSubscriber
     {
         $entity = $eventArgs->getObject();
 
-        if (!$this->hasTrait($entity, 'Blast\BaseEntitiesBundle\Entity\Traits\Traceable'))
+        if (!$this->hasTrait($entity, 'Blast\BaseEntitiesBundle\Entity\Traits\Timestampable'))
             return;
 
         $this->logger->debug(
-            "[TraceableListener] Entering TraceableListener for « preUpdate » event"
+            "[TimestampableListener] Entering TimestampableListener for « preUpdate » event"
         );
 
         $now = new DateTime('NOW');

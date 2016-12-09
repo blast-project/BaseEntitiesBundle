@@ -97,7 +97,7 @@ We're using standard Doctrine EventSubscriber to manage BaseEntities behaviors.
 * [see official Symfony documentation](http://symfony.com/doc/current/cookbook/doctrine/event_listeners_subscribers.html#creating-the-subscriber-class)
 * [see official Doctrine documentation](http://doctrine-orm.readthedocs.org/projects/doctrine-orm/en/latest/reference/events.html#the-event-system)
 
-Here's a simplified example of Traceable EventSubscriber :
+Here's a simplified example of Timestampable EventSubscriber :
 
 ```php
 namespace Blast\BaseEntitiesBundle\EventListener;
@@ -108,7 +108,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 
-class TraceableListener implements EventSubscriber
+class TimestampableListener implements EventSubscriber
 {
     /**
      * Returns an array of events this subscriber wants to listen to.
@@ -125,7 +125,7 @@ class TraceableListener implements EventSubscriber
     }
 
     /**
-     * define Traceable mapping at runtime
+     * define Timestampable mapping at runtime
      *
      * @param LoadClassMetadataEventArgs $eventArgs
      */
@@ -134,12 +134,12 @@ class TraceableListener implements EventSubscriber
         /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
 
-        if (!$this->hasTrait($metadata->getReflectionClass(), 'Blast\BaseEntitiesBundle\Entity\Traits\Traceable'))
-            return; // return if current entity doesn't use Traceable trait
+        if (!$this->hasTrait($metadata->getReflectionClass(), 'Blast\BaseEntitiesBundle\Entity\Traits\Timestampable'))
+            return; // return if current entity doesn't use Timestampable trait
 
         // [...]
 
-        // setting default mapping configuration for Traceable
+        // setting default mapping configuration for Timestampable
 
         // createdDate
         $metadata->mapField([
@@ -178,12 +178,12 @@ Let's take a usefull example :
 
 ```php
 
-class TraceableListener implements EventSubscriber
+class TimestampableListener implements EventSubscriber
 {
     // [...]
 
     /**
-     * sets Traceable dateTime and user information when persisting entity
+     * sets Timestampable dateTime and user information when persisting entity
      *
      * @param LifecycleEventArgs $eventArgs
      */
@@ -191,7 +191,7 @@ class TraceableListener implements EventSubscriber
     {
         $entity = $eventArgs->getObject();
 
-        if (!$this->hasTrait($entity, 'Blast\BaseEntitiesBundle\Entity\Traits\Traceable'))
+        if (!$this->hasTrait($entity, 'Blast\BaseEntitiesBundle\Entity\Traits\Timestampable'))
             return;
 
         $user = $this->tokenStorage->getToken()->getUser(); // Using SF 2.6 TokenStorage service to retreive current user
@@ -205,7 +205,7 @@ class TraceableListener implements EventSubscriber
 }
 ```
 
-This is quite trivial, this event listener appends data before persisting entities that use Traceable trait.
+This is quite trivial, this event listener appends data before persisting entities that use Timestampable trait.
 
 ## Searchable trait
 

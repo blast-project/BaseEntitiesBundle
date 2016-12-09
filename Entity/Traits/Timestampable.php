@@ -1,10 +1,20 @@
 <?php
 
+/*
+ * This file is part of the BLAST package <http://blast.libre-informatique.fr>.
+ *
+ * Copyright (C) 2015-2016 Libre Informatique
+ *
+ * This file is licenced under the GNU GPL v3.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\Entity\Traits;
 
 use DateTime;
 
-trait Traceable
+trait Timestampable
 {
     /**
      * @var DateTime
@@ -27,7 +37,7 @@ trait Traceable
     /**
      * @param DateTime $createdAt
      *
-     * @return Traceable
+     * @return Timestampable
      */
     public function setCreatedAt(DateTime $createdAt)
     {
@@ -46,7 +56,7 @@ trait Traceable
     /**
      * @param DateTime $lastUpdatedAt
      *
-     * @return Traceable
+     * @return Timestampable
      */
     public function setUpdatedAt(DateTime $lastUpdatedAt)
     {

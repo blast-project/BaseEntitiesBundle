@@ -1,13 +1,23 @@
 <?php
 
+/*
+ * This file is part of the BLAST package <http://blast.libre-informatique.fr>.
+ *
+ * Copyright (C) 2015-2016 Libre Informatique
+ *
+ * This file is licenced under the GNU GPL v3.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\EventListener;
 
+use Blast\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
+use Blast\BaseEntitiesBundle\EventListener\Traits\Logger;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Psr\Log\LoggerAwareInterface;
-use Blast\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
-use Blast\BaseEntitiesBundle\EventListener\Traits\Logger;
 
 class AddressableListener implements LoggerAwareInterface, EventSubscriber
 {
@@ -49,7 +59,7 @@ class AddressableListener implements LoggerAwareInterface, EventSubscriber
             "[AddressableListener] Entering AddressableListener for « loadClassMetadata » event"
         );
 
-        // setting default mapping configuration for Traceable
+        // setting default mapping configuration for Addressable
 
         // address
         $metadata->mapField([

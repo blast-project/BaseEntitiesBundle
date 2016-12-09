@@ -77,7 +77,7 @@
                 <target>Classement</target>
             </trans-unit>
 
-<!-- TRACEABLE -->
+<!-- TIMESTAMPABLE -->
             <trans-unit id="librinfo.label.created_at">
                 <source>librinfo.label.created_at</source>
                 <target>Créé le</target>

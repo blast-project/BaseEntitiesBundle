@@ -53,7 +53,7 @@ librinfo_doctrine:
         default:
             naming: true
             guidable: true
-            traceable: true
+            timestampable: true
             addressable: true
             treeable: true
             nameable: true
@@ -72,7 +72,7 @@ Add/remove the needed behaviours for each orm connection used by your applicatio
 
 - naming: provides a database table naming based on your vendor / bundle / entity
 - guidable: provides GUID primary keys to your entities
-- traceable: provides createdAt / updatedAt fields and doctrine listeners to your entities
+- timestampable: provides createdAt / updatedAt fields and doctrine listeners to your entities
 - addressable: provides address fields to your entities (address, city, zip, country...)
 - treeable: provides tree structure to your entities
 - nameable: provides a name field to your entities

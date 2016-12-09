@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the BLAST package <http://blast.libre-informatique.fr>.
+ *
+ * Copyright (C) 2015-2016 Libre Informatique
+ *
+ * This file is licenced under the GNU GPL v3.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -43,7 +53,7 @@ class Configuration implements ConfigurationInterface
                 ->children()
                     ->scalarNode('naming')->defaultFalse()->end()
                     ->scalarNode('guidable')->defaultFalse()->end()
-                    ->scalarNode('traceable')->defaultFalse()->end()
+                    ->scalarNode('timestampable')->defaultFalse()->end()
                     ->scalarNode('addressable')->defaultFalse()->end()
                     ->scalarNode('treeable')->defaultFalse()->end()
                     ->scalarNode('nameable')->defaultFalse()->end()

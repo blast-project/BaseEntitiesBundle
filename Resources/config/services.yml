@@ -1,5 +1,5 @@
 services:
-            
+
 # ###################################################################################
 #
 #                             DOCTRINE BEHAVIORS
@@ -21,9 +21,9 @@ services:
             - [setLogger, [@logger]]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
-# Service that manages Traceable doctrine mapping and behavior
-    blast_base_entities.listener.traceable:
-        class: Blast\BaseEntitiesBundle\EventListener\TraceableListener
+# Service that manages Timestampable doctrine mapping and behavior
+    blast_base_entities.listener.timestampable:
+        class: Blast\BaseEntitiesBundle\EventListener\TimestampableListener
         calls:
             - [setLogger, [@logger]]
             - [setTokenStorage, [@security.token_storage]]
@@ -144,7 +144,7 @@ services:
             - [setEntityManager, ['@doctrine.orm.entity_manager']]
         tags:
             - { name: form.type, alias: blast_treeablechoice }
-            
+
     blast_base_entities.form.type.nested_treeable:
         class: Blast\BaseEntitiesBundle\Form\Type\NestedTreeableType
         tags:
