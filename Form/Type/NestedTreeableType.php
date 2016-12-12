@@ -15,8 +15,8 @@ class NestedTreeableType extends AbstractType
         $queryBuilder = function (Options $options) 
         {
             return $options['em']
-                    ->getRepository($options['class'])
-                    ->getNodesHierarchyQueryBuilder();
+                ->getRepository($options['class'])
+                ->getNodesHierarchyQueryBuilder();
         };
         
         $choiceLabel = function($choice)
