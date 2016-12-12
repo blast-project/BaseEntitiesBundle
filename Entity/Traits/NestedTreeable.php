@@ -184,7 +184,8 @@ trait NestedTreeable {
         return $this->treeParent;
     }
     
-    public function initCollections(){
+    public function initCollections()
+    {
         $this->treeChildren = new ArrayCollection();
     }
 }
