@@ -9,9 +9,4 @@ trait BaseEntity
 {
     use Guidable;
     use Stringable;
-
-    /**
-     * @var \Doctrine\Common\Collections\Collection
-     */
-    private $links;
 }
