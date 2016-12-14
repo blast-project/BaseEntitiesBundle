@@ -48,7 +48,11 @@ parameters:
                 add:
                     email: ~
             Sonata\AdminBundle\Show\ShowMapper:
-                _copy: Sonata\AdminBundle\Form\FormMapper
+                add:
+                    form_group_general:
+                        '':
+                            email:
+                                template: BlastCoreBundle:CRUD:show_field_email.html.twig
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     form_group_general:
