@@ -57,7 +57,7 @@ class SearchableListener implements EventSubscriber
             ]);
         }
 
-        // Add manyToOne mapping to entities that exetend SearchIndexEntity (first parent only)
+        // Add manyToOne mapping to entities that extend SearchIndexEntity (first parent only)
         $parentClass = $reflectionClass->getParentClass();
         if ( $parentClass && $parentClass->getName() ==  'Blast\BaseEntitiesBundle\Entity\SearchIndexEntity' )
         {
