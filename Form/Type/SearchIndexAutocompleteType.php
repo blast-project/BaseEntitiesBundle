@@ -10,15 +10,7 @@ use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Form\DataTransformer\ModelToIdPropertyTransformer;
 
 class SearchIndexAutocompleteType extends ModelAutocompleteType
-{
-//    /**
-//     * {@inheritdoc}
-//     */
-//    public function getParent()
-//    {
-//        return 'entity';
-//    }
-    
+{   
     /**
      * {@inheritdoc}
      */
