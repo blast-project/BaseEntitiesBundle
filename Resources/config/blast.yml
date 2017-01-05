@@ -1,3 +1,5 @@
+
+
 parameters:
     blast:
         configuration:
@@ -258,3 +260,43 @@ parameters:
                         '':
                             parentNode:
                                 type: librinfo_baseentities_treeable
+        ### SearchIndexEntity  ###
+        Blast\BaseEntitiesBundle\Entity\SearchIndexEntity:
+            # SHOW
+            Sonata\AdminBundle\Show\ShowMapper:
+                add:
+                    main_tab:
+                        main_group:
+                            id: ~
+                            field: ~
+                            keyword: ~
+    
+            # FORM    
+            Sonata\AdminBundle\Form\FormMapper:
+                add:
+                    main_tab:
+                        main_group:
+                            id: ~
+                            field: ~
+                            keyword: ~
+    
+            # LIST    
+            Sonata\AdminBundle\Datagrid\ListMapper:
+                add:
+                    id: ~
+                    field: ~
+                    keyword: ~
+    
+                    _actions:
+                        show: ~
+                        edit: ~
+                        delete: ~
+                        duplicate:
+                            template: BlastCoreBundle:CRUD:list__action_duplicate.html.twig
+            # FILTERS 
+            Sonata\AdminBundle\Datagrid\DatagridMapper:
+                add:
+                    id: ~
+                    field: ~
+                    keyword: ~
+    
