@@ -13,7 +13,7 @@ trait ClassChecker
 
     /**
      * @param string $classAnalyzer     class analyzer FQCN
-     * @return this
+     * @return self
      */
     public function setClassAnalyser($classAnalyzer)
     {
