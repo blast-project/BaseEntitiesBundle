@@ -1,28 +1,22 @@
 <?php
 
-/*
- * This file is part of the Libre Informatique Symfony2 projects.
- *
- * (c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
- * (c) Marcos Bezerra de Menezes <marcos.bezerra@libre-informatique.fr>
- * (c) Libre Informatique <contact@libre-informatique.Fr>
- *
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Blast\BaseEntitiesBundle\Form\DataTransformer;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\Common\Util\ClassUtils;
+use Sonata\AdminBundle\Model\ModelManagerInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 
+/**
+ * Transform object to ID and label.
+ *
+ * @author Romain SANCHEZ <romain.sanchez@libre-informatique.fr>
+ */
 class ModelToIdTransformer implements DataTransformerInterface
 {
     /**
-     * @var EntityManager
+     * @var ModelManagerInterface
      */
-    protected $entityManager;
+    protected $modelManager;
 
     /**
      * @var string
@@ -30,48 +24,126 @@ class ModelToIdTransformer implements DataTransformerInterface
     protected $className;
 
     /**
-     * @param EntityManager $em
-     * @param string        $className
+     * @var bool
      */
-    public function __construct(EntityManager $em, $className)
+    protected $multiple;
+
+    /**
+     * @var callable|null
+     */
+    protected $toStringCallback;
+
+    /**
+     * @param ModelManagerInterface $modelManager
+     * @param string                $className
+     * @param string                $property
+     * @param bool                  $multiple
+     * @param null                  $toStringCallback
+     */
+    public function __construct(ModelManagerInterface $modelManager, $className, $multiple = false, $toStringCallback = null)
     {
-        $this->entityManager = $em;
-        $this->className    = $className;
+        $this->modelManager = $modelManager;
+        $this->className = $className;
+        $this->multiple = $multiple;
+        $this->toStringCallback = $toStringCallback;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function reverseTransform($newId)
+    public function reverseTransform($value)
     {
-        if (empty($newId) && !in_array($newId, array('0', 0), true)) {
+        $collection = $this->modelManager->getModelCollectionInstance($this->className);
+
+        if ( empty($value) )
+        {
+            if ( $this->multiple )
+                return $collection;
+
             return;
         }
 
-        return $this->entityManager->find($this->className, $newId);
+        if ( !$this->multiple )
+            return $this->modelManager->find($this->className, $value);
+
+        if ( !is_array($value) )
+            throw new \UnexpectedValueException(sprintf('Value should be array, %s given.', gettype($value)));
+
+        foreach ( $value as $key => $id )
+        {
+            if ( $key === '_labels' )
+                continue;
+            
+            $collection->add($this->modelManager->find($this->className, $id));
+        }
+
+        return $collection;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function transform($entity)
+    public function transform($entityOrCollection)
     {
-        if (empty($entity)) {
-            return;
+        $result = array();
+
+        if ( !$entityOrCollection )
+        {
+            return $result;
         }
 
-        if (is_scalar($entity)) {
-            throw new \RunTimeException('Invalid argument, object or null required');
+        if ( $this->multiple )
+        {
+            $isArray = is_array($entityOrCollection);
+            if ( !$isArray && substr(get_class($entityOrCollection), -1 * strlen($this->className)) == $this->className )
+            {
+                throw new \InvalidArgumentException('A multiple selection must be passed a collection not a single value. Make sure that form option "multiple=false" is set for many-to-one relation and "multiple=true" is set for many-to-many or one-to-many relations.');
+            } elseif ( $isArray || ($entityOrCollection instanceof \ArrayAccess) )
+            {
+                $collection = $entityOrCollection;
+            } else
+            {
+                throw new \InvalidArgumentException('A multiple selection must be passed a collection not a single value. Make sure that form option "multiple=false" is set for many-to-one relation and "multiple=true" is set for many-to-many or one-to-many relations.');
+            }
+        } else
+        {
+            if ( substr(get_class($entityOrCollection), -1 * strlen($this->className)) == $this->className )
+            {
+                $collection = array($entityOrCollection);
+            } elseif ( $entityOrCollection instanceof \ArrayAccess )
+            {
+                throw new \InvalidArgumentException('A single selection must be passed a single value not a collection. Make sure that form option "multiple=false" is set for many-to-one relation and "multiple=true" is set for many-to-many or one-to-many relations.');
+            } else
+            {
+                $collection = array($entityOrCollection);
+            }
         }
 
-        if (!$entity) {
-            return;
-        }
+        foreach ( $collection as $entity )
+        {
+            if(!$entity)
+                continue;
+            
+            $id = current($this->modelManager->getIdentifierValues($entity));
 
-        if (!$this->entityManager->getUnitOfWork()->isInIdentityMap($entity)) {
-            return;
-        }
+            if ( $this->toStringCallback !== null )
+            {
+                if ( !is_callable($this->toStringCallback) )
+                    throw new \RuntimeException('Callback in "to_string_callback" option doesn`t contain a callable function.');
 
-        return implode('~', $this->entityManager->getUnitOfWork()->getEntityIdentifier($entity));
+                $label = call_user_func($this->toStringCallback, $entity);
+            } else
+                try {
+                    $label = (string) $entity;
+                } catch ( \Exception $e ) {
+                    throw new \RuntimeException(sprintf("Unable to convert the entity %s to String, entity must have a '__toString()' method defined", ClassUtils::getClass($entity)), 0, $e);
+                }
+
+            $result[] = $id;
+            $result['_labels'][] = $label;
+        }
+        
+        return $result;
     }
+
 }
