@@ -56,7 +56,7 @@ class SearchableRepository extends EntityRepository
             $parameters["search$k"] = $word . '%';
         }
         $query->setParameters($parameters);
-        //dump($query->getQuery()->getSQL());
+
         $results = $query->getQuery()->execute();
         return $results;
     }
