@@ -105,14 +105,6 @@ services:
             - [setLogger, [@logger]]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
-# Service that manages GUID doctrine mapping for Sylius entities
-# TODO: put this in a Sylius bundle
-    blast_base_entities.listener.syliusGuidable:
-        class: Blast\BaseEntitiesBundle\EventListener\SyliusGuidableListener
-        calls:
-            - [setLogger, [@logger]]
-            - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
-
 # ###################################################################################
 #
 #                          SYMFONY EVENT LISTENERS
@@ -149,7 +141,7 @@ services:
         class: Blast\BaseEntitiesBundle\Form\Type\NestedTreeableType
         tags:
             - { name: form.type, alias: blast_nested_treeable }
-            
+
     blast_base_entities.form.type.search_index_autocomplete:
         class: Blast\BaseEntitiesBundle\Form\Type\SearchIndexAutocompleteType
         tags:
