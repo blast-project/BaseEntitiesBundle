@@ -11,98 +11,98 @@ services:
     blast_base_entities.listener.naming:
         class: Blast\BaseEntitiesBundle\EventListener\NamingListener
         calls:
-            - [setLogger, [@logger]]
+            - [setLogger, ['@logger']]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages GUID doctrine mapping
     blast_base_entities.listener.guidable:
         class: Blast\BaseEntitiesBundle\EventListener\GuidableListener
         calls:
-            - [setLogger, [@logger]]
+            - [setLogger, ['@logger']]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Timestampable doctrine mapping and behavior
     blast_base_entities.listener.timestampable:
         class: Blast\BaseEntitiesBundle\EventListener\TimestampableListener
         calls:
-            - [setLogger, [@logger]]
-            - [setTokenStorage, [@security.token_storage]]
+            - [setLogger, ['@logger']]
+            - [setTokenStorage, ['@security.token_storage']]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Addressable doctrine mapping
     blast_base_entities.listener.addressable:
         class: Blast\BaseEntitiesBundle\EventListener\AddressableListener
         calls:
-            - [setLogger, [@logger]]
+            - [setLogger, ['@logger']]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Treeable doctrine mapping
     blast_base_entities.listener.treeable:
         class: Blast\BaseEntitiesBundle\EventListener\TreeableListener
         calls:
-            - [setLogger, [@logger]]
+            - [setLogger, ['@logger']]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages NestedTreeable doctrine mapping
     blast_base_entities.listener.nested_treeable:
         class: Blast\BaseEntitiesBundle\EventListener\NestedTreeableListener
         calls:
-            - [setLogger, [@logger]]
+            - [setLogger, ['@logger']]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Nameable doctrine mapping
     blast_base_entities.listener.nameable:
         class: Blast\BaseEntitiesBundle\EventListener\NameableListener
         calls:
-            - [setLogger, [@logger]]
+            - [setLogger, ['@logger']]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Labelable doctrine mapping
     blast_base_entities.listener.labelable:
         class: Blast\BaseEntitiesBundle\EventListener\LabelableListener
         calls:
-            - [setLogger, [@logger]]
+            - [setLogger, ['@logger']]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Emailable doctrine mapping
     blast_base_entities.listener.emailable:
         class: Blast\BaseEntitiesBundle\EventListener\EmailableListener
         calls:
-            - [setLogger, [@logger]]
+            - [setLogger, ['@logger']]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Descriptible doctrine mapping
     blast_base_entities.listener.descriptible:
         class: Blast\BaseEntitiesBundle\EventListener\DescriptibleListener
         calls:
-            - [setLogger, [@logger]]
+            - [setLogger, ['@logger']]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Searchable doctrine mapping
     blast_base_entities.listener.searchable:
         class: Blast\BaseEntitiesBundle\EventListener\SearchableListener
         calls:
-            - [setLogger, [@logger]]
+            - [setLogger, ['@logger']]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Loggable doctrine behaviour
     blast_base_entities.listener.loggable:
         class: Blast\BaseEntitiesBundle\Loggable\LoggableListener
         calls:
-            - [setAnnotationReader, [@annotation_reader]]
+            - [setAnnotationReader, ['@annotation_reader']]
 
 # Service that manages Loggable doctrine behaviour
     blast_base_entities.listener.sortable:
         class: Blast\BaseEntitiesBundle\EventListener\SortableListener
         calls:
-            - [setLogger, [@logger]]
+            - [setLogger, ['@logger']]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # Service that manages Normalize doctrine behaviour
     blast_base_entities.listener.normalize:
         class: Blast\BaseEntitiesBundle\EventListener\NormalizeListener
         calls:
-            - [setLogger, [@logger]]
+            - [setLogger, ['@logger']]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
 
 # ###################################################################################
@@ -115,7 +115,7 @@ services:
     blast_base_entities.listener.logger:
         class: Blast\BaseEntitiesBundle\Loggable\LoggerListener
         public: false
-        arguments: [@blast_base_entities.listener.loggable]
+        arguments: ['@blast_base_entities.listener.loggable']
 
 
 # ###################################################################################
