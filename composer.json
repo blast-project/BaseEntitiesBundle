@@ -3,7 +3,7 @@
     "type": "symfony-bundle",
     "description": "Base behaviors for Doctrine Entities in Libre Informatique Symfony2 projects",
     "require": {
-        "blast-project/core-bundle": "dev-master",
+        "blast-project/core-bundle": "dev-sf3.2",
         "stof/doctrine-extensions-bundle": "^1.2"
     },
     "license": "GPL-3.0",
