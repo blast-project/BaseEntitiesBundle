@@ -35,7 +35,7 @@ parameters:
                         form_group_communication:
                             vcard_uid:
                                 type: text
-                                read_only: true
+#                                read_only: true
                                 disabled: true
                                 required: false
 
@@ -129,13 +129,13 @@ parameters:
                         form_group_history:
                             createdAt:
                                 type: sonata_type_datetime_picker
-                                read_only: true
+#                                read_only: true
                                 disabled: true
                                 required: false
                                 dp_side_by_side: true
                             updatedAt:
                                 type: sonata_type_datetime_picker
-                                read_only: true
+#                                read_only: true
                                 disabled: true
                                 required: false
                                 dp_side_by_side: true
@@ -270,8 +270,8 @@ parameters:
                             id: ~
                             field: ~
                             keyword: ~
-    
-            # FORM    
+
+            # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     main_tab:
@@ -279,24 +279,24 @@ parameters:
                             id: ~
                             field: ~
                             keyword: ~
-    
-            # LIST    
+
+            # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     id: ~
                     field: ~
                     keyword: ~
-    
+
                     _actions:
                         show: ~
                         edit: ~
                         delete: ~
                         duplicate:
                             template: BlastCoreBundle:CRUD:list__action_duplicate.html.twig
-            # FILTERS 
+            # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     id: ~
                     field: ~
                     keyword: ~
-    
+
