@@ -162,7 +162,7 @@ parameters:
                     form_group_general:
                         '':
                             parentNode:
-                                type: librinfo_baseentities_treeable
+                                type: librinfo_baseentities_treeable  # ???
 
 
         Blast\BaseEntitiesBundle\Entity\Traits\Sortable:
@@ -259,7 +259,7 @@ parameters:
                     form_group_general:
                         '':
                             parentNode:
-                                type: librinfo_baseentities_treeable
+                                type: librinfo_baseentities_treeable  # ???
         ### SearchIndexEntity  ###
         Blast\BaseEntitiesBundle\Entity\SearchIndexEntity:
             # SHOW
