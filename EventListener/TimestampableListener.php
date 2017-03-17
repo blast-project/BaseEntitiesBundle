@@ -90,7 +90,7 @@ class TimestampableListener implements LoggerAwareInterface, EventSubscriber
     }
 
     /**
-     * sets Timestampable dateTime and user information when persisting entity
+     * sets Timestampable dateTime (createdAt and updatedAt) information when persisting entity
      *
      * @param LifecycleEventArgs $eventArgs
      */
@@ -111,7 +111,7 @@ class TimestampableListener implements LoggerAwareInterface, EventSubscriber
     }
 
     /**
-     * sets Timestampable dateTime and user information when updating entity
+     * sets Timestampable dateTime (updatedAt) information when updating entity
      *
      * @param LifecycleEventArgs $eventArgs
      */

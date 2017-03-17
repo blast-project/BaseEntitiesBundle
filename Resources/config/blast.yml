@@ -127,15 +127,23 @@ parameters:
                         form_group_history:
                             createdAt:
                                 type: sonata_type_datetime_picker
+<<<<<<< HEAD
                                 attr:
                                     readonly: true
+=======
+#                                read_only: true
+>>>>>>> 14ed1546ba7dd65cc5e4c2664de3c6735ba28016
                                 disabled: true
                                 required: false
                                 dp_side_by_side: true
                             updatedAt:
                                 type: sonata_type_datetime_picker
+<<<<<<< HEAD
                                 attr:
                                     readonly: true
+=======
+#                                read_only: true
+>>>>>>> 14ed1546ba7dd65cc5e4c2664de3c6735ba28016
                                 disabled: true
                                 required: false
                                 dp_side_by_side: true
@@ -162,7 +170,7 @@ parameters:
                     form_group_general:
                         '':
                             parentNode:
-                                type: librinfo_baseentities_treeable
+                                type: librinfo_baseentities_treeable  # ???
 
 
         Blast\BaseEntitiesBundle\Entity\Traits\Sortable:
@@ -259,7 +267,7 @@ parameters:
                     form_group_general:
                         '':
                             parentNode:
-                                type: librinfo_baseentities_treeable
+                                type: librinfo_baseentities_treeable  # ???
         ### SearchIndexEntity  ###
         Blast\BaseEntitiesBundle\Entity\SearchIndexEntity:
             # SHOW
@@ -270,8 +278,8 @@ parameters:
                             id: ~
                             field: ~
                             keyword: ~
-    
-            # FORM    
+
+            # FORM
             Sonata\AdminBundle\Form\FormMapper:
                 add:
                     main_tab:
@@ -279,24 +287,24 @@ parameters:
                             id: ~
                             field: ~
                             keyword: ~
-    
-            # LIST    
+
+            # LIST
             Sonata\AdminBundle\Datagrid\ListMapper:
                 add:
                     id: ~
                     field: ~
                     keyword: ~
-    
+
                     _actions:
                         show: ~
                         edit: ~
                         delete: ~
                         duplicate:
                             template: BlastCoreBundle:CRUD:list__action_duplicate.html.twig
-            # FILTERS 
+            # FILTERS
             Sonata\AdminBundle\Datagrid\DatagridMapper:
                 add:
                     id: ~
                     field: ~
                     keyword: ~
-    
+
