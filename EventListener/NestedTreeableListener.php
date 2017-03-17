@@ -14,18 +14,6 @@ class NestedTreeableListener extends TreeListener implements LoggerAwareInterfac
 {
     use ClassChecker, Logger;
 
-    /**
-     * Returns an array of events this subscriber wants to listen to.
-     *
-     * @return array
-     */
-    public function getSubscribedEvents()
-    {
-        return [
-            'loadClassMetadata'
-        ];
-    }
-
     public function loadClassMetadata(EventArgs $eventArgs)
     {
         $meta = $eventArgs->getClassMetadata();
