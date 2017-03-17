@@ -1,5 +1,4 @@
 
-
 parameters:
     blast:
         configuration:
@@ -35,11 +34,10 @@ parameters:
                         form_group_communication:
                             vcard_uid:
                                 type: text
-                                read_only: true
+                                attr:
+                                    readonly: true
                                 disabled: true
                                 required: false
-
-
 
         Blast\BaseEntitiesBundle\Entity\Traits\Emailable:
             Sonata\AdminBundle\Datagrid\ListMapper:
@@ -129,13 +127,15 @@ parameters:
                         form_group_history:
                             createdAt:
                                 type: sonata_type_datetime_picker
-                                read_only: true
+                                attr:
+                                    readonly: true
                                 disabled: true
                                 required: false
                                 dp_side_by_side: true
                             updatedAt:
                                 type: sonata_type_datetime_picker
-                                read_only: true
+                                attr:
+                                    readonly: true
                                 disabled: true
                                 required: false
                                 dp_side_by_side: true
