@@ -9,8 +9,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.todo',
     'sphinx.ext.coverage',
-    'sphinx.ext.ifconfig',
-    'sensio.sphinx.configurationblock'
+    'sphinx.ext.ifconfig'
 ]
 
 
