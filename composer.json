@@ -31,7 +31,8 @@
     ],
     "autoload": {
         "psr-4": {
-            "Blast\\BaseEntitiesBundle\\": ""
+            "Blast\\BaseEntitiesBundle\\": "src/",
+            "Blast\\BaseEntitiesBundle\\Tests\\": "tests/"
         }
     },
     "suggest": {
