@@ -19,7 +19,7 @@ chmod u+x "${HOME}/bin/coveralls"
 phpenv config-rm xdebug.ini
 
 
-composer install --prefer-dist --no-interaction 
+composer install --profile --prefer-dist --no-interaction -vvv
 
 # To be removed when this issue will be resolved: https://github.com/composer/composer/issues/5355
 #if [ "${COMPOSER_FLAGS}" = '--prefer-lowest' ]; then
