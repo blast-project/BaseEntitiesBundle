@@ -22,16 +22,13 @@ chmod u+x "${HOME}/bin/coveralls"
 #mkdir --parents ${HOME}/phpenvini/
 #echo 'memory_limit=2048M' > ${HOME}/phpenvini/myenv.ini
 #phpenv config-add  ${HOME}/phpenvini/myenv.ini
-echo "memory_limit=2G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-
-grep memory_limit ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/*.ini
-grep memory_limit ~/.phpenv/versions/$(phpenv version-name)/etc/*.ini
+echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
 #cat  ${HOME}/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
 php -v
 
-composer install --profile --prefer-dist --no-interaction -vvv
+composer install --profile --prefer-dist --no-interaction
 
 # To be removed when this issue will be resolved: https://github.com/composer/composer/issues/5355
 #if [ "${COMPOSER_FLAGS}" = '--prefer-lowest' ]; then
