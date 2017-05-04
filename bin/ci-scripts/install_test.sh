@@ -17,11 +17,11 @@ wget https://github.com/satooshi/php-coveralls/releases/download/v1.0.1/coverall
 chmod u+x "${HOME}/bin/coveralls"
 
 #phpenv config-rm xdebug.ini
-# Ugly hack
 
-phpenv config-add <<EOF
-memory_limit=-1
-EOF
+# Ugly hack
+mkdir --parents ${HOME}/phpenvini/
+echo 'memory_limit=-1' > ${HOME}/phpenvini/myenv.ini
+phpenv config-add  ${HOME}/phpenvini/myenv.ini
 
 php -v
 
