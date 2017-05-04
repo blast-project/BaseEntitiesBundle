@@ -9,10 +9,7 @@
 - DevKit updates for BaseEntitiesBundle [\#2](https://github.com/blast-project/BaseEntitiesBundle/pull/2) ([BlastCI](https://github.com/BlastCI))
 
 ## [0.2](https://github.com/blast-project/BaseEntitiesBundle/tree/0.2) (2017-03-07)
-[Full Changelog](https://github.com/blast-project/BaseEntitiesBundle/compare/pre-sf3.2...0.2)
-
-## [pre-sf3.2](https://github.com/blast-project/BaseEntitiesBundle/tree/pre-sf3.2) (2017-03-07)
-[Full Changelog](https://github.com/blast-project/BaseEntitiesBundle/compare/0.1...pre-sf3.2)
+[Full Changelog](https://github.com/blast-project/BaseEntitiesBundle/compare/0.1...0.2)
 
 ## [0.1](https://github.com/blast-project/BaseEntitiesBundle/tree/0.1) (2017-02-15)
 
