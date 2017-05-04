@@ -20,7 +20,7 @@ chmod u+x "${HOME}/bin/coveralls"
 
 # Ugly hack
 mkdir --parents ${HOME}/phpenvini/
-echo 'memory_limit=-1' > ${HOME}/phpenvini/myenv.ini
+echo 'memory_limit=2048M' > ${HOME}/phpenvini/myenv.ini
 phpenv config-add  ${HOME}/phpenvini/myenv.ini
 
 php -v
