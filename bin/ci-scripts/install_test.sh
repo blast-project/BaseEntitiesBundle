@@ -16,8 +16,14 @@ chmod u+x "${HOME}/bin/phpunit"
 wget https://github.com/satooshi/php-coveralls/releases/download/v1.0.1/coveralls.phar --output-document="${HOME}/bin/coveralls"
 chmod u+x "${HOME}/bin/coveralls"
 
-phpenv config-rm xdebug.ini
+#phpenv config-rm xdebug.ini
+# Ugly hack
 
+phpenv config-add <<EOF
+memory_limit=-1
+EOF
+
+php -v
 
 composer install --profile --prefer-dist --no-interaction -vvv
 
