@@ -1,5 +1,14 @@
 # SymfonyBlastBaseEntitiesBundle
 
+[![Build Status](https://travis-ci.org/blast-project/BaseEntitiesBundle.svg?branch=master)](https://travis-ci.org/blast-project/BaseEntitiesBundle)
+[![Coverage Status](https://coveralls.io/repos/github/blast-project/BaseEntitiesBundle/badge.svg?branch=master)](https://coveralls.io/github/blast-project/BaseEntitiesBundle?branch=master)
+[![License](https://img.shields.io/github/license/blast-project/BaseEntitiesBundle.svg?style=flat-square)](./LICENCE.md)
+
+[![Latest Stable Version](https://poser.pugx.org/blast-project/base-entities-bundle/v/stable)](https://packagist.org/packages/blast-project/base-entities-bundle)
+[![Latest Unstable Version](https://poser.pugx.org/blast-project/base-entities-bundle/v/unstable)](https://packagist.org/packages/blast-project/base-entities-bundle)
+[![Total Downloads](https://poser.pugx.org/blast-project/base-entities-bundle/downloads)](https://packagist.org/packages/blast-project/base-entities-bundle)
+
+
 This bundle provides some tools for a better integration of
 [LibrinfoDoctrineBundle](https://github.com/libre-informatique/SymfonyLibrinfoDoctrineBundle)
 behaviours in
