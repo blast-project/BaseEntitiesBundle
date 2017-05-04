@@ -16,6 +16,8 @@ chmod u+x "${HOME}/bin/phpunit"
 wget https://github.com/satooshi/php-coveralls/releases/download/v1.0.1/coveralls.phar --output-document="${HOME}/bin/coveralls"
 chmod u+x "${HOME}/bin/coveralls"
 
+phpenv config-rm xdebug.ini
+
 
 composer install --prefer-dist --no-interaction 
 
