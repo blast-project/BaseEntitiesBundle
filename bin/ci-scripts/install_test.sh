@@ -19,9 +19,12 @@ chmod u+x "${HOME}/bin/coveralls"
 #phpenv config-rm xdebug.ini
 
 # Ugly hack
-mkdir --parents ${HOME}/phpenvini/
-echo 'memory_limit=2048M' > ${HOME}/phpenvini/myenv.ini
-phpenv config-add  ${HOME}/phpenvini/myenv.ini
+#mkdir --parents ${HOME}/phpenvini/
+#echo 'memory_limit=2048M' > ${HOME}/phpenvini/myenv.ini
+#phpenv config-add  ${HOME}/phpenvini/myenv.ini
+echo "memory_limit=520M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+
+cat  ${HOME}/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
 php -v
 
