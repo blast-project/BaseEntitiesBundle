@@ -22,9 +22,12 @@ chmod u+x "${HOME}/bin/coveralls"
 #mkdir --parents ${HOME}/phpenvini/
 #echo 'memory_limit=2048M' > ${HOME}/phpenvini/myenv.ini
 #phpenv config-add  ${HOME}/phpenvini/myenv.ini
-echo "memory_limit=520M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+echo "memory_limit=2G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
-cat  ${HOME}/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+grep memory_limit ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/*.ini
+grep memory_limit ~/.phpenv/versions/$(phpenv version-name)/etc/*.ini
+
+#cat  ${HOME}/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
 php -v
 
