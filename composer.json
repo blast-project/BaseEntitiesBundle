@@ -39,6 +39,11 @@
             "Blast\\BaseEntitiesBundle\\Tests\\": "tests/"
         }
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.4.x-dev"
+        }
+    },
     "suggest": {
         "libre-informatique/crm-bundle": "Manage contacts, organisms and more..."
     }
