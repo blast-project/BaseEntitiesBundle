@@ -15,36 +15,37 @@ use Blast\BaseEntitiesBundle\Form\DataTransformer\ModelToIdTransformer;
  * @author Romain SANCHEZ <romain.sanchez@libre-informatique.fr>
  */
 class SearchIndexAutocompleteType extends ModelAutocompleteType
-{   
+{
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
-    {  
+    {
         $admin = $options['sonata_field_description']->getAssociationAdmin();
-      
+
         $builder->setAttribute('callback', $options['callback']);
         $builder->setAttribute('minimum_input_length', $options['minimum_input_length']);
         $builder->setAttribute('items_per_page', $options['items_per_page']);
         $builder->setAttribute('req_param_name_page_number', $options['req_param_name_page_number']);
         $builder->setAttribute('disabled', $options['disabled']);
         $builder->setAttribute('to_string_callback', $options['to_string_callback']);
+        $builder->setAttribute('target_admin_access_action', $options['target_admin_access_action']);
 
         $builder->addViewTransformer(
             new ModelToIdTransformer(
-                $admin->getModelManager(), 
-                $admin->getClass(), 
+                $admin->getModelManager(),
+                $admin->getClass(),
                 $options['multiple']
-            ), 
+            ),
             true
         );
-        
-        if ($options['multiple']) 
+
+        if ($options['multiple'])
         {
             $resizeListener = new ResizeFormListener(
                 'hidden', array(), true, true, true
             );
-            
+
             $builder->addEventSubscriber($resizeListener);
         }
     }
@@ -57,9 +58,9 @@ class SearchIndexAutocompleteType extends ModelAutocompleteType
         $compound = function (Options $options) {
             return $options['multiple'];
         };
-        
+
         $callback = function($admin, $property, $value){
-            
+
             $searchIndex = $admin->getClass() . 'SearchIndex';
             $datagrid = $admin->getDatagrid();
             $queryBuilder = $datagrid->getQuery();
@@ -70,7 +71,7 @@ class SearchIndexAutocompleteType extends ModelAutocompleteType
                 ->where('s.keyword LIKE :value')
                 ->setParameter('value', "%$value%")
             ;
-            
+
            // $datagrid->setValue($property, null, $value);
         };
 
@@ -90,7 +91,7 @@ class SearchIndexAutocompleteType extends ModelAutocompleteType
             'items_per_page' => 10,
             'quiet_millis' => 100,
             'cache' => false,
-
+            'target_admin_access_action' => 'list',
             'to_string_callback' => null,
 
             // ajax parameters
