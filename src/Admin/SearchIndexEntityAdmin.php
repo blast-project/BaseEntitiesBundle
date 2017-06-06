@@ -20,4 +20,17 @@ class SearchIndexEntityAdmin extends CoreAdmin
 
        // $datagrid->setValue($property, null, $value);
   }
+  
+  public static function searchIndexDoctrineORMCallback($queryBuilder, $alias, $property, $value){
+        $entityNamespace = $queryBuilder->getDQLPart('from')[0]->getFrom();
+        $searchIndex = $entityNamespace . 'SearchIndex';
+
+        $queryBuilder
+            ->leftJoin($searchIndex, 's', 'WITH', $alias . '.id = s.object')
+            ->where('s.keyword LIKE :value')
+            ->setParameter('value', "%".$value['value']."%")
+        ;
+
+       // $datagrid->setValue($property, null, $value);
+  }
 }
