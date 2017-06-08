@@ -1,5 +1,15 @@
 # Change Log
 
+## [0.4.3](https://github.com/blast-project/BaseEntitiesBundle/tree/0.4.3) (2017-06-08)
+[Full Changelog](https://github.com/blast-project/BaseEntitiesBundle/compare/0.4.2...0.4.3)
+
+**Merged pull requests:**
+
+- Correct function setId\(\) [\#10](https://github.com/blast-project/BaseEntitiesBundle/pull/10) ([erwanrolland](https://github.com/erwanrolland))
+- DevKit updates for BaseEntitiesBundle [\#9](https://github.com/blast-project/BaseEntitiesBundle/pull/9) ([BlastCI](https://github.com/BlastCI))
+- DevKit updates for BaseEntitiesBundle [\#8](https://github.com/blast-project/BaseEntitiesBundle/pull/8) ([BlastCI](https://github.com/BlastCI))
+- DevKit updates for BaseEntitiesBundle [\#6](https://github.com/blast-project/BaseEntitiesBundle/pull/6) ([BlastCI](https://github.com/BlastCI))
+
 ## [0.4.2](https://github.com/blast-project/BaseEntitiesBundle/tree/0.4.2) (2017-05-04)
 [Full Changelog](https://github.com/blast-project/BaseEntitiesBundle/compare/0.2...0.4.2)
 
