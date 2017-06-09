@@ -23,7 +23,7 @@ trait Guidable
      */
     public function setId($id)
     {
-        $this->$id = $id;
+        $this->id = $id;
         return $this;
     }
 
