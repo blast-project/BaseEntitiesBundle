@@ -27,9 +27,10 @@ trait Labelable
     {
         return $this->label;
     }
-    
+
     public function __toString()
     {
-        return $this->label ? $this->label : (method_exists($this, 'getId') ? $this->getId() : '');
+        // @TODO: should use Stringable from traits
+        return (string) ($this->label ? $this->label : (method_exists($this, 'getId') ? $this->getId() : ''));
     }
 }
