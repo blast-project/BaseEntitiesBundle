@@ -1,5 +1,13 @@
 # Change Log
 
+## [Unreleased](https://github.com/blast-project/BaseEntitiesBundle/tree/HEAD)
+
+[Full Changelog](https://github.com/blast-project/BaseEntitiesBundle/compare/0.4.3...HEAD)
+
+**Merged pull requests:**
+
+- DevKit updates for BaseEntitiesBundle [\#11](https://github.com/blast-project/BaseEntitiesBundle/pull/11) ([BlastCI](https://github.com/BlastCI))
+
 ## [0.4.3](https://github.com/blast-project/BaseEntitiesBundle/tree/0.4.3) (2017-06-08)
 [Full Changelog](https://github.com/blast-project/BaseEntitiesBundle/compare/0.4.2...0.4.3)
 
