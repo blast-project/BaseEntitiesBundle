@@ -21,7 +21,7 @@ parameters:
                 _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
                 add:
-                    form_group_general:
+                    form_tab_general:
                         form_group_main_address:
                             address:
                                 type: textarea
@@ -49,13 +49,13 @@ parameters:
                     email: ~
             Sonata\AdminBundle\Show\ShowMapper:
                 add:
-                    form_group_general:
+                    form_tab_general:
                         '':
                             email:
                                 template: BlastCoreBundle:CRUD:show_field_email.html.twig
             Sonata\AdminBundle\Form\FormMapper:
                 add:
-                    form_group_general:
+                    form_tab_general:
                         '':
                             email:
                                 type: email
@@ -75,19 +75,19 @@ parameters:
                 _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
                 add:
-                    form_group_general:
+                    form_tab_general:
                         '':
                             name: ~
 
         Blast\BaseEntitiesBundle\Entity\Traits\Descriptible:
             Sonata\AdminBundle\Show\ShowMapper:
                 add:
-                    form_group_general:
+                    form_tab_general:
                         form_group_description:
                             description: ~
             Sonata\AdminBundle\Form\FormMapper:
                 add:
-                    form_group_general:
+                    form_tab_general:
                         form_group_description:
                             description:
                                 type: textarea
@@ -104,7 +104,7 @@ parameters:
                 _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
                 add:
-                    form_group_general:
+                    form_tab_general:
                         '':
                             label: ~
 
@@ -155,7 +155,7 @@ parameters:
                 _copy: Sonata\AdminBundle\Form\FormMapper
             Sonata\AdminBundle\Form\FormMapper:
                 add:
-                    form_group_general:
+                    form_tab_general:
                         '':
                             parentNode:
                                 type: librinfo_baseentities_treeable  # ???
