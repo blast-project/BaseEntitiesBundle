@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\Loggable\Mapping\Driver;
 
 use Gedmo\Mapping\Driver\File;
@@ -27,29 +37,27 @@ use Blast\CoreBundle\Tools\Reflection\ClassAnalyzer;
 class Yaml extends File implements Driver
 {
     /**
-     * File extension
+     * File extension.
+     *
      * @var string
      */
     protected $_extension = '.dcm.yml';
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function readExtendedMetadata($meta, array &$config)
     {
         $mapping = $this->_getMapping($meta->name);
 
         // Entities that have the Loggable trait don't need the blast:loggable entry in the yaml file
-        if ( ClassAnalyzer::hasTrait($meta->name, 'Blast\BaseEntitiesBundle\Entity\Traits\Loggable') )
-        {
+        if (ClassAnalyzer::hasTrait($meta->name, 'Blast\BaseEntitiesBundle\Entity\Traits\Loggable')) {
             $config['loggable'] = true;
-        }
-
-        elseif (isset($mapping['blast'])) {
+        } elseif (isset($mapping['blast'])) {
             $classMapping = $mapping['blast'];
             if (isset($classMapping['loggable'])) {
                 $config['loggable'] = true;
-                if (isset ($classMapping['loggable']['logEntryClass'])) {
+                if (isset($classMapping['loggable']['logEntryClass'])) {
                     if (!$cl = $this->getRelatedClassName($meta, $classMapping['loggable']['logEntryClass'])) {
                         throw new InvalidMappingException("LogEntry class: {$classMapping['loggable']['logEntryClass']} does not exist.");
                     }
@@ -58,60 +66,66 @@ class Yaml extends File implements Driver
             }
         }
 
-        if ( !isset($config['loggable']) )
+        if (!isset($config['loggable'])) {
             return;
+        }
 
-        if ( isset($mapping['fields']) )
-            foreach ( $mapping['fields'] as $field => $fieldMapping )
-                if ( !isset($fieldMapping['blast']) || !in_array('unversioned', $fieldMapping['blast']) )
-                {
+        if (isset($mapping['fields'])) {
+            foreach ($mapping['fields'] as $field => $fieldMapping) {
+                if (!isset($fieldMapping['blast']) || !in_array('unversioned', $fieldMapping['blast'])) {
                     // fields cannot be overrided and throws mapping exception
-                    if ( $meta->isCollectionValuedAssociation($field) )
+                    if ($meta->isCollectionValuedAssociation($field)) {
                         throw new InvalidMappingException("Cannot versioned [{$field}] as it is collection in object - {$meta->name}");
+                    }
                     $config['versioned'][] = $field;
                 }
+            }
+        }
 
-        if (isset($mapping['attributeOverride']))
-            foreach ($mapping['attributeOverride'] as $field => $fieldMapping)
-                if ( !isset($fieldMapping['blast']) || !in_array('unversioned', $fieldMapping['blast']) )
-                {
+        if (isset($mapping['attributeOverride'])) {
+            foreach ($mapping['attributeOverride'] as $field => $fieldMapping) {
+                if (!isset($fieldMapping['blast']) || !in_array('unversioned', $fieldMapping['blast'])) {
                     // fields cannot be overrided and throws mapping exception
-                    if ($meta->isCollectionValuedAssociation($field))
+                    if ($meta->isCollectionValuedAssociation($field)) {
                         throw new InvalidMappingException("Cannot versioned [{$field}] as it is collection in object - {$meta->name}");
+                    }
                     $config['versioned'][] = $field;
                 }
+            }
+        }
 
-        if (isset($mapping['manyToOne']))
-            foreach ($mapping['manyToOne'] as $field => $fieldMapping)
-                if ( !isset($fieldMapping['blast']) || !in_array('unversioned', $fieldMapping['blast']) )
-                {
+        if (isset($mapping['manyToOne'])) {
+            foreach ($mapping['manyToOne'] as $field => $fieldMapping) {
+                if (!isset($fieldMapping['blast']) || !in_array('unversioned', $fieldMapping['blast'])) {
                     // fields cannot be overrided and throws mapping exception
-                    if ($meta->isCollectionValuedAssociation($field))
+                    if ($meta->isCollectionValuedAssociation($field)) {
                         throw new InvalidMappingException("Cannot versioned [{$field}] as it is collection in object - {$meta->name}");
+                    }
                     $config['versioned'][] = $field;
                 }
+            }
+        }
 
-        if (isset($mapping['oneToOne']))
-            foreach ($mapping['oneToOne'] as $field => $fieldMapping)
-                if ( !isset($fieldMapping['blast']) || !in_array('unversioned', $fieldMapping['blast']) )
-                {
-                     // fields cannot be overrided and throws mapping exception
-                    if ($meta->isCollectionValuedAssociation($field))
+        if (isset($mapping['oneToOne'])) {
+            foreach ($mapping['oneToOne'] as $field => $fieldMapping) {
+                if (!isset($fieldMapping['blast']) || !in_array('unversioned', $fieldMapping['blast'])) {
+                    // fields cannot be overrided and throws mapping exception
+                    if ($meta->isCollectionValuedAssociation($field)) {
                         throw new InvalidMappingException("Cannot versioned [{$field}] as it is collection in object - {$meta->name}");
+                    }
                     $config['versioned'][] = $field;
                 }
+            }
+        }
 
         if (!$meta->isMappedSuperclass && $config) {
-            if ( is_array($meta->identifier) && count($meta->identifier) > 1 )
-            {
+            if (is_array($meta->identifier) && count($meta->identifier) > 1) {
                 throw new InvalidMappingException("Loggable does not support composite identifiers in class - {$meta->name}");
             }
-            if ( isset($config['versioned']) && !isset($config['loggable']) )
-            {
+            if (isset($config['versioned']) && !isset($config['loggable'])) {
                 throw new InvalidMappingException("Class must be annoted with Loggable annotation in order to track versioned fields in class - {$meta->name}");
             }
-            if ( !empty($config['loggable']) )
-            {
+            if (!empty($config['loggable'])) {
                 $this->addTraitsMetadata($meta, $config);
             }
         }
@@ -120,25 +134,21 @@ class Yaml extends File implements Driver
     public function addTraitsMetadata($meta, array &$config)
     {
         // add versioned fields for entities that have the Nameable trait
-        if ( ClassAnalyzer::hasTrait($meta->name, 'Blast\BaseEntitiesBundle\Entity\Traits\Nameable' ) )
-        {
+        if (ClassAnalyzer::hasTrait($meta->name, 'Blast\BaseEntitiesBundle\Entity\Traits\Nameable')) {
             $config['versioned'][] = 'name';
         }
         // add versioned fields for entities that have the Descriptible trait
-        if ( ClassAnalyzer::hasTrait($meta->name, 'Blast\BaseEntitiesBundle\Entity\Traits\Descriptible' ) )
-        {
+        if (ClassAnalyzer::hasTrait($meta->name, 'Blast\BaseEntitiesBundle\Entity\Traits\Descriptible')) {
             $config['versioned'][] = 'description';
         }
         // add versioned fields for entities that have the Emailable trait
-        if ( ClassAnalyzer::hasTrait($meta->name, 'Blast\BaseEntitiesBundle\Entity\Traits\Emailable' ) )
-        {
+        if (ClassAnalyzer::hasTrait($meta->name, 'Blast\BaseEntitiesBundle\Entity\Traits\Emailable')) {
             $config['versioned'][] = 'email';
             $config['versioned'][] = 'emailNpai';
             $config['versioned'][] = 'emailNoNewsletter';
         }
         // add versioned fields for entities that have the Addressable trait
-        if ( ClassAnalyzer::hasTrait($meta->name, 'Blast\BaseEntitiesBundle\Entity\Traits\Addressable' ) )
-        {
+        if (ClassAnalyzer::hasTrait($meta->name, 'Blast\BaseEntitiesBundle\Entity\Traits\Addressable')) {
             $config['versioned'][] = 'address';
             $config['versioned'][] = 'zip';
             $config['versioned'][] = 'city';
@@ -149,10 +159,8 @@ class Yaml extends File implements Driver
         }
     }
 
-
-
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function _loadMappingFile($file)
     {

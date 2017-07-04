@@ -1,12 +1,12 @@
 <?php
 
 /*
- * This file is part of the BLAST package <http://blast.libre-informatique.fr>.
+ * This file is part of the Blast Project package.
  *
- * Copyright (C) 2015-2016 Libre Informatique
+ * Copyright (C) 2015-2017 Libre Informatique
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -42,6 +42,7 @@ trait Timestampable
     public function setCreatedAt(DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 
@@ -61,6 +62,7 @@ trait Timestampable
     public function setUpdatedAt(DateTime $lastUpdatedAt)
     {
         $this->updatedAt = $lastUpdatedAt;
+
         return $this;
     }
 }

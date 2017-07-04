@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\Entity\Repository;
 
 use Doctrine\ORM\QueryBuilder;
@@ -8,7 +18,7 @@ use Blast\BaseEntitiesBundle\Entity\Traits\Tree\NodeInterface;
 interface TreeableRepositoryInterface
 {
     /**
-     * Constructs a query builder to get all root nodes
+     * Constructs a query builder to get all root nodes.
      *
      * @param string $rootAlias
      *
@@ -17,7 +27,7 @@ interface TreeableRepositoryInterface
     public function getRootNodesQB($rootAlias = 't');
 
     /**
-     * Returns all root nodes
+     * Returns all root nodes.
      *
      * @api
      *
@@ -28,7 +38,7 @@ interface TreeableRepositoryInterface
     public function getRootNodes($rootAlias = 't');
 
     /**
-     * Returns a node hydrated with its children and parents
+     * Returns a node hydrated with its children and parents.
      *
      * @api
      *
@@ -42,16 +52,16 @@ interface TreeableRepositoryInterface
     public function getTreeExceptNodeAndItsChildrenQB(NodeInterface $entity, $rootAlias = 't');
 
     /**
-     * Extracts the root node and constructs a tree using flat resultset
+     * Extracts the root node and constructs a tree using flat resultset.
      *
-     * @param Iterable|array $results a flat resultset
+     * @param iterable|array $results a flat resultset
      *
      * @return NodeInterface
      */
     public function buildTree($results);
 
     /**
-     * Constructs a query builder to get a flat tree, starting from a given path
+     * Constructs a query builder to get a flat tree, starting from a given path.
      *
      * @param string $path
      * @param string $rootAlias
@@ -69,14 +79,14 @@ interface TreeableRepositoryInterface
 //    function addFlatTreeConditions(QueryBuilder $qb);
 
     /**
-     * Executes the flat tree query builder
+     * Executes the flat tree query builder.
      *
      * @return array the flat resultset
      */
     public function getFlatTree($path, $rootAlias = 't');
 
     /**
-     * getRootNodesTree
+     * getRootNodesTree.
      *
      * Return all trees without distinction
      * It builds the tree for each root nodes

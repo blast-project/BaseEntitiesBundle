@@ -1,18 +1,18 @@
 <?php
 
-/**
- * This file was initially part of the KnpDoctrineBehaviors package.
+/*
+ * This file is part of the Blast Project package.
  *
- * (c) KnpLabs <http://knplabs.com/>
+ * Copyright (C) 2015-2017 Libre Informatique
  *
- * For the full copyright and license information, please view the LICENSE
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
 namespace Blast\BaseEntitiesBundle\Entity\Traits\Tree;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Blast\BaseEntitiesBundle\Entity\Traits\Tree\NodeInterface;
 
 /*
  * @author     Florian Klein <florian.klein@free.fr>
@@ -20,12 +20,12 @@ use Blast\BaseEntitiesBundle\Entity\Traits\Tree\NodeInterface;
 trait Node
 {
     /**
-     * @var ArrayCollection $childNodes the children in the tree
+     * @var ArrayCollection the children in the tree
      */
     private $childNodes;
 
     /**
-     * @var NodeInterface $parentNode the parent in the tree
+     * @var NodeInterface the parent in the tree
      */
     private $parentNode;
 
@@ -51,7 +51,7 @@ trait Node
      **/
     public function getRealMaterializedPath()
     {
-        return $this->getMaterializedPath() . self::getMaterializedPathSeparator() . $this->getNodeId();
+        return $this->getMaterializedPath().self::getMaterializedPathSeparator().$this->getNodeId();
     }
 
     public function getMaterializedPath()
@@ -98,7 +98,7 @@ trait Node
     {
         $explodedPath = $this->getExplodedPath();
 
-        return static::getMaterializedPathSeparator() . array_shift($explodedPath);
+        return static::getMaterializedPathSeparator().array_shift($explodedPath);
     }
 
     /**
@@ -124,7 +124,7 @@ trait Node
      **/
     public function getChildNodes()
     {
-        return $this->childNodes = $this->childNodes ?: new ArrayCollection;
+        return $this->childNodes = $this->childNodes ?: new ArrayCollection();
     }
 
     /**
@@ -246,7 +246,7 @@ trait Node
     public function toArray(\Closure $prepare = null, array &$tree = null)
     {
         if (null === $prepare) {
-            $prepare = function(NodeInterface $node) {
+            $prepare = function (NodeInterface $node) {
                 return (string) $node;
             };
         }
@@ -271,7 +271,7 @@ trait Node
     public function toFlatArray(\Closure $prepare = null, array &$tree = null)
     {
         if (null === $prepare) {
-            $prepare = function(NodeInterface $node) {
+            $prepare = function (NodeInterface $node) {
                 $pre = $node->getNodeLevel() > 1 ? implode('', array_fill(0, $node->getNodeLevel(), '--')) : '';
 
                 return $pre.(string) $node;
@@ -318,7 +318,7 @@ trait Node
     {
         $path = explode(static::getMaterializedPathSeparator(), $this->getRealMaterializedPath());
 
-        return array_filter($path, function($item) {
+        return array_filter($path, function ($item) {
             return '' !== $item;
         });
     }

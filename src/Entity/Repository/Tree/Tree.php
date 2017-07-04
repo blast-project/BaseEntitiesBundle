@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\Entity\Repository\Tree;
 
 use Blast\BaseEntitiesBundle\Entity\Traits\Tree\NodeInterface;
@@ -8,7 +18,7 @@ use Doctrine\ORM\QueryBuilder;
 trait Tree
 {
     /**
-     * Constructs a query builder to get all root nodes
+     * Constructs a query builder to get all root nodes.
      *
      * @param string $rootAlias
      *
@@ -23,7 +33,7 @@ trait Tree
     }
 
     /**
-     * Returns all root nodes
+     * Returns all root nodes.
      *
      * @api
      *
@@ -41,7 +51,7 @@ trait Tree
     }
 
     /**
-     * Returns a node hydrated with its children and parents
+     * Returns a node hydrated with its children and parents.
      *
      * @api
      *
@@ -68,9 +78,9 @@ trait Tree
     }
 
     /**
-     * Extracts the root node and constructs a tree using flat resultset
+     * Extracts the root node and constructs a tree using flat resultset.
      *
-     * @param Iterable|array $results a flat resultset
+     * @param iterable|array $results a flat resultset
      *
      * @return NodeInterface
      */
@@ -87,7 +97,7 @@ trait Tree
     }
 
     /**
-     * Constructs a query builder to get a flat tree, starting from a given path
+     * Constructs a query builder to get a flat tree, starting from a given path.
      *
      * @param string $path
      * @param string $rootAlias
@@ -117,7 +127,7 @@ trait Tree
 
     /**
      * manipulates the flat tree query builder before executing it.
-     * Override this method to customize the tree query
+     * Override this method to customize the tree query.
      *
      * @param QueryBuilder $qb
      */
@@ -126,7 +136,7 @@ trait Tree
     }
 
     /**
-     * Executes the flat tree query builder
+     * Executes the flat tree query builder.
      *
      * @return array the flat resultset
      */

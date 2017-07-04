@@ -1,23 +1,33 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\Entity\Traits;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-trait NestedTreeable {
-    
+trait NestedTreeable
+{
     /**
-     * @var integer
+     * @var int
      */
     private $treeLft;
 
     /**
-     * @var integer
+     * @var int
      */
     private $treeRgt;
 
     /**
-     * @var integer
+     * @var int
      */
     private $treeLvl;
 
@@ -30,16 +40,17 @@ trait NestedTreeable {
      * @var \Entity\Category
      */
     private $treeParent;
-    
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
     private $treeChildren;
-    
+
     /**
-     * Set treeLft
+     * Set treeLft.
      *
-     * @param integer $treeLft
+     * @param int $treeLft
+     *
      * @return mixed $this
      */
     public function setTreeLft($treeLft)
@@ -50,9 +61,9 @@ trait NestedTreeable {
     }
 
     /**
-     * Get treeLft
+     * Get treeLft.
      *
-     * @return integer 
+     * @return int
      */
     public function getTreeLft()
     {
@@ -60,9 +71,10 @@ trait NestedTreeable {
     }
 
     /**
-     * Set treeRgt
+     * Set treeRgt.
      *
-     * @param integer $treeRgt
+     * @param int $treeRgt
+     *
      * @return mixed $this
      */
     public function setTreeRgt($treeRgt)
@@ -73,9 +85,9 @@ trait NestedTreeable {
     }
 
     /**
-     * Get treeRgt
+     * Get treeRgt.
      *
-     * @return integer 
+     * @return int
      */
     public function getTreeRgt()
     {
@@ -83,9 +95,10 @@ trait NestedTreeable {
     }
 
     /**
-     * Set treeLvl
+     * Set treeLvl.
      *
-     * @param integer $treeLvl
+     * @param int $treeLvl
+     *
      * @return mixed $this
      */
     public function setTreeLvl($treeLvl)
@@ -96,9 +109,9 @@ trait NestedTreeable {
     }
 
     /**
-     * Get treeLvl
+     * Get treeLvl.
      *
-     * @return integer 
+     * @return int
      */
     public function getTreeLvl()
     {
@@ -106,9 +119,10 @@ trait NestedTreeable {
     }
 
     /**
-     * Add treeTreeChildren
+     * Add treeTreeChildren.
      *
-     * @param Object $treeChild
+     * @param object $treeChild
+     *
      * @return mixed $this
      */
     public function addTreeChild($treeChild)
@@ -119,9 +133,9 @@ trait NestedTreeable {
     }
 
     /**
-     * Remove treeChild
+     * Remove treeChild.
      *
-     * @param Object $treeChild
+     * @param object $treeChild
      */
     public function removeTreeChild($treeChild)
     {
@@ -129,9 +143,9 @@ trait NestedTreeable {
     }
 
     /**
-     * Get treeChildren
+     * Get treeChildren.
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getTreeChildren()
     {
@@ -139,9 +153,10 @@ trait NestedTreeable {
     }
 
     /**
-     * Set treeRoot
+     * Set treeRoot.
      *
-     * @param Object $treeRoot
+     * @param object $treeRoot
+     *
      * @return mixed $this
      */
     public function setTreeRoot($treeRoot = null)
@@ -152,9 +167,9 @@ trait NestedTreeable {
     }
 
     /**
-     * Get treeRoot
+     * Get treeRoot.
      *
-     * @return Object
+     * @return object
      */
     public function getTreeRoot()
     {
@@ -162,9 +177,10 @@ trait NestedTreeable {
     }
 
     /**
-     * Set treeParent
+     * Set treeParent.
      *
-     * @param Object $treeParent
+     * @param object $treeParent
+     *
      * @return mixed
      */
     public function setTreeParent($treeParent = null)
@@ -175,7 +191,7 @@ trait NestedTreeable {
     }
 
     /**
-     * Get treeParent
+     * Get treeParent.
      *
      * @return object
      */
@@ -183,7 +199,7 @@ trait NestedTreeable {
     {
         return $this->treeParent;
     }
-    
+
     public function initCollections()
     {
         $this->treeChildren = new ArrayCollection();

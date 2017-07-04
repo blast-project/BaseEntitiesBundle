@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
@@ -21,12 +31,12 @@ class LabelableListener implements LoggerAwareInterface, EventSubscriber
     public function getSubscribedEvents()
     {
         return [
-            'loadClassMetadata'
+            'loadClassMetadata',
         ];
     }
 
     /**
-     * define Labelable mapping at runtime
+     * define Labelable mapping at runtime.
      *
      * @param LoadClassMetadataEventArgs $eventArgs
      */
@@ -37,24 +47,24 @@ class LabelableListener implements LoggerAwareInterface, EventSubscriber
 
         $reflectionClass = $metadata->getReflectionClass();
 
-        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\Labelable'))
-            return; // return if current entity doesn't use Labelable trait
+        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\Labelable')) {
+            return;
+        } // return if current entity doesn't use Labelable trait
 
-        $this->logger->debug("[LabelableListener] Entering LabelableListener for « loadClassMetadata » event");
+        $this->logger->debug('[LabelableListener] Entering LabelableListener for « loadClassMetadata » event');
 
         // setting default mapping configuration for Labelable
 
         // name
         $metadata->mapField([
             'fieldName' => 'label',
-            'type'      => 'string',
-            'nullable'  => true,
+            'type' => 'string',
+            'nullable' => true,
         ]);
 
         $this->logger->debug(
-            "[LabelableListener] Added Labelable mapping metadata to Entity",
+            '[LabelableListener] Added Labelable mapping metadata to Entity',
             ['class' => $metadata->getName()]
         );
-
     }
 }

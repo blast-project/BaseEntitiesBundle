@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\Loggable;
 
 use Gedmo\Loggable\LoggableListener;
@@ -12,7 +22,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
- * LoggableListener
+ * LoggableListener.
  *
  * @author Christophe Coevoet <stof@notk.org>
  */
@@ -43,7 +53,7 @@ class LoggerListener implements EventSubscriberInterface
     }
 
     /**
-     * Set the username from the security context by listening on core.request
+     * Set the username from the security context by listening on core.request.
      *
      * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
      */

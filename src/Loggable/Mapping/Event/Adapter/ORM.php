@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\Loggable\Mapping\Event\Adapter;
 
 use Gedmo\Mapping\Event\Adapter\ORM as BaseAdapterORM;
@@ -7,7 +17,7 @@ use Gedmo\Loggable\Mapping\Event\LoggableAdapter;
 
 /**
  * Doctrine event adapter for ORM adapted
- * for Loggable behavior
+ * for Loggable behavior.
  *
  * @author Gediminas Morkevicius <gediminas.morkevicius@gmail.com>
  * @license MIT License (http://www.opensource.org/licenses/mit-license.php)
@@ -15,7 +25,7 @@ use Gedmo\Loggable\Mapping\Event\LoggableAdapter;
 final class ORM extends BaseAdapterORM implements LoggableAdapter
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getDefaultLogEntryClass()
     {
@@ -23,7 +33,7 @@ final class ORM extends BaseAdapterORM implements LoggableAdapter
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function isPostInsertGenerator($meta)
     {
@@ -31,7 +41,7 @@ final class ORM extends BaseAdapterORM implements LoggableAdapter
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getNewVersion($meta, $object)
     {
@@ -41,8 +51,8 @@ final class ORM extends BaseAdapterORM implements LoggableAdapter
         $objectId = $objectMeta->getReflectionProperty($identifierField)->getValue($object);
 
         $dql = "SELECT MAX(log.version) FROM {$meta->name} log";
-        $dql .= " WHERE log.objectId = :objectId";
-        $dql .= " AND log.objectClass = :objectClass";
+        $dql .= ' WHERE log.objectId = :objectId';
+        $dql .= ' AND log.objectClass = :objectClass';
 
         $q = $em->createQuery($dql);
         $q->setParameters(array(

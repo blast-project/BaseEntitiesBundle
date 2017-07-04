@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\EventListener;
 
 use Doctrine\Common\EventArgs;
@@ -13,7 +23,6 @@ use Blast\BaseEntitiesBundle\Entity\Repository\SortableRepository;
 
 class SortableListener implements LoggerAwareInterface, EventSubscriber
 {
-
     use ClassChecker,
         Logger;
 
@@ -31,7 +40,7 @@ class SortableListener implements LoggerAwareInterface, EventSubscriber
     }
 
     /**
-     * define Sortable mapping at runtime
+     * define Sortable mapping at runtime.
      *
      * @param LoadClassMetadataEventArgs $eventArgs
      */
@@ -42,10 +51,11 @@ class SortableListener implements LoggerAwareInterface, EventSubscriber
 
         $reflectionClass = $metadata->getReflectionClass();
 
-        if ( !$reflectionClass || !$this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\Sortable') )
-            return; // return if current entity doesn't use Sortable trait
+        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\Sortable')) {
+            return;
+        } // return if current entity doesn't use Sortable trait
 
-        $this->logger->debug("[SortableListener] Entering SortableListener for « loadClassMetadata » event");
+        $this->logger->debug('[SortableListener] Entering SortableListener for « loadClassMetadata » event');
 
         // setting default mapping configuration for Sortable
         // sortRank
@@ -53,21 +63,22 @@ class SortableListener implements LoggerAwareInterface, EventSubscriber
             'fieldName' => 'sortRank',
             'type' => 'float',
             'nullable' => false,
-            'default' => 65536
+            'default' => 65536,
         ]);
 
         // add index on sort_rank column
-        if ( !isset($metadata->table['indexes']) )
+        if (!isset($metadata->table['indexes'])) {
             $metadata->table['indexes'] = [];
+        }
         $metadata->table['indexes']['sort_rank'] = ['columns' => ['sort_rank']];
 
         $this->logger->debug(
-            "[SortableListener] Added Sortable mapping metadata to Entity", ['class' => $metadata->getName()]
+            '[SortableListener] Added Sortable mapping metadata to Entity', ['class' => $metadata->getName()]
         );
     }
 
     /**
-     * Compute sortRank for entities that are created
+     * Compute sortRank for entities that are created.
      *
      * @param EventArgs $args
      */
@@ -80,11 +91,13 @@ class SortableListener implements LoggerAwareInterface, EventSubscriber
 
         $reflectionClass = $meta->getReflectionClass();
 
-        if ( !$reflectionClass || !$this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\Sortable') )
-            return; // return if current entity doesn't use Sortable trait
-
-        if ( $object->getSortRank() )
+        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\Sortable')) {
             return;
+        } // return if current entity doesn't use Sortable trait
+
+        if ($object->getSortRank()) {
+            return;
+        }
 
         $maxPos = $this->getMaxPosition($em, $meta);
         $maxPos = $maxPos ? $maxPos + 1000 : 65536;
@@ -96,11 +109,12 @@ class SortableListener implements LoggerAwareInterface, EventSubscriber
     private function getMaxPosition($em, $meta)
     {
         $class = $meta->name;
-        if ( isset($this->maxPositions[$class]) )
+        if (isset($this->maxPositions[$class])) {
             return $this->maxPositions[$class];
+        }
 
         $repo = new SortableRepository($em, $meta);
+
         return $repo->getMaxPosition();
     }
-
 }

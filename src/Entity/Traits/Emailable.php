@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\Entity\Traits;
 
 trait Emailable
@@ -10,12 +20,12 @@ trait Emailable
     private $email;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $emailNpai = false;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $emailNoNewsletter = false;
 
@@ -35,11 +45,12 @@ trait Emailable
     public function setEmail($email)
     {
         $this->email = $email;
+
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isEmailNpai()
     {
@@ -47,18 +58,19 @@ trait Emailable
     }
 
     /**
-     * @param boolean $emailNpai
+     * @param bool $emailNpai
      *
      * @return Emailable
      */
     public function setEmailNpai($emailNpai)
     {
         $this->emailNpai = $emailNpai;
+
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isEmailNoNewsletter()
     {
@@ -66,13 +78,14 @@ trait Emailable
     }
 
     /**
-     * @param boolean $emailNoNewsletter
+     * @param bool $emailNoNewsletter
      *
      * @return Emailable
      */
     public function setEmailNoNewsletter($emailNoNewsletter)
     {
         $this->emailNoNewsletter = $emailNoNewsletter;
+
         return $this;
     }
 }

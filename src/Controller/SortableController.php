@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CoreController;
@@ -12,7 +22,7 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 class SortableController extends CoreController
 {
     /**
-     * Move a sortable item
+     * Move a sortable item.
      *
      * @param Request $request
      *
@@ -33,16 +43,16 @@ class SortableController extends CoreController
         $em = $this->getDoctrine()->getEntityManager();
         $meta = new ClassMetadata($class);
         $repo = new SortableRepository($em, $meta);
-        if ($prev_rank)
+        if ($prev_rank) {
             $new_rank = $repo->moveObjectAfter($id, $prev_rank);
-        elseif ($next_rank)
+        } elseif ($next_rank) {
             $new_rank = $repo->moveObjectBefore($id, $next_rank);
+        }
 
         return new JsonResponse(array(
             'status' => $new_rank ? 'OK' : 'KO',
             'new_rank' => $new_rank,
-            'class'   => $admin->getClass(),
+            'class' => $admin->getClass(),
         ));
     }
-
 }

@@ -1,12 +1,12 @@
 <?php
 
 /*
- * This file is part of the BLAST package <http://blast.libre-informatique.fr>.
+ * This file is part of the Blast Project package.
  *
- * Copyright (C) 2015-2016 Libre Informatique
+ * Copyright (C) 2015-2017 Libre Informatique
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -41,12 +41,12 @@ class TimestampableListener implements LoggerAwareInterface, EventSubscriber
         return [
             'loadClassMetadata',
             'prePersist',
-            'preUpdate'
+            'preUpdate',
         ];
     }
 
     /**
-     * define Timestampable mapping at runtime
+     * define Timestampable mapping at runtime.
      *
      * @param LoadClassMetadataEventArgs $eventArgs
      */
@@ -57,16 +57,19 @@ class TimestampableListener implements LoggerAwareInterface, EventSubscriber
 
         $reflectionClass = $metadata->getReflectionClass();
 
-        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\Timestampable'))
-            return; // return if current entity doesn't use Timestampable trait
+        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\Timestampable')) {
+            return;
+        } // return if current entity doesn't use Timestampable trait
 
         // Check if parents already have the Timestampable trait
-        foreach ($metadata->parentClasses as $parent)
-            if ($this->classAnalyzer->hasTrait($parent, 'Blast\BaseEntitiesBundle\Entity\Traits\Timestampable'))
+        foreach ($metadata->parentClasses as $parent) {
+            if ($this->classAnalyzer->hasTrait($parent, 'Blast\BaseEntitiesBundle\Entity\Traits\Timestampable')) {
                 return;
+            }
+        }
 
         $this->logger->debug(
-            "[TimestampableListener] Entering TimestampableListener for « loadClassMetadata » event"
+            '[TimestampableListener] Entering TimestampableListener for « loadClassMetadata » event'
         );
 
         // setting default mapping configuration for Timestampable
@@ -74,23 +77,23 @@ class TimestampableListener implements LoggerAwareInterface, EventSubscriber
         // createdAt
         $metadata->mapField([
             'fieldName' => 'createdAt',
-            'type'      => 'datetime',
+            'type' => 'datetime',
         ]);
 
         // updatedAt
         $metadata->mapField([
             'fieldName' => 'updatedAt',
-            'type'      => 'datetime',
+            'type' => 'datetime',
         ]);
 
         $this->logger->debug(
-            "[TimestampableListener] Added Timestampable mapping metadata to Entity",
+            '[TimestampableListener] Added Timestampable mapping metadata to Entity',
             ['class' => $metadata->getName()]
         );
     }
 
     /**
-     * sets Timestampable dateTime (createdAt and updatedAt) information when persisting entity
+     * sets Timestampable dateTime (createdAt and updatedAt) information when persisting entity.
      *
      * @param LifecycleEventArgs $eventArgs
      */
@@ -98,11 +101,12 @@ class TimestampableListener implements LoggerAwareInterface, EventSubscriber
     {
         $entity = $eventArgs->getObject();
 
-        if (!$this->hasTrait($entity, 'Blast\BaseEntitiesBundle\Entity\Traits\Timestampable'))
+        if (!$this->hasTrait($entity, 'Blast\BaseEntitiesBundle\Entity\Traits\Timestampable')) {
             return;
+        }
 
         $this->logger->debug(
-            "[TimestampableListener] Entering TimestampableListener for « prePersist » event"
+            '[TimestampableListener] Entering TimestampableListener for « prePersist » event'
         );
 
         $now = new DateTime('NOW');
@@ -111,7 +115,7 @@ class TimestampableListener implements LoggerAwareInterface, EventSubscriber
     }
 
     /**
-     * sets Timestampable dateTime (updatedAt) information when updating entity
+     * sets Timestampable dateTime (updatedAt) information when updating entity.
      *
      * @param LifecycleEventArgs $eventArgs
      */
@@ -119,11 +123,12 @@ class TimestampableListener implements LoggerAwareInterface, EventSubscriber
     {
         $entity = $eventArgs->getObject();
 
-        if (!$this->hasTrait($entity, 'Blast\BaseEntitiesBundle\Entity\Traits\Timestampable'))
+        if (!$this->hasTrait($entity, 'Blast\BaseEntitiesBundle\Entity\Traits\Timestampable')) {
             return;
+        }
 
         $this->logger->debug(
-            "[TimestampableListener] Entering TimestampableListener for « preUpdate » event"
+            '[TimestampableListener] Entering TimestampableListener for « preUpdate » event'
         );
 
         $now = new DateTime('NOW');
@@ -131,7 +136,7 @@ class TimestampableListener implements LoggerAwareInterface, EventSubscriber
     }
 
     /**
-     * setTokenStorage
+     * setTokenStorage.
      *
      * @param TokenStorage $tokenStorage
      */

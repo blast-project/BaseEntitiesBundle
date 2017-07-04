@@ -1,11 +1,12 @@
 <?php
 
-/**
- * This file was initially part of the KnpDoctrineBehaviors package.
+/*
+ * This file is part of the Blast Project package.
  *
- * (c) KnpLabs <http://knplabs.com/>
+ * Copyright (C) 2015-2017 Libre Informatique
  *
- * For the full copyright and license information, please view the LICENSE
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -15,7 +16,7 @@ use Doctrine\Common\Collections\Collection;
 
 /**
  * Tree\Node defines a set of needed methods
- * to work with materialized path tree nodes
+ * to work with materialized path tree nodes.
  *
  * @author     Florian Klein <florian.klein@free.fr>
  */
@@ -28,13 +29,13 @@ interface NodeInterface
 
     /**
      * @return string the materialized path,
-     * eg the representation of path from all ancestors
+     *                eg the representation of path from all ancestors
      **/
     public function getMaterializedPath();
 
     /**
      * @return string the real materialized path,
-     * eg the representation of path from all ancestors + current node
+     *                eg the representation of path from all ancestors + current node
      **/
     public function getRealMaterializedPath();
 
@@ -46,7 +47,7 @@ interface NodeInterface
     /**
      * Set parent path.
      *
-     * @param string $path the value to set.
+     * @param string $path the value to set
      */
     public function setParentMaterializedPath($path);
 
@@ -68,7 +69,7 @@ interface NodeInterface
      *    - modify the parent of this node
      *    - Add the this node to the children of the new parent
      *    - Remove the this node from the children of the old parent
-     *    - Modify the materialized path of this node and all its children, recursively
+     *    - Modify the materialized path of this node and all its children, recursively.
      *
      * @param NodeInterface $node The node to use as a parent
      *
@@ -104,23 +105,21 @@ interface NodeInterface
     public function getRootNode();
 
     /**
-     * Tells if this node is a child of another node
+     * Tells if this node is a child of another node.
+     *
      * @param NodeInterface $node the node to compare with
      *
-     * @return boolean true if this node is a direct child of $node
+     * @return bool true if this node is a direct child of $node
      **/
     public function isChildNodeOf(NodeInterface $node);
 
     /**
-     *
-     * @return integer the level of this node, eg: the depth compared to root node
+     * @return int the level of this node, eg: the depth compared to root node
      **/
     public function getNodeLevel();
 
     /**
-     * Builds a hierarchical tree from a flat collection of NodeInterface elements
-     *
-     * @return void
+     * Builds a hierarchical tree from a flat collection of NodeInterface elements.
      **/
     public function buildTree(array $nodes);
 }

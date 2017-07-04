@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
@@ -8,7 +18,6 @@ use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Blast\BaseEntitiesBundle\EventListener\Traits\Logger;
 use Psr\Log\LoggerAwareInterface;
 use Blast\BaseEntitiesBundle\EventListener\Traits\ClassChecker;
-
 
 class NormalizeListener implements LoggerAwareInterface, EventSubscriber
 {
@@ -48,12 +57,13 @@ class NormalizeListener implements LoggerAwareInterface, EventSubscriber
     public function prePersist(LifecycleEventArgs $eventArgs)
     {
         $this->object = $eventArgs->getObject();
-        $class = str_replace("Proxies\\__CG__\\", "", get_class($this->object));
-        if ( !array_key_exists($class, $this->actions) )
+        $class = str_replace('Proxies\\__CG__\\', '', get_class($this->object));
+        if (!array_key_exists($class, $this->actions)) {
             return;
+        }
 
         $this->logger->debug(
-            "[NormalizeListener] Entering NormalizeListener for « prePersist » event"
+            '[NormalizeListener] Entering NormalizeListener for « prePersist » event'
         );
 
         $this->normalizeFields();
@@ -62,12 +72,13 @@ class NormalizeListener implements LoggerAwareInterface, EventSubscriber
     public function preUpdate(PreUpdateEventArgs $eventArgs)
     {
         $this->object = $eventArgs->getObject();
-        $class = str_replace("Proxies\\__CG__\\", "", get_class($this->object));
-        if ( !array_key_exists($class, $this->actions) )
+        $class = str_replace('Proxies\\__CG__\\', '', get_class($this->object));
+        if (!array_key_exists($class, $this->actions)) {
             return;
+        }
 
         $this->logger->debug(
-            "[NormalizeListener] Entering NormalizeListener for « preUpdate » event"
+            '[NormalizeListener] Entering NormalizeListener for « preUpdate » event'
         );
 
         $this->normalizeFields();
@@ -75,35 +86,37 @@ class NormalizeListener implements LoggerAwareInterface, EventSubscriber
 
     private function normalizeFields()
     {
-        if (!$this->object)
+        if (!$this->object) {
             return [];
-        $class = str_replace("Proxies\\__CG__\\", "", get_class($this->object));
+        }
+        $class = str_replace('Proxies\\__CG__\\', '', get_class($this->object));
 
-        foreach($this->actions[$class] as $field => $actions) {
+        foreach ($this->actions[$class] as $field => $actions) {
             $this->normalizeField($field, $actions);
         }
     }
 
     /**
      * @param string $field
-     * @param array $actions (uppercase, titlecase...)
+     * @param array  $actions (uppercase, titlecase...)
+     *
      * @return string|null
      */
     private function normalizeField($field, $actions)
     {
         $getter = 'get'.ucfirst($field);
-        if ( !method_exists($this->object, $getter) ) {
+        if (!method_exists($this->object, $getter)) {
             $this->logger->warn(
                 "[NormalizeListener] Method « $getter » does not exist for Entity",
                 ['class' => get_class($this->object)]
             );
+
             return;
         }
 
         $data = $this->object->$getter();
         $normalized = false;
-        foreach($actions as $action)
-        {
+        foreach ($actions as $action) {
             switch ($action) {
                 case 'uppercase':
                 case 'upper':
@@ -122,26 +135,26 @@ class NormalizeListener implements LoggerAwareInterface, EventSubscriber
                     );
             }
         }
-        if ( !$normalized )
+        if (!$normalized) {
             return;
+        }
 
         $setter = 'set'.ucfirst($field);
-        if ( !method_exists($this->object, $setter) ) {
+        if (!method_exists($this->object, $setter)) {
             $this->logger->warn(
                 "[NormalizeListener] Method « $setter » does not exist for Entity",
                 ['class' => get_class($this->object)]
             );
+
             return;
         }
 
         $this->object->$setter($data);
         $this->logger->debug(
             "[NormalizeListener] Normalized field « $field » for Entity",
-            ['class' => get_class($this->object), 'field' => $field, 'actions' => implode(", ", $actions)]
+            ['class' => get_class($this->object), 'field' => $field, 'actions' => implode(', ', $actions)]
         );
 
         return $data;
     }
-
-
 }

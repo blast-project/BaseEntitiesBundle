@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\Controller;
 
 use Librinfo\CRMBundle\Entity\Category;
@@ -13,23 +23,20 @@ class TreeableCRUDController extends CRUDController
         $this->admin->checkAccess('list');
 
         $preResponse = $this->preList($request);
-        if ($preResponse !== null)
-        {
+        if ($preResponse !== null) {
             return $preResponse;
         }
 
-        if ($listMode = $request->get('_list_mode'))
-        {
+        if ($listMode = $request->get('_list_mode')) {
             $this->admin->setListMode($listMode);
         }
 
         $datagrid = $this->admin->getDatagrid();
 
         /** @var Category $item */
-        foreach ($datagrid->getResults() as $key => $item)
-        {
+        foreach ($datagrid->getResults() as $key => $item) {
             $datagrid->getResults()[$key]->setName(
-                str_repeat('- - ', $item->getNodeLevel()-1) . ' ' .
+                str_repeat('- - ', $item->getNodeLevel() - 1).' '.
                 $datagrid->getResults()[$key]->getName()
             );
         }
@@ -40,11 +47,10 @@ class TreeableCRUDController extends CRUDController
         $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
 
         return $this->render($this->admin->getTemplate('list'), array(
-            'action'     => 'list',
-            'form'       => $formView,
-            'datagrid'   => $datagrid,
+            'action' => 'list',
+            'form' => $formView,
+            'datagrid' => $datagrid,
             'csrf_token' => $this->getCsrfToken('sonata.batch'),
         ), null, $request);
     }
-
 }

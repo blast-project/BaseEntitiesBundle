@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
@@ -22,7 +32,7 @@ class GuidableListener implements LoggerAwareInterface, EventSubscriber
     public function getSubscribedEvents()
     {
         return [
-            'loadClassMetadata'
+            'loadClassMetadata',
         ];
     }
 
@@ -32,36 +42,41 @@ class GuidableListener implements LoggerAwareInterface, EventSubscriber
         $metadata = $eventArgs->getClassMetadata();
 
         // Do not generate id mapping twice for entities that extend a MappedSuperclass
-        if ($metadata->isMappedSuperclass)
+        if ($metadata->isMappedSuperclass) {
             return;
+        }
 
         // Do not generate id mapping twice for entities that use the SINGLE_TABLE inheritance mapping strategy.
-        if ( $metadata->isInheritanceTypeSingleTable() && !$metadata->subClasses )
+        if ($metadata->isInheritanceTypeSingleTable() && !$metadata->subClasses) {
             return;
+        }
 
         // Check if parents already have the Guidable trait
-        foreach ($metadata->parentClasses as $parent)
-            if ($this->classAnalyzer->hasTrait($parent, 'Blast\BaseEntitiesBundle\Entity\Traits\Guidable'))
+        foreach ($metadata->parentClasses as $parent) {
+            if ($this->classAnalyzer->hasTrait($parent, 'Blast\BaseEntitiesBundle\Entity\Traits\Guidable')) {
                 return;
+            }
+        }
 
-        $this->logger->debug("[GuidableListener] Entering GuidableListener for « loadClassMetadata » event");
+        $this->logger->debug('[GuidableListener] Entering GuidableListener for « loadClassMetadata » event');
 
         $reflectionClass = $metadata->getReflectionClass();
 
         // return if the current entity doesn't use Guidable trait
-        if ( !$reflectionClass || !$this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\Guidable') )
+        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\Guidable')) {
             return;
+        }
 
         $metadata->mapField([
             'id' => true,
-            'fieldName' => "id",
-            'type' => "guid",
-            'columnName' => "id",
+            'fieldName' => 'id',
+            'type' => 'guid',
+            'columnName' => 'id',
         ]);
         $metadata->setIdGenerator(new UuidGenerator());
 
         $this->logger->debug(
-            "[GuidableListener] Added Guidable mapping metadata to Entity",
+            '[GuidableListener] Added Guidable mapping metadata to Entity',
             ['class' => $metadata->getName()]
         );
     }

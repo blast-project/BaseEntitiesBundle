@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\Form\Type;
 
 use Symfony\Component\Form\Extension\Core\EventListener\ResizeFormListener;
@@ -10,7 +20,7 @@ use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Blast\BaseEntitiesBundle\Form\DataTransformer\ModelToIdTransformer;
 
 /**
- * Form type that uses search indexes for entity search autocompletion
+ * Form type that uses search indexes for entity search autocompletion.
  *
  * @author Romain SANCHEZ <romain.sanchez@libre-informatique.fr>
  */
@@ -40,8 +50,7 @@ class SearchIndexAutocompleteType extends ModelAutocompleteType
             true
         );
 
-        if ($options['multiple'])
-        {
+        if ($options['multiple']) {
             $resizeListener = new ResizeFormListener(
                 'hidden', array(), true, true, true
             );
@@ -59,15 +68,14 @@ class SearchIndexAutocompleteType extends ModelAutocompleteType
             return $options['multiple'];
         };
 
-        $callback = function($admin, $property, $value){
-
-            $searchIndex = $admin->getClass() . 'SearchIndex';
+        $callback = function ($admin, $property, $value) {
+            $searchIndex = $admin->getClass().'SearchIndex';
             $datagrid = $admin->getDatagrid();
             $queryBuilder = $datagrid->getQuery();
             $alias = $queryBuilder->getRootalias();
 
             $queryBuilder
-                ->leftJoin($searchIndex, 's', 'WITH', $alias . '.id = s.object')
+                ->leftJoin($searchIndex, 's', 'WITH', $alias.'.id = s.object')
                 ->where('s.keyword LIKE :value')
                 ->setParameter('value', "%$value%")
             ;

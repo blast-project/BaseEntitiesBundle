@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\Loggable\Mapping\Driver;
 
 use Gedmo\Mapping\Driver\Xml as BaseXml;
@@ -27,12 +37,12 @@ use Gedmo\Exception\InvalidMappingException;
 class Xml extends BaseXml
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function readExtendedMetadata($meta, array &$config)
     {
         /**
-         * @var \SimpleXmlElement $xml
+         * @var \SimpleXmlElement
          */
         $xml = $this->_getMapping($meta->name);
         $xmlDoctrine = $xml;
@@ -42,7 +52,7 @@ class Xml extends BaseXml
         if ($xmlDoctrine->getName() == 'entity' || $xmlDoctrine->getName() == 'document' || $xmlDoctrine->getName() == 'mapped-superclass') {
             if (isset($xml->loggable)) {
                 /**
-                 * @var \SimpleXMLElement $data;
+                 * @var \SimpleXMLElement;
                  */
                 $data = $xml->loggable;
                 $config['loggable'] = true;
@@ -83,7 +93,7 @@ class Xml extends BaseXml
     }
 
     /**
-     * Searches mappings on element for versioned fields
+     * Searches mappings on element for versioned fields.
      *
      * @param \SimpleXMLElement $element
      * @param array             $config
@@ -94,7 +104,7 @@ class Xml extends BaseXml
         foreach ($element as $mapping) {
             $mappingDoctrine = $mapping;
             /**
-             * @var \SimpleXmlElement $mapping
+             * @var \SimpleXmlElement
              */
             $mapping = $mapping->children(self::GEDMO_NAMESPACE_URI);
 

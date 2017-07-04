@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\SearchAnalyser;
 
 use Behat\Transliterator\Transliterator;
@@ -8,6 +18,7 @@ class SearchAnalyser
 {
     /**
      * @param string $text
+     *
      * @return array
      */
     public static function analyse($text)
@@ -21,23 +32,24 @@ class SearchAnalyser
         // considering very special chars as spaces
         $text = str_replace(array(
           '@',
-          '.',',','¿',
-          '♠','♣','♥','♦',
-          '-','+',
-          '←','↑','→','↓',
-          "'",'’','´',
-          '●','•',
-          '¼','½','¾',
+          '.', ',', '¿',
+          '♠', '♣', '♥', '♦',
+          '-', '+',
+          '←', '↑', '→', '↓',
+          "'", '’', '´',
+          '●', '•',
+          '¼', '½', '¾',
           '“', '”', '„',
-          '°','™','©','®',
-          '³','²',
-        ),' ',$text);
+          '°', '™', '©', '®',
+          '³', '²',
+        ), ' ', $text);
 
         // remove multiple spaces
-        $text = preg_replace('/\s+/', ' ',$text);
+        $text = preg_replace('/\s+/', ' ', $text);
 
-        if ($text)
+        if ($text) {
             return explode(' ', $text);
+        }
 
         return [];
     }

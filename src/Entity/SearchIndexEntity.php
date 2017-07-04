@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\Entity;
 
 abstract class SearchIndexEntity
@@ -21,7 +31,6 @@ abstract class SearchIndexEntity
      */
     protected $field;
 
-
     /**
      * @var object Entity
      */
@@ -29,11 +38,13 @@ abstract class SearchIndexEntity
 
     /**
      * @param string $field
+     *
      * @return self
      */
     public function setField($field)
     {
         $this->field = $field;
+
         return $this;
     }
 
@@ -47,11 +58,13 @@ abstract class SearchIndexEntity
 
     /**
      * @param string $keyword
+     *
      * @return self
      */
     public function setKeyword($keyword)
     {
         $this->keyword = $keyword;
+
         return $this;
     }
 
@@ -65,11 +78,13 @@ abstract class SearchIndexEntity
 
     /**
      * @param object $object
+     *
      * @return self
      */
     public function setObject($object)
     {
         $this->object = $object;
+
         return $this;
     }
 

@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\Controller;
 
 use Sonata\AdminBundle\Controller\CoreController;
@@ -14,7 +24,7 @@ class SearchController extends CoreController
 {
     /**
      * Retrieve list of items for autocomplete form field with search indexes
-     * Based on Sonata\AdminBundle\Controller\HelperController#retrieveAutocompleteItemsAction
+     * Based on Sonata\AdminBundle\Controller\HelperController#retrieveAutocompleteItemsAction.
      *
      * @param Request $request
      *
@@ -27,7 +37,7 @@ class SearchController extends CoreController
      */
     public function retrieveAutocompleteItemsAction(Request $request)
     {
-//        $$pool = $this->container->get('sonata.admin.pool')->getInstance($request->get('admin_code'));
+        //        $$pool = $this->container->get('sonata.admin.pool')->getInstance($request->get('admin_code'));
         $admin = $this->container->get('sonata.admin.pool')->getInstance($request->get('admin_code'));
         $admin->setRequest($request);
         $context = $request->get('_context', '');
@@ -51,12 +61,12 @@ class SearchController extends CoreController
             $fieldDescription = $this->retrieveFilterFieldDescription($admin, $request->get('field'));
             $filterAutocomplete = $admin->getDatagrid()->getFilter($fieldDescription->getName());
 
-            $property           = $filterAutocomplete->getFieldOption('property');
-            $callback           = $filterAutocomplete->getFieldOption('callback');  // not used
+            $property = $filterAutocomplete->getFieldOption('property');
+            $callback = $filterAutocomplete->getFieldOption('callback');  // not used
             $minimumInputLength = $filterAutocomplete->getFieldOption('minimum_input_length', 3);
-            $itemsPerPage       = $filterAutocomplete->getFieldOption('items_per_page', 10);
+            $itemsPerPage = $filterAutocomplete->getFieldOption('items_per_page', 10);
             $reqParamPageNumber = $filterAutocomplete->getFieldOption('req_param_name_page_number', '_page'); // not used (TODO)
-            $toStringCallback   = $filterAutocomplete->getFieldOption('to_string_callback');
+            $toStringCallback = $filterAutocomplete->getFieldOption('to_string_callback');
         } else {
             // create/edit form
             $fieldDescription = $this->retrieveFormFieldDescription($admin, $request->get('field'));
@@ -66,12 +76,12 @@ class SearchController extends CoreController
                 throw new AccessDeniedException('Autocomplete list can`t be retrieved because the form element is disabled or read_only.');
             }
 
-            $property           = $formAutocomplete->getConfig()->getAttribute('property');
-            $callback           = $formAutocomplete->getConfig()->getAttribute('callback');  // not used
+            $property = $formAutocomplete->getConfig()->getAttribute('property');
+            $callback = $formAutocomplete->getConfig()->getAttribute('callback');  // not used
             $minimumInputLength = $formAutocomplete->getConfig()->getAttribute('minimum_input_length');
-            $itemsPerPage       = $formAutocomplete->getConfig()->getAttribute('items_per_page');
+            $itemsPerPage = $formAutocomplete->getConfig()->getAttribute('items_per_page');
             $reqParamPageNumber = $formAutocomplete->getConfig()->getAttribute('req_param_name_page_number');  // not used (TODO)
-            $toStringCallback   = $formAutocomplete->getConfig()->getAttribute('to_string_callback');
+            $toStringCallback = $formAutocomplete->getConfig()->getAttribute('to_string_callback');
         }
 
         $searchText = $request->get('q');
@@ -107,21 +117,21 @@ class SearchController extends CoreController
             }
 
             $items[] = array(
-                'id'    => $admin->id($entity),
+                'id' => $admin->id($entity),
                 'label' => $label,
             );
         }
 
         return new JsonResponse(array(
             'status' => 'OK',
-            'more'   => false,  // TODO !
-            'items'  => $items,
+            'more' => false,  // TODO !
+            'items' => $items,
         ));
     }
 
     /**
      * Retrieve the form field description given by field name.
-     * Copied from Sonata\AdminBundle\Controller\HelperController
+     * Copied from Sonata\AdminBundle\Controller\HelperController.
      *
      * @param AdminInterface $admin
      * @param string         $field

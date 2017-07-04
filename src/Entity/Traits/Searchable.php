@@ -1,5 +1,15 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\Entity\Traits;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,7 +23,8 @@ trait Searchable
      */
     protected $searchIndexes;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->searchIndexes = new ArrayCollection();
     }
 
@@ -43,7 +54,9 @@ trait Searchable
 
     /**
      * @param string $field
+     *
      * @return array
+     *
      * @throws \Exception
      */
     public function analyseField($field)
@@ -51,8 +64,9 @@ trait Searchable
         try {
             $data = $this->$field;
         } catch (\Exception $exc) {
-            throw new \Exception("Property $field does not exist for " . get_class());
+            throw new \Exception("Property $field does not exist for ".get_class());
         }
+
         return SearchAnalyser::analyse($data);
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
 /*
- * This file is part of the BLAST package <http://blast.libre-informatique.fr>.
+ * This file is part of the Blast Project package.
  *
- * Copyright (C) 2015-2016 Libre Informatique
+ * Copyright (C) 2015-2017 Libre Informatique
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 class BlastBaseEntitiesExtension extends BlastCoreExtension
 {
-    private $entityManagers   = array();
+    private $entityManagers = array();
     private $documentManagers = array();
 
     /**
@@ -45,36 +45,36 @@ class BlastBaseEntitiesExtension extends BlastCoreExtension
 
         $useLoggable = false;
 
-        foreach ( $availableListeners as $listenerName )
-        {
-            $serviceId = 'blast_base_entities.listener.' . $listenerName;
+        foreach ($availableListeners as $listenerName) {
+            $serviceId = 'blast_base_entities.listener.'.$listenerName;
 
             // enable doctrine ORM event subscribers
-            foreach ( $config['orm'] as $connection => $listeners ) {
-                if ( !empty($listeners[$listenerName]) && $container->hasDefinition($serviceId) ) {
+            foreach ($config['orm'] as $connection => $listeners) {
+                if (!empty($listeners[$listenerName]) && $container->hasDefinition($serviceId)) {
                     $definition = $container->getDefinition($serviceId);
                     $definition->addTag('doctrine.event_subscriber', ['connection' => $connection]);
-                    if ( $listenerName == 'loggable' )
+                    if ($listenerName == 'loggable') {
                         $useLoggable = true;
+                    }
                 }
                 $this->entityManagers[$connection] = $listeners;
             }
 
             // enable doctrine ODM event subscribers
             // TODO : not tested
-            foreach ( $config['mongodb'] as $connection => $listeners ) {
-                if ( !empty($listeners['$listenerName']) && $container->hasDefinition($serviceId) ) {
+            foreach ($config['mongodb'] as $connection => $listeners) {
+                if (!empty($listeners['$listenerName']) && $container->hasDefinition($serviceId)) {
                     $definition = $container->getDefinition($serviceId);
                     $definition->addTag('doctrine_mongodb.odm..event_subscriber', ['connection' => $connection]);
-                    if ( $listenerName == 'loggable' )
+                    if ($listenerName == 'loggable') {
                         $useLoggable = true;
+                    }
                 }
                 $this->documentManagers[$connection] = $listeners;
             }
         }
 
-        if ( $useLoggable )
-        {
+        if ($useLoggable) {
             $container->getDefinition('blast_base_entities.listener.logger')
                 ->setPublic(true)
                 ->addTag('kernel.event_subscriber');

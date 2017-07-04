@@ -1,8 +1,16 @@
 <?php
 
-namespace Blast\BaseEntitiesBundle\Entity\Traits;
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
 
-use Blast\BaseEntitiesBundle\Entity\Traits\Nameable;
+namespace Blast\BaseEntitiesBundle\Entity\Traits;
 
 trait Addressable
 {
@@ -29,7 +37,7 @@ trait Addressable
     private $country;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $npai = false;
 
@@ -39,7 +47,7 @@ trait Addressable
     private $vcardUid;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $confirmed = true;
 
@@ -59,6 +67,7 @@ trait Addressable
     public function setAddress($address)
     {
         $this->address = $address;
+
         return $this;
     }
 
@@ -77,7 +86,8 @@ trait Addressable
      */
     public function setZip($zip)
     {
-       $this->zip = $zip;
+        $this->zip = $zip;
+
         return $this;
     }
 
@@ -97,6 +107,7 @@ trait Addressable
     public function setCity($city)
     {
         $this->city = $city;
+
         return $this;
     }
 
@@ -116,11 +127,12 @@ trait Addressable
     public function setCountry($country)
     {
         $this->country = $country;
+
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isNpai()
     {
@@ -128,13 +140,14 @@ trait Addressable
     }
 
     /**
-     * @param boolean $npai
+     * @param bool $npai
      *
      * @return Addressable
      */
     public function setNpai($npai)
     {
         $this->npai = $npai;
+
         return $this;
     }
 
@@ -154,11 +167,12 @@ trait Addressable
     public function setVcardUid($vcardUid)
     {
         $this->vcardUid = $vcardUid;
+
         return $this;
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isConfirmed()
     {
@@ -166,35 +180,43 @@ trait Addressable
     }
 
     /**
-     * @param boolean $confirmed
+     * @param bool $confirmed
      *
      * @return Addressable
      */
     public function setConfirmed($confirmed)
     {
         $this->confirmed = $confirmed;
+
         return $this;
     }
 
     /**
      * @param string $separator
+     *
      * @return string
      */
     public function getFulltextAddress($separator = "\n")
     {
         $elems = [];
-        if ($this->address)
+        if ($this->address) {
             $elems[] = $this->address;
+        }
         $zip_city = [];
-        if ($this->zip)
+        if ($this->zip) {
             $zip_city[] = $this->zip;
-        if ($this->city)
+        }
+        if ($this->city) {
             $zip_city[] = $this->city;
+        }
 
-        if ($zip_city)
+        if ($zip_city) {
             $elems[] = implode(' ', $zip_city);
-        if ($this->country)
+        }
+        if ($this->country) {
             $elems[] = $this->country;
+        }
+
         return implode($separator, $elems);
     }
 }

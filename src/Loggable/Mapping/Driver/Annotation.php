@@ -1,10 +1,21 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\Loggable\Mapping\Driver;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Gedmo\Exception\InvalidMappingException;
 use Gedmo\Mapping\Driver\AbstractAnnotationDriver;
+
 /**
  * This is an annotation mapping driver for Loggable
  * behavioral extension. Used for extraction of extended
@@ -27,17 +38,17 @@ use Gedmo\Mapping\Driver\AbstractAnnotationDriver;
 class Annotation extends AbstractAnnotationDriver
 {
     /**
-     * Annotation to define that this object is loggable
+     * Annotation to define that this object is loggable.
      */
     const LOGGABLE = 'Gedmo\\Mapping\\Annotation\\Loggable';
 
     /**
-     * Annotation to define that this property is versioned
+     * Annotation to define that this property is versioned.
      */
     const VERSIONED = 'Gedmo\\Mapping\\Annotation\\Versioned';
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function validateFullMetadata(ClassMetadata $meta, array $config)
     {
@@ -50,7 +61,7 @@ class Annotation extends AbstractAnnotationDriver
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function readExtendedMetadata($meta, array &$config)
     {
@@ -123,10 +134,10 @@ class Annotation extends AbstractAnnotationDriver
     }
 
     /**
-     * Searches properties of embedded object for versioned fields
+     * Searches properties of embedded object for versioned fields.
      *
-     * @param string $field
-     * @param array $config
+     * @param string                              $field
+     * @param array                               $config
      * @param \Doctrine\ORM\Mapping\ClassMetadata $meta
      */
     private function inspectEmbeddedForVersioned($field, array &$config, \Doctrine\ORM\Mapping\ClassMetadata $meta)
@@ -137,7 +148,7 @@ class Annotation extends AbstractAnnotationDriver
         foreach ($сlass->getProperties() as $property) {
             // versioned property
             if ($this->reader->getPropertyAnnotation($property, self::VERSIONED)) {
-                $config['versioned'][] = $field . '.' . $property->getName();
+                $config['versioned'][] = $field.'.'.$property->getName();
             }
         }
     }

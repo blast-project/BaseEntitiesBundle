@@ -1,12 +1,12 @@
 <?php
 
 /*
- * This file is part of the BLAST package <http://blast.libre-informatique.fr>.
+ * This file is part of the Blast Project package.
  *
- * Copyright (C) 2015-2016 Libre Informatique
+ * Copyright (C) 2015-2017 Libre Informatique
  *
- * This file is licenced under the GNU GPL v3.
- * For the full copyright and license information, please view the LICENSE
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
  * file that was distributed with this source code.
  */
 
@@ -31,12 +31,12 @@ class EmailableListener implements LoggerAwareInterface, EventSubscriber
     public function getSubscribedEvents()
     {
         return [
-            'loadClassMetadata'
+            'loadClassMetadata',
         ];
     }
 
     /**
-     * define Emailable mapping at runtime
+     * define Emailable mapping at runtime.
      *
      * @param LoadClassMetadataEventArgs $eventArgs
      */
@@ -47,16 +47,19 @@ class EmailableListener implements LoggerAwareInterface, EventSubscriber
 
         $reflectionClass = $metadata->getReflectionClass();
 
-        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\Emailable'))
-            return; // return if current entity doesn't use Emailable trait
+        if (!$reflectionClass || !$this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\Emailable')) {
+            return;
+        } // return if current entity doesn't use Emailable trait
 
         // Check if parents already have the Emailable trait
-        foreach ($metadata->parentClasses as $parent)
-            if ($this->classAnalyzer->hasTrait($parent, 'Blast\BaseEntitiesBundle\Entity\Traits\Emailable'))
+        foreach ($metadata->parentClasses as $parent) {
+            if ($this->classAnalyzer->hasTrait($parent, 'Blast\BaseEntitiesBundle\Entity\Traits\Emailable')) {
                 return;
+            }
+        }
 
         $this->logger->debug(
-            "[EmailableListener] Entering EmailableListener for « loadClassMetadata » event"
+            '[EmailableListener] Entering EmailableListener for « loadClassMetadata » event'
         );
 
         // setting default mapping configuration for Emailable
@@ -64,28 +67,27 @@ class EmailableListener implements LoggerAwareInterface, EventSubscriber
         // email
         $metadata->mapField([
             'fieldName' => 'email',
-            'type'      => 'string',
-            'nullable'  => true,
+            'type' => 'string',
+            'nullable' => true,
         ]);
 
         // emailNpai
         $metadata->mapField([
             'fieldName' => 'emailNpai',
-            'type'      => 'boolean',
-            'nullable'  => true,
+            'type' => 'boolean',
+            'nullable' => true,
         ]);
 
         // emailNoNewsletter
         $metadata->mapField([
             'fieldName' => 'emailNoNewsletter',
-            'type'      => 'boolean',
-            'nullable'  => true,
+            'type' => 'boolean',
+            'nullable' => true,
         ]);
 
         $this->logger->debug(
-            "[EmailableListener] Added Emailable mapping metadata to Entity",
+            '[EmailableListener] Added Emailable mapping metadata to Entity',
             ['class' => $metadata->getName()]
         );
-
     }
 }

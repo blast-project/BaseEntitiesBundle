@@ -1,11 +1,20 @@
 <?php
 
+/*
+ * This file is part of the Blast Project package.
+ *
+ * Copyright (C) 2015-2017 Libre Informatique
+ *
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
+ */
+
 namespace Blast\BaseEntitiesBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Blast\BaseEntitiesBundle\SearchAnalyser\SearchAnalyser;
-
 use Doctrine\ORM\EntityRepository;
 
 class SearchableRepository extends EntityRepository
@@ -13,13 +22,13 @@ class SearchableRepository extends EntityRepository
     public function __construct(EntityManagerInterface $em, ClassMetadata $class)
     {
         $this->_entityName = $class->name;
-        $this->_em         = $em;
-        $this->_class      = $class;
+        $this->_em = $em;
+        $this->_class = $class;
     }
 
     public function getSearchIndexClass()
     {
-        return $this->getClassName() . 'SearchIndex';
+        return $this->getClassName().'SearchIndex';
     }
 
     public function getSearchIndexTable()
@@ -28,47 +37,49 @@ class SearchableRepository extends EntityRepository
     }
 
     /**
-     * Find the entities that have the appropriate keywords in their searchIndex
+     * Find the entities that have the appropriate keywords in their searchIndex.
      *
      * @param string $searchText
-     * @param int $maxResults
+     * @param int    $maxResults
+     *
      * @return Collection found entities
      */
     public function indexSearch($searchText, $maxResults)
     {
         // split the phrase into words
         $words = SearchAnalyser::analyse($searchText);
-        if ( !$words )
+        if (!$words) {
             return [];
+        }
 
         $query = $this->createQueryBuilder('o')
             ->setMaxResults($maxResults);
 
         $parameters = [];
-        foreach ( $words as $k => $word )
-        {
+        foreach ($words as $k => $word) {
             $subquery = $query->getEntityManager()->createQueryBuilder()
                 ->select("i$k.keyword")
                 ->from($this->getSearchIndexClass(), "i$k")
                 ->where("i$k.object = o")
                 ->andWhere("i$k.keyword LIKE :search$k");
-            $query->andWhere($query->expr()->exists( $subquery->getDql()));
-            $parameters["search$k"] = $word . '%';
+            $query->andWhere($query->expr()->exists($subquery->getDql()));
+            $parameters["search$k"] = $word.'%';
         }
         $query->setParameters($parameters);
 
         $results = $query->getQuery()->execute();
+
         return $results;
     }
 
     /**
-     * Does a batch update of the whole search index table
+     * Does a batch update of the whole search index table.
      */
     public function batchUpdate()
     {
-        if (! $this->truncateTable() )
-            throw new \Exception('Could not truncate table ' . $this->getSearchIndexTable());
-
+        if (!$this->truncateTable()) {
+            throw new \Exception('Could not truncate table '.$this->getSearchIndexTable());
+        }
         $em = $this->getEntityManager();
         $indexClass = $this->getSearchIndexClass();
 
@@ -80,15 +91,12 @@ class SearchableRepository extends EntityRepository
         do {
             $query->setFirstResult($offset);
             $entities = $query->getQuery()->execute();
-            foreach ( $entities as $entity )
-            {
+            foreach ($entities as $entity) {
                 $fields = $indexClass::$fields;
-                foreach ( $fields as $field )
-                {
+                foreach ($fields as $field) {
                     $keywords = $entity->analyseField($field);
-                    foreach ( $keywords as $keyword )
-                    {
-                        $index = new $indexClass;
+                    foreach ($keywords as $keyword) {
+                        $index = new $indexClass();
                         $index->setObject($entity);
                         $index->setField($field);
                         $index->setKeyword($keyword);
@@ -98,13 +106,13 @@ class SearchableRepository extends EntityRepository
             }
             $em->flush();
             $offset += $batchSize;
-        }
-        while ( count($entities) > 0 );
+        } while (count($entities) > 0);
     }
 
     /**
-     * Truncates the search index table
-     * @return boolean true if success
+     * Truncates the search index table.
+     *
+     * @return bool true if success
      */
     public function truncateTable()
     {
@@ -115,10 +123,11 @@ class SearchableRepository extends EntityRepository
             $q = $dbPlatform->getTruncateTableSql($this->getSearchIndexTable());
             $connection->executeUpdate($q);
             $connection->commit();
+
             return true;
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             $connection->rollback();
+
             return false;
         }
     }

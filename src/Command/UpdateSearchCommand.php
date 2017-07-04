@@ -1,21 +1,13 @@
 <?php
 
 /*
- * Copyright (C) 2016 Libre Informatique <contact at libre-informatique.fr>
- * Copyright (C) 2016 Marcos Bezerra de Menezes <marcos.bezerra at libre-informatique.fr>
+ * This file is part of the Blast Project package.
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Copyright (C) 2015-2017 Libre Informatique
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * This file is licenced under the GNU LGPL v3.
+ * For the full copyright and license information, please view the LICENSE.md
+ * file that was distributed with this source code.
  */
 
 namespace Blast\BaseEntitiesBundle\Command;
@@ -27,11 +19,11 @@ use Doctrine\Bundle\DoctrineBundle\Command\DoctrineCommand;
 use Blast\BaseEntitiesBundle\Entity\Traits\Searchable;
 use Blast\BaseEntitiesBundle\Entity\Repository\SearchableRepository;
 
-
 /**
- * Batch update of search indexes
+ * Batch update of search indexes.
  *
  * @author Marcos Bezerra de Menezes <marcos.bezerra at libre-informatique.fr>
+ *
  * @todo update all search indexes for a namespace or for a bundle
  *          it could be based on GenerateEntitiesDoctrineCommand, but it is not yet PSR-4 compatible
  *          see : https://github.com/doctrine/DoctrineBundle/issues/282
@@ -39,7 +31,7 @@ use Blast\BaseEntitiesBundle\Entity\Repository\SearchableRepository;
 class UpdateSearchCommand extends DoctrineCommand
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -57,9 +49,8 @@ EOT
         );
     }
 
-
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -78,7 +69,7 @@ EOT
         // Check if the entity has the Searchable trait
         $reflector = new \ReflectionClass($name);
         $traits = $reflector->getTraitNames();
-        if ( ! in_array('Blast\BaseEntitiesBundle\Entity\Traits\Searchable', $traits) ) {
+        if (!in_array('Blast\BaseEntitiesBundle\Entity\Traits\Searchable', $traits)) {
             throw new \RuntimeException(sprintf('%s class doesn\'t have the Searchable trait.', $reflector->getName()));
         }
 
@@ -88,6 +79,4 @@ EOT
         $repo->batchUpdate();
         $output->writeln('DONE');
     }
-
-
 }
