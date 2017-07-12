@@ -12,7 +12,7 @@
 
 namespace Blast\BaseEntitiesBundle\Loggable;
 
-use Gedmo\Loggable\LoggableListener;
+use Gedmo\Loggable\LoggableListener as BaseLoggableListener;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -33,7 +33,7 @@ class LoggerListener implements EventSubscriberInterface
 
     private $loggableListener;
 
-    public function __construct(LoggableListener $loggableListener, $tokenStorage = null, AuthorizationCheckerInterface $authorizationChecker = null)
+    public function __construct(BaseLoggableListener $loggableListener, $tokenStorage = null, AuthorizationCheckerInterface $authorizationChecker = null)
     {
         $this->loggableListener = $loggableListener;
 
