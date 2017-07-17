@@ -51,7 +51,7 @@ trait Node
      **/
     public function getRealMaterializedPath()
     {
-        return $this->getMaterializedPath().self::getMaterializedPathSeparator().$this->getNodeId();
+        return $this->getMaterializedPath() . self::getMaterializedPathSeparator() . $this->getNodeId();
     }
 
     public function getMaterializedPath()
@@ -78,7 +78,7 @@ trait Node
         $path = $this->getExplodedPath();
         array_pop($path);
 
-        $parentPath = static::getMaterializedPathSeparator().implode(static::getMaterializedPathSeparator(), $path);
+        $parentPath = static::getMaterializedPathSeparator() . implode(static::getMaterializedPathSeparator(), $path);
 
         return $parentPath;
     }
@@ -98,7 +98,7 @@ trait Node
     {
         $explodedPath = $this->getExplodedPath();
 
-        return static::getMaterializedPathSeparator().array_shift($explodedPath);
+        return static::getMaterializedPathSeparator() . array_shift($explodedPath);
     }
 
     /**
@@ -274,7 +274,7 @@ trait Node
             $prepare = function (NodeInterface $node) {
                 $pre = $node->getNodeLevel() > 1 ? implode('', array_fill(0, $node->getNodeLevel(), '--')) : '';
 
-                return $pre.(string) $node;
+                return $pre . (string) $node;
             };
         }
         if (null === $tree) {

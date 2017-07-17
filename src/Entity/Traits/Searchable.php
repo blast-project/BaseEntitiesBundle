@@ -64,7 +64,7 @@ trait Searchable
         try {
             $data = $this->$field;
         } catch (\Exception $exc) {
-            throw new \Exception("Property $field does not exist for ".get_class());
+            throw new \Exception("Property $field does not exist for " . get_class());
         }
 
         return SearchAnalyser::analyse($data);

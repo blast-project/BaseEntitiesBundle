@@ -104,7 +104,7 @@ class NormalizeListener implements LoggerAwareInterface, EventSubscriber
      */
     private function normalizeField($field, $actions)
     {
-        $getter = 'get'.ucfirst($field);
+        $getter = 'get' . ucfirst($field);
         if (!method_exists($this->object, $getter)) {
             $this->logger->warn(
                 "[NormalizeListener] Method « $getter » does not exist for Entity",
@@ -139,7 +139,7 @@ class NormalizeListener implements LoggerAwareInterface, EventSubscriber
             return;
         }
 
-        $setter = 'set'.ucfirst($field);
+        $setter = 'set' . ucfirst($field);
         if (!method_exists($this->object, $setter)) {
             $this->logger->warn(
                 "[NormalizeListener] Method « $setter » does not exist for Entity",

@@ -29,7 +29,7 @@ class NestedTreeableType extends AbstractType
         };
 
         $choiceLabel = function ($choice) {
-            return str_repeat(' - ', $choice->getTreeLvl()).(string) $choice;
+            return str_repeat(' - ', $choice->getTreeLvl()) . (string) $choice;
         };
 
         $resolver->setDefaults([

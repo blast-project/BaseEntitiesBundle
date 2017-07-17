@@ -66,7 +66,7 @@ class TreeableType extends AbstractType
         $choiceLabel = function ($choice) {
             $level = $choice->getNodeLevel() - 1;
 
-            return str_repeat('- - ', $level).(string) $choice;
+            return str_repeat('- - ', $level) . (string) $choice;
         };
 
         $queryBuilderNormalizer = function (Options $options, $qb) {
