@@ -63,7 +63,7 @@ class NamingListener implements LoggerAwareInterface, EventSubscriber
             if ($mapping['type'] == ClassMetadataInfo::MANY_TO_MANY && $mapping['isOwningSide']) {
                 if ($namingStrategy->classToTableName($mapping['joinTable']['name']) == $mapping['joinTable']['name']) {
                     $rc = new \ReflectionClass($mapping['targetEntity']);
-                    $fqdn = $mapping['sourceEntity'].'__'.$rc->getShortName();
+                    $fqdn = $mapping['sourceEntity'] . '__' . $rc->getShortName();
                     $metadata->associationMappings[$field]['joinTable']['name'] = $this->buildTableName($fqdn);
                 }
             }

@@ -30,7 +30,7 @@ trait Treeable
         // TODO: getSortField
         $sortPath = rtrim($node->getSortMaterializedPath(), $separator);
         $sortString = method_exists($this, 'getSortField') ? $this->getSortField() : (string) $this;
-        $this->setSortMaterializedPath($sortPath.$separator.$sortString.$separator.$this->getId());
+        $this->setSortMaterializedPath($sortPath . $separator . $sortString . $separator . $this->getId());
 
         if (null !== $this->parentNode) {
             $this->parentNode->getChildNodes()->removeElement($this);

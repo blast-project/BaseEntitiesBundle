@@ -28,7 +28,7 @@ class SearchableRepository extends EntityRepository
 
     public function getSearchIndexClass()
     {
-        return $this->getClassName().'SearchIndex';
+        return $this->getClassName() . 'SearchIndex';
     }
 
     public function getSearchIndexTable()
@@ -63,7 +63,7 @@ class SearchableRepository extends EntityRepository
                 ->where("i$k.object = o")
                 ->andWhere("i$k.keyword LIKE :search$k");
             $query->andWhere($query->expr()->exists($subquery->getDql()));
-            $parameters["search$k"] = $word.'%';
+            $parameters["search$k"] = $word . '%';
         }
         $query->setParameters($parameters);
 
@@ -78,7 +78,7 @@ class SearchableRepository extends EntityRepository
     public function batchUpdate()
     {
         if (!$this->truncateTable()) {
-            throw new \Exception('Could not truncate table '.$this->getSearchIndexTable());
+            throw new \Exception('Could not truncate table ' . $this->getSearchIndexTable());
         }
         $em = $this->getEntityManager();
         $indexClass = $this->getSearchIndexClass();

@@ -36,7 +36,7 @@ class TreeableCRUDController extends CRUDController
         /** @var Category $item */
         foreach ($datagrid->getResults() as $key => $item) {
             $datagrid->getResults()[$key]->setName(
-                str_repeat('- - ', $item->getNodeLevel() - 1).' '.
+                str_repeat('- - ', $item->getNodeLevel() - 1) . ' ' .
                 $datagrid->getResults()[$key]->getName()
             );
         }

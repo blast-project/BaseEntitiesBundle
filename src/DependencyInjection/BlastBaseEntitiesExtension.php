@@ -46,7 +46,7 @@ class BlastBaseEntitiesExtension extends BlastCoreExtension
         $useLoggable = false;
 
         foreach ($availableListeners as $listenerName) {
-            $serviceId = 'blast_base_entities.listener.'.$listenerName;
+            $serviceId = 'blast_base_entities.listener.' . $listenerName;
 
             // enable doctrine ORM event subscribers
             foreach ($config['orm'] as $connection => $listeners) {

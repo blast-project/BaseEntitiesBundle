@@ -59,10 +59,10 @@ class SearchableListener implements EventSubscriber
 
         // Add oneToMany mapping to entities that have the Searchable trait
         if ($this->hasTrait($reflectionClass, 'Blast\BaseEntitiesBundle\Entity\Traits\Searchable')) {
-            $this->logger->debug('[SearchableListener] Entering SearchableListener for « loadClassMetadata » event: entity '.$reflectionClass->getName());
+            $this->logger->debug('[SearchableListener] Entering SearchableListener for « loadClassMetadata » event: entity ' . $reflectionClass->getName());
 
             $metadata->mapOneToMany([
-                'targetEntity' => $reflectionClass->getShortName().'SearchIndex',
+                'targetEntity' => $reflectionClass->getShortName() . 'SearchIndex',
                 'fieldName' => 'searchIndexes',
                 'mappedBy' => 'object',
                 'cascade' => ['persist'],
@@ -72,7 +72,7 @@ class SearchableListener implements EventSubscriber
         // Add manyToOne mapping to entities that extend SearchIndexEntity (first parent only)
         $parentClass = $reflectionClass->getParentClass();
         if ($parentClass && $parentClass->getName() == 'Blast\BaseEntitiesBundle\Entity\SearchIndexEntity') {
-            $this->logger->debug('[SearchableListener] Entering SearchableListener for « loadClassMetadata » event: entity '.$reflectionClass->getName());
+            $this->logger->debug('[SearchableListener] Entering SearchableListener for « loadClassMetadata » event: entity ' . $reflectionClass->getName());
 
             $metadata->mapManyToOne([
                 'targetEntity' => str_replace('SearchIndex', '', $reflectionClass->getName()),
@@ -111,7 +111,7 @@ class SearchableListener implements EventSubscriber
     private function deleteSearchIndexes($em, $entity)
     {
         $reflClass = new \ReflectionClass($entity);
-        $indexClass = $reflClass->getName().'SearchIndex';
+        $indexClass = $reflClass->getName() . 'SearchIndex';
 
         // delete old keywords
         $sql = "DELETE $indexClass p WHERE p.object = :entity";
@@ -123,7 +123,7 @@ class SearchableListener implements EventSubscriber
     {
         $uow = $em->getUnitOfWork();
         $reflClass = new \ReflectionClass($entity);
-        $indexClass = $reflClass->getName().'SearchIndex';
+        $indexClass = $reflClass->getName() . 'SearchIndex';
         $classMetadata = $em->getClassMetadata($indexClass);
 
         $fields = $indexClass::$fields;
