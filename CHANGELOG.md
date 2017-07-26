@@ -1,5 +1,19 @@
 # Change Log
 
+## [Unreleased](https://github.com/blast-project/BaseEntitiesBundle/tree/HEAD)
+
+[Full Changelog](https://github.com/blast-project/BaseEntitiesBundle/compare/0.4.4...HEAD)
+
+**Merged pull requests:**
+
+- DevKit updates for BaseEntitiesBundle [\#19](https://github.com/blast-project/BaseEntitiesBundle/pull/19) ([BlastCI](https://github.com/BlastCI))
+- Lisem fix & features [\#17](https://github.com/blast-project/BaseEntitiesBundle/pull/17) ([FanchTheSystem](https://github.com/FanchTheSystem))
+- DevKit updates for BaseEntitiesBundle [\#16](https://github.com/blast-project/BaseEntitiesBundle/pull/16) ([BlastCI](https://github.com/BlastCI))
+- DevKit updates for BaseEntitiesBundle [\#15](https://github.com/blast-project/BaseEntitiesBundle/pull/15) ([BlastCI](https://github.com/BlastCI))
+- Wip lisem [\#14](https://github.com/blast-project/BaseEntitiesBundle/pull/14) ([FanchTheSystem](https://github.com/FanchTheSystem))
+- DevKit updates for BaseEntitiesBundle [\#13](https://github.com/blast-project/BaseEntitiesBundle/pull/13) ([BlastCI](https://github.com/BlastCI))
+- DevKit updates for BaseEntitiesBundle [\#12](https://github.com/blast-project/BaseEntitiesBundle/pull/12) ([BlastCI](https://github.com/BlastCI))
+
 ## [0.4.4](https://github.com/blast-project/BaseEntitiesBundle/tree/0.4.4) (2017-06-27)
 [Full Changelog](https://github.com/blast-project/BaseEntitiesBundle/compare/0.4.3...0.4.4)
 
