@@ -39,7 +39,7 @@ trait Timestampable
      *
      * @return Timestampable
      */
-    public function setCreatedAt(DateTime $createdAt)
+    public function setCreatedAt(\DateTimeInterface $createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -59,7 +59,7 @@ trait Timestampable
      *
      * @return Timestampable
      */
-    public function setUpdatedAt(DateTime $lastUpdatedAt)
+    public function setUpdatedAt(\DateTimeInterface $lastUpdatedAt)
     {
         $this->updatedAt = $lastUpdatedAt;
 
