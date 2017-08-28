@@ -80,7 +80,7 @@ class SearchIndexAutocompleteType extends ModelAutocompleteType
                 ->setParameter('value', "%$value%")
             ;
 
-           // $datagrid->setValue($property, null, $value);
+            // $datagrid->setValue($property, null, $value);
         };
 
         $resolver->setDefaults(array(

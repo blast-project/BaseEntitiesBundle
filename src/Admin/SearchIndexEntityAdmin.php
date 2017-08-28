@@ -29,6 +29,6 @@ class SearchIndexEntityAdmin extends CoreAdmin
             ->setParameter('value', "%$value%")
         ;
 
-       // $datagrid->setValue($property, null, $value);
+        // $datagrid->setValue($property, null, $value);
     }
 }
