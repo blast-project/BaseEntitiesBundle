@@ -14,8 +14,6 @@ namespace Blast\BaseEntitiesBundle\Entity;
 
 abstract class SearchIndexEntity
 {
-    public static $fields = [];
-
     /**
      * @var int
      */

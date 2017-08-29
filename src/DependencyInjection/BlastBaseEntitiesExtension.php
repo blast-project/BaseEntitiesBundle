@@ -62,10 +62,10 @@ class BlastBaseEntitiesExtension extends BlastCoreExtension
 
             // enable doctrine ODM event subscribers
             // TODO : not tested
-            foreach ($config['mongodb'] as $connection => $listeners) {
+            foreach ($config['odm'] as $connection => $listeners) {
                 if (!empty($listeners['$listenerName']) && $container->hasDefinition($serviceId)) {
                     $definition = $container->getDefinition($serviceId);
-                    $definition->addTag('doctrine_mongodb.odm..event_subscriber', ['connection' => $connection]);
+                    $definition->addTag('doctrine_mongodb.odm.event_subscriber', ['connection' => $connection]);
                     if ($listenerName == 'loggable') {
                         $useLoggable = true;
                     }
@@ -78,6 +78,15 @@ class BlastBaseEntitiesExtension extends BlastCoreExtension
             $container->getDefinition('blast_base_entities.listener.logger')
                 ->setPublic(true)
                 ->addTag('kernel.event_subscriber');
+        }
+
+        if (array_key_exists('entity_search_indexes', $config)) {
+            $mergedConfig = $config['entity_search_indexes'];
+            if ($container->hasParameter('blast_base_entities.entity_search_indexes')) {
+                $mergedConfig = array_merge($container->getParameter('blast_base_entities.entity_search_indexes') ?: [], $mergedConfig);
+            }
+
+            $container->setParameter('blast_base_entities.entity_search_indexes', $mergedConfig);
         }
 
         return $this;

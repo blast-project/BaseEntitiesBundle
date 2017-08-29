@@ -28,7 +28,5 @@ class SearchIndexEntityAdmin extends CoreAdmin
             ->where('s.keyword LIKE :value')
             ->setParameter('value', "%$value%")
         ;
-
-        // $datagrid->setValue($property, null, $value);
     }
 }
