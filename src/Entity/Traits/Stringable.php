@@ -17,8 +17,18 @@ trait Stringable
     // @TODO: Set method name configurable
     public function __toString()
     {
+        /* BugFix for sylius TranslatableTrait (example for shipping method $this->getTranslation()->getName(); ) */
+        if (property_exists(get_class($this), 'currentLocale') && method_exists(get_class($this), 'setCurrentLocale')) {
+            if (!$this->currentLocale) {
+                $this->setCurrentLocale($this->getContainer()->getParameter('locale'));
+            }
+        }
+
         if (method_exists(get_class($this), 'getName')) {
             return (string) $this->getName();
+        }
+        if (method_exists(get_class($this), 'getCode')) {
+            return (string) $this->getCode();
         }
         if (method_exists(get_class($this), 'getId')) {
             return (string) $this->getId();
