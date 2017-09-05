@@ -12,6 +12,8 @@
 
 namespace Blast\BaseEntitiesBundle\Entity\Traits;
 
+use Symfony\Component\Intl\Locale;
+
 trait Stringable
 {
     // @TODO: Set method name configurable
@@ -20,7 +22,7 @@ trait Stringable
         /* BugFix for sylius TranslatableTrait (example for shipping method $this->getTranslation()->getName(); ) */
         if (property_exists(get_class($this), 'currentLocale') && method_exists(get_class($this), 'setCurrentLocale')) {
             if (!$this->currentLocale) {
-                $this->setCurrentLocale($this->getContainer()->getParameter('locale'));
+                $this->setCurrentLocale(Locale::getDefault());
             }
         }
 
