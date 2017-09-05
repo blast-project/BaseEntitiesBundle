@@ -25,6 +25,11 @@ class SearchableListener implements EventSubscriber
         Logger;
 
     /**
+     * @var array
+     */
+    private $classFields;
+
+    /**
      * Returns an array of events this subscriber wants to listen to.
      *
      * @return array
@@ -123,20 +128,27 @@ class SearchableListener implements EventSubscriber
     {
         $uow = $em->getUnitOfWork();
         $reflClass = new \ReflectionClass($entity);
-        $indexClass = $reflClass->getName() . 'SearchIndex';
+        $entityClass = $reflClass->getName();
+        $indexClass = $entityClass . 'SearchIndex';
         $classMetadata = $em->getClassMetadata($indexClass);
 
-        $fields = $indexClass::$fields;
-        foreach ($fields as $field) {
-            $keywords = $entity->analyseField($field);
-            foreach ($keywords as $keyword) {
-                $index = new $indexClass();
-                $index->setObject($entity);
-                $index->setField($field);
-                $index->setKeyword($keyword);
-                $em->persist($index);
-                $uow->computeChangeSet($classMetadata, $index);
+        if (array_key_exists($entityClass, $this->classFields)) {
+            foreach ($this->classFields[$entityClass] as $field) {
+                $keywords = $entity->analyseField($field);
+                foreach ($keywords as $keyword) {
+                    $index = new $indexClass();
+                    $index->setObject($entity);
+                    $index->setField($field);
+                    $index->setKeyword($keyword);
+                    $em->persist($index);
+                    $uow->computeChangeSet($classMetadata, $index);
+                }
             }
         }
+    }
+
+    public function setClassFields(array $classFields)
+    {
+        $this->classFields = $classFields;
     }
 }

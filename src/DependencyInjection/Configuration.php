@@ -32,7 +32,18 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->append($this->getVendorNode('orm'))
-            ->append($this->getVendorNode('mongodb')) // not tested yet
+            ->append($this->getVendorNode('odm')) // not tested yet
+            ->children()
+                ->arrayNode('entity_search_indexes')
+                    ->useAttributeAsKey('class')
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('class')->end()
+                            ->variableNode('fields')->end()
+                        ->end()
+                    ->end()
+                    ->defaultValue([])
+                ->end()
             ->end()
         ;
 

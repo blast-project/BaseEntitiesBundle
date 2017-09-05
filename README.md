@@ -71,9 +71,22 @@ librinfo_doctrine:
             descriptible: true
             searchable: true
             loggable: true
+    # List of entity search-able indexed fields
+    entity_search_indexes:
+        Me\MyBundle\Entity\MyEntity:
+            fields:
+                - name
+                - fulltextName
+                - firstname
+                - lastname
+                - description
+                - email
+                - url
 ```
 
 Add/remove the needed behaviours for each orm connection used by your application.
+
+Under `entity_search_indexes` key, you can set search indexes for each entity that should be indexable.
 
 ## Learn how to use the bundle
 

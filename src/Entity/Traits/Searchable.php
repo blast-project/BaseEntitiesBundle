@@ -12,6 +12,7 @@
 
 namespace Blast\BaseEntitiesBundle\Entity\Traits;
 
+use Symfony\Component\PropertyAccess\PropertyAccess;
 use Doctrine\Common\Collections\ArrayCollection;
 use Blast\BaseEntitiesBundle\Entity\SearchIndexEntity;
 use Blast\BaseEntitiesBundle\SearchAnalyser\SearchAnalyser;
@@ -62,7 +63,9 @@ trait Searchable
     public function analyseField($field)
     {
         try {
-            $data = $this->$field;
+            $accessor = PropertyAccess::createPropertyAccessor();
+
+            $data = $accessor->getValue($this, $field);
         } catch (\Exception $exc) {
             throw new \Exception("Property $field does not exist for " . get_class());
         }

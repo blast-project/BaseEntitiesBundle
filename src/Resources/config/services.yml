@@ -84,6 +84,7 @@ services:
         calls:
             - [setLogger, ['@logger']]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
+            - [setClassFields, ['%blast_base_entities.entity_search_indexes%']]
 
 # Service that manages Loggable doctrine behaviour
     blast_base_entities.listener.loggable:
