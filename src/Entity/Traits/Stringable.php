@@ -17,7 +17,7 @@ use Symfony\Component\Intl\Locale;
 trait Stringable
 {
     // @TODO: Set method name configurable
-    public function __toString()
+    public function __toString(): string
     {
         /* BugFix for sylius TranslatableTrait (example for shipping method $this->getTranslation()->getName(); ) */
         if (property_exists(get_class($this), 'currentLocale') && method_exists(get_class($this), 'setCurrentLocale')) {
