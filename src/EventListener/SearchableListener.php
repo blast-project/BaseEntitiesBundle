@@ -68,9 +68,9 @@ class SearchableListener implements EventSubscriber
 
             $metadata->mapOneToMany([
                 'targetEntity' => $reflectionClass->getShortName() . 'SearchIndex',
-                'fieldName' => 'searchIndexes',
-                'mappedBy' => 'object',
-                'cascade' => ['persist'],
+                'fieldName'    => 'searchIndexes',
+                'mappedBy'     => 'object',
+                'cascade'      => ['persist'],
             ]);
         }
 
@@ -81,9 +81,9 @@ class SearchableListener implements EventSubscriber
 
             $metadata->mapManyToOne([
                 'targetEntity' => str_replace('SearchIndex', '', $reflectionClass->getName()),
-                'fieldName' => 'object',
-                'inversedBy' => 'searchIndexes',
-                'cascade' => ['persist'],
+                'fieldName'    => 'object',
+                'inversedBy'   => 'searchIndexes',
+                'cascade'      => ['persist'],
             ]);
         }
     }
@@ -134,14 +134,16 @@ class SearchableListener implements EventSubscriber
 
         if (array_key_exists($entityClass, $this->classFields)) {
             foreach ($this->classFields[$entityClass] as $field) {
-                $keywords = $entity->analyseField($field);
-                foreach ($keywords as $keyword) {
-                    $index = new $indexClass();
-                    $index->setObject($entity);
-                    $index->setField($field);
-                    $index->setKeyword($keyword);
-                    $em->persist($index);
-                    $uow->computeChangeSet($classMetadata, $index);
+                if (!is_array($field)) {
+                    $keywords = $entity->analyseField($field);
+                    foreach ($keywords as $keyword) {
+                        $index = new $indexClass();
+                        $index->setObject($entity);
+                        $index->setField($field);
+                        $index->setKeyword($keyword);
+                        $em->persist($index);
+                        $uow->computeChangeSet($classMetadata, $index);
+                    }
                 }
             }
         }
