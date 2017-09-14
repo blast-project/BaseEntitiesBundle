@@ -13,7 +13,6 @@
 namespace Blast\BaseEntitiesBundle\Entity\Traits;
 
 use Symfony\Component\Intl\Locale;
-use Sylius\Component\Locale\Provider\LocaleProvider;
 
 trait Stringable
 {
@@ -30,7 +29,7 @@ trait Stringable
            }
            }
         */
-        
+
         if (method_exists(get_class($this), 'getName')) {
             return (string) $this->getName();
         }

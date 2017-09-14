@@ -58,8 +58,8 @@ class LabelableListener implements LoggerAwareInterface, EventSubscriber
         // name
         $metadata->mapField([
             'fieldName' => 'label',
-            'type' => 'string',
-            'nullable' => true,
+            'type'      => 'string',
+            'nullable'  => true,
         ]);
 
         $this->logger->debug(

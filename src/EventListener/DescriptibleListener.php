@@ -64,8 +64,8 @@ class DescriptibleListener implements LoggerAwareInterface, EventSubscriber
 
         $metadata->mapField([
             'fieldName' => 'description',
-            'type' => 'text',
-            'nullable' => true,
+            'type'      => 'text',
+            'nullable'  => true,
         ]);
 
         $this->logger->debug(

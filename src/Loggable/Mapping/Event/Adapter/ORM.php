@@ -56,7 +56,7 @@ final class ORM extends BaseAdapterORM implements LoggableAdapter
 
         $q = $em->createQuery($dql);
         $q->setParameters(array(
-            'objectId' => $objectId,
+            'objectId'    => $objectId,
             'objectClass' => $objectMeta->name,
         ));
 

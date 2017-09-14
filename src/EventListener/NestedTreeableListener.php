@@ -42,74 +42,74 @@ class NestedTreeableListener extends TreeListener implements LoggerAwareInterfac
 
         self::$configurations['Tree'] = [
             $fqcn => [
-                'strategy' => 'nested',
+                'strategy'         => 'nested',
                 'activate_locking' => false,
-                'locking_timeout' => 3,
-                'left' => 'treeLft',
-                'right' => 'treeRgt',
-                'level' => 'treeLvl',
-                'root' => 'treeRoot',
-                'parent' => 'treeParent',
-                'useObjectClass' => $fqcn,
+                'locking_timeout'  => 3,
+                'left'             => 'treeLft',
+                'right'            => 'treeRgt',
+                'level'            => 'treeLvl',
+                'root'             => 'treeRoot',
+                'parent'           => 'treeParent',
+                'useObjectClass'   => $fqcn,
             ],
         ];
 
         if (!$meta->hasField('treeLft')) {
             $meta->mapField([
                 'fieldName' => 'treeLft',
-                'type' => 'integer',
-                'gedmo' => ['treeLeft'],
+                'type'      => 'integer',
+                'gedmo'     => ['treeLeft'],
             ]);
         }
 
         if (!$meta->hasField('treeRgt')) {
             $meta->mapField([
                 'fieldName' => 'treeRgt',
-                'type' => 'integer',
-                'gedmo' => 'treeRight',
+                'type'      => 'integer',
+                'gedmo'     => 'treeRight',
             ]);
         }
 
         if (!$meta->hasField('treeLvl')) {
             $meta->mapField([
                 'fieldName' => 'treeLvl',
-                'type' => 'integer',
-                'gedmo' => 'treeLevel',
+                'type'      => 'integer',
+                'gedmo'     => 'treeLevel',
             ]);
         }
 
         if (!$meta->hasAssociation('treeChildren')) {
             $meta->mapOneToMany([
-                'fieldName' => 'treeChildren',
+                'fieldName'    => 'treeChildren',
                 'targetEntity' => $fqcn,
-                'mappedBy' => 'treeParent',
-                'orderBy' => ['treeLft' => 'ASC'],
-                'cascade' => ['persist', 'remove'],
+                'mappedBy'     => 'treeParent',
+                'orderBy'      => ['treeLft' => 'ASC'],
+                'cascade'      => ['persist', 'remove'],
             ]);
         }
 
         if (!$meta->hasAssociation('treeRoot')) {
             $meta->mapManyToOne([
-                'fieldName' => 'treeRoot',
+                'fieldName'    => 'treeRoot',
                 'targetEntity' => $fqcn,
-                'join_column' => [
-                    'name' => 'tree_root',
+                'join_column'  => [
+                    'name'                 => 'tree_root',
                     'referencedColumnName' => 'id',
                     ],
                 'onDelete' => 'CASCADE',
-                'gedmo' => 'treeRoot',
+                'gedmo'    => 'treeRoot',
             ]);
         }
 
         if (!$meta->hasAssociation('treeParent')) {
             $meta->mapManyToOne([
-                'fieldName' => 'treeParent',
+                'fieldName'    => 'treeParent',
                 'targetEntity' => $fqcn,
-                'inversedBy' => 'treeChildren',
-                'join_column' => [
-                    'name' => 'tree_parent_id',
+                'inversedBy'   => 'treeChildren',
+                'join_column'  => [
+                    'name'                 => 'tree_parent_id',
                     'referencedColumnName' => 'id',
-                    'onDelete' => 'CASCADE',
+                    'onDelete'             => 'CASCADE',
                     ],
                 'gedmo' => 'treeParent',
             ]);

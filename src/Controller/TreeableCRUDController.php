@@ -47,9 +47,9 @@ class TreeableCRUDController extends CRUDController
         $this->defineFormTheme($formView, $this->admin->getFormTheme());
 
         return $this->render($this->admin->getTemplate('list'), array(
-            'action' => 'list',
-            'form' => $formView,
-            'datagrid' => $datagrid,
+            'action'     => 'list',
+            'form'       => $formView,
+            'datagrid'   => $datagrid,
             'csrf_token' => $this->getCsrfToken('sonata.batch'),
         ), null, $request);
     }

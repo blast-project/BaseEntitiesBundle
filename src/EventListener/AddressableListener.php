@@ -67,51 +67,51 @@ class AddressableListener implements LoggerAwareInterface, EventSubscriber
         // address
         $metadata->mapField([
             'fieldName' => 'address',
-            'type' => 'string',
-            'nullable' => true,
+            'type'      => 'string',
+            'nullable'  => true,
         ]);
 
         // zip
         $metadata->mapField([
             'fieldName' => 'zip',
-            'type' => 'string',
-            'length' => 20,
-            'nullable' => true,
+            'type'      => 'string',
+            'length'    => 20,
+            'nullable'  => true,
         ]);
 
         // city
         $metadata->mapField([
             'fieldName' => 'city',
-            'type' => 'string',
-            'nullable' => true,
+            'type'      => 'string',
+            'nullable'  => true,
         ]);
 
         // country
         $metadata->mapField([
             'fieldName' => 'country',
-            'type' => 'string',
-            'nullable' => true,
+            'type'      => 'string',
+            'nullable'  => true,
         ]);
 
         // npai
         $metadata->mapField([
             'fieldName' => 'npai',
-            'type' => 'boolean',
-            'nullable' => true,
+            'type'      => 'boolean',
+            'nullable'  => true,
         ]);
 
         // vcardUid
         $metadata->mapField([
             'fieldName' => 'vcardUid',
-            'type' => 'string',
-            'nullable' => true,
+            'type'      => 'string',
+            'nullable'  => true,
         ]);
 
         // confirmed
         $metadata->mapField([
             'fieldName' => 'confirmed',
-            'type' => 'boolean',
-            'default' => true,
+            'type'      => 'boolean',
+            'default'   => true,
         ]);
 
         $this->logger->debug(
