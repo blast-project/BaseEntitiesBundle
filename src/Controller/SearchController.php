@@ -117,15 +117,15 @@ class SearchController extends CoreController
             }
 
             $items[] = array(
-                'id' => $admin->id($entity),
+                'id'    => $admin->id($entity),
                 'label' => $label,
             );
         }
 
         return new JsonResponse(array(
             'status' => 'OK',
-            'more' => false,  // TODO !
-            'items' => $items,
+            'more'   => false,  // TODO !
+            'items'  => $items,
         ));
     }
 

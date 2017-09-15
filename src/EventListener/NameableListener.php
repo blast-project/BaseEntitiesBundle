@@ -65,8 +65,8 @@ class NameableListener implements LoggerAwareInterface, EventSubscriber
         // name
         $metadata->mapField([
             'fieldName' => 'name',
-            'type' => 'string',
-            'nullable' => true,
+            'type'      => 'string',
+            'nullable'  => true,
         ]);
 
         $this->logger->debug(

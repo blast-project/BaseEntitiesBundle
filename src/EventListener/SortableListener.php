@@ -61,9 +61,9 @@ class SortableListener implements LoggerAwareInterface, EventSubscriber
         // sortRank
         $metadata->mapField([
             'fieldName' => 'sortRank',
-            'type' => 'float',
-            'nullable' => false,
-            'default' => 65536,
+            'type'      => 'float',
+            'nullable'  => false,
+            'default'   => 65536,
         ]);
 
         // add index on sort_rank column

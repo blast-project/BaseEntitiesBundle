@@ -77,13 +77,13 @@ class TimestampableListener implements LoggerAwareInterface, EventSubscriber
         // createdAt
         $metadata->mapField([
             'fieldName' => 'createdAt',
-            'type' => 'datetime',
+            'type'      => 'datetime',
         ]);
 
         // updatedAt
         $metadata->mapField([
             'fieldName' => 'updatedAt',
-            'type' => 'datetime',
+            'type'      => 'datetime',
         ]);
 
         $this->logger->debug(

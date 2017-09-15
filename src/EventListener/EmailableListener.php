@@ -67,22 +67,22 @@ class EmailableListener implements LoggerAwareInterface, EventSubscriber
         // email
         $metadata->mapField([
             'fieldName' => 'email',
-            'type' => 'string',
-            'nullable' => true,
+            'type'      => 'string',
+            'nullable'  => true,
         ]);
 
         // emailNpai
         $metadata->mapField([
             'fieldName' => 'emailNpai',
-            'type' => 'boolean',
-            'nullable' => true,
+            'type'      => 'boolean',
+            'nullable'  => true,
         ]);
 
         // emailNoNewsletter
         $metadata->mapField([
             'fieldName' => 'emailNoNewsletter',
-            'type' => 'boolean',
-            'nullable' => true,
+            'type'      => 'boolean',
+            'nullable'  => true,
         ]);
 
         $this->logger->debug(

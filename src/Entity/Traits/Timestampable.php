@@ -13,6 +13,7 @@
 namespace Blast\BaseEntitiesBundle\Entity\Traits;
 
 use DateTime;
+use DateTimeInterface;
 
 trait Timestampable
 {
@@ -29,7 +30,7 @@ trait Timestampable
     /**
      * @return DateTime
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
@@ -39,7 +40,7 @@ trait Timestampable
      *
      * @return Timestampable
      */
-    public function setCreatedAt(\DateTimeInterface $createdAt)
+    public function setCreatedAt(?DateTimeInterface $createdAt)
     {
         $this->createdAt = $createdAt;
 
@@ -49,7 +50,7 @@ trait Timestampable
     /**
      * @return DateTime
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): ?DateTimeInterface
     {
         return $this->updatedAt;
     }
@@ -59,7 +60,7 @@ trait Timestampable
      *
      * @return Timestampable
      */
-    public function setUpdatedAt(\DateTimeInterface $lastUpdatedAt)
+    public function setUpdatedAt(?DateTimeInterface $lastUpdatedAt)
     {
         $this->updatedAt = $lastUpdatedAt;
 

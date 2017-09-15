@@ -44,12 +44,12 @@ class TreeableCRUDController extends CRUDController
         $formView = $datagrid->getForm()->createView();
 
         // set the theme for the current Admin Form
-        $this->get('twig')->getExtension('form')->renderer->setTheme($formView, $this->admin->getFilterTheme());
+        $this->defineFormTheme($formView, $this->admin->getFormTheme());
 
         return $this->render($this->admin->getTemplate('list'), array(
-            'action' => 'list',
-            'form' => $formView,
-            'datagrid' => $datagrid,
+            'action'     => 'list',
+            'form'       => $formView,
+            'datagrid'   => $datagrid,
             'csrf_token' => $this->getCsrfToken('sonata.batch'),
         ), null, $request);
     }

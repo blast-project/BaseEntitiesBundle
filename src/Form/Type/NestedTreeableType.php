@@ -34,10 +34,10 @@ class NestedTreeableType extends AbstractType
 
         $resolver->setDefaults([
             'query_builder' => $queryBuilder,
-            'choice_label' => $choiceLabel,
-            'btn_add' => 'link_add',
-            'btn_list' => 'link_list',
-            'btn_delete' => 'link_delete',
+            'choice_label'  => $choiceLabel,
+            'btn_add'       => 'link_add',
+            'btn_list'      => 'link_list',
+            'btn_delete'    => 'link_delete',
             'btn_catalogue' => 'SonataAdminBundle',
         ]);
     }

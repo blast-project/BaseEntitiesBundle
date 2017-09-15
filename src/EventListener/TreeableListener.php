@@ -53,16 +53,16 @@ class TreeableListener implements LoggerAwareInterface, EventSubscriber
         if (!$metadata->hasField('materializedPath')) {
             $metadata->mapField([
                 'fieldName' => 'materializedPath',
-                'type' => 'string',
-                'length' => 2048,
+                'type'      => 'string',
+                'length'    => 2048,
             ]);
         }
 
         if (!$metadata->hasField('sortMaterializedPath')) {
             $metadata->mapField([
                 'fieldName' => 'sortMaterializedPath',
-                'type' => 'string',
-                'length' => 2048,
+                'type'      => 'string',
+                'length'    => 2048,
             ]);
         }
 

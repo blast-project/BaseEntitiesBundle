@@ -50,9 +50,9 @@ class SortableController extends CoreController
         }
 
         return new JsonResponse(array(
-            'status' => $new_rank ? 'OK' : 'KO',
+            'status'   => $new_rank ? 'OK' : 'KO',
             'new_rank' => $new_rank,
-            'class' => $admin->getClass(),
+            'class'    => $admin->getClass(),
         ));
     }
 }

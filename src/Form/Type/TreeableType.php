@@ -85,8 +85,8 @@ class TreeableType extends AbstractType
         $resolver->setDefaults(array(
             'min_node_level' => 0,
             'max_node_level' => 0,
-            'choice_label' => $choiceLabel,
-            'query_builder' => $queryBuilder,
+            'choice_label'   => $choiceLabel,
+            'query_builder'  => $queryBuilder,
         ));
     }
 

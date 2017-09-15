@@ -24,6 +24,13 @@ class GuidableListener implements LoggerAwareInterface, EventSubscriber
 {
     use ClassChecker, Logger;
 
+    protected $fieldMappingConfiguration = [
+        'id'         => true,
+        'fieldName'  => 'id',
+        'type'       => 'guid',
+        'columnName' => 'id',
+    ];
+
     /**
      * Returns an array of events this subscriber wants to listen to.
      *
@@ -67,12 +74,12 @@ class GuidableListener implements LoggerAwareInterface, EventSubscriber
             return;
         }
 
-        $metadata->mapField([
-            'id' => true,
-            'fieldName' => 'id',
-            'type' => 'guid',
-            'columnName' => 'id',
-        ]);
+        // Don't apply twice the uuid mapping
+        if ($metadata->idGenerator instanceof UuidGenerator) {
+            return;
+        }
+
+        $metadata->mapField($this->fieldMappingConfiguration);
         $metadata->setIdGenerator(new UuidGenerator());
 
         $this->logger->debug(
