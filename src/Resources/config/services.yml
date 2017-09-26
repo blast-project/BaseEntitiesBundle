@@ -7,13 +7,18 @@ services:
 # doctrine.event_subscriber tags are added in BlastBaseEntitiesExtension.php
 # ###################################################################################
 
+    blast_core.label.strategy.librinfo_baseentities:
+        class: Blast\CoreBundle\Translator\LibrinfoLabelTranslatorStrategy
+        arguments: ['Blast\BaseEntitiesBundle']
+
+
 # Service that manages Table naming convention
     blast_base_entities.listener.naming:
         class: Blast\BaseEntitiesBundle\EventListener\NamingListener
         calls:
             - [setLogger, ['@logger']]
             - [setClassAnalyser, [Blast\CoreBundle\Tools\Reflection\ClassAnalyzer]]
-
+            
 # Service that manages GUID doctrine mapping
     blast_base_entities.listener.guidable:
         class: Blast\BaseEntitiesBundle\EventListener\GuidableListener
