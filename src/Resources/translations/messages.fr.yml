@@ -5,27 +5,9 @@ blast:
         
 
 
-librinfo.old:
-    label.old:
-        address.old: 'Adresse'
-        zip.old: 'Code postal'
-        city.old: 'Ville'
-        country.old: 'Pays'
-        npai.old: 'NPAI'
-        confirmed.old: 'Confirmé'
-        vcard_uid.old: 'Uid Vcard'
-        email.old: 'Email'
-        email_npai.old: 'NPAI Email'
-        email_no_newsletter.old: 'Pas de Newsletter'
-        owner.old: 'Propriétaire'
-        description.old: 'Description'
-        label.old: 'Libellé'
-        name.old: 'Nom'
-        sort_rank.old: 'Classement'
-        created_at.old: 'Créé le'
-        updated_at.old: 'Modifié le'
-'form_group_address.old': 'Adresse'
-'form_group_email.old': 'Email'
-'form_group_communication.old': 'Communication'
-'form_group_phones.old': 'Numéros de téléphone'
-'form_group_description.old': 'Description'
+
+'form_group_address': 'Adresse'
+'form_group_email': 'Email'
+'form_group_communication': 'Communication'
+'form_group_phones': 'Numéros de téléphone'
+'form_group_description': 'Description'
