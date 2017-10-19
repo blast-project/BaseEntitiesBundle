@@ -38,7 +38,6 @@
             "Blast\\BaseEntitiesBundle\\": "src/"
         }
     },
-    "version": "dev-wip-lisem",
     "suggest": {
         "libre-informatique/crm-bundle": "Manage contacts, organisms and more..."
     }
