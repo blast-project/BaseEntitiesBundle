@@ -1,5 +1,13 @@
 # Change Log
 
+## [0.5.2](https://github.com/blast-project/BaseEntitiesBundle/tree/0.5.2) (2017-10-19)
+[Full Changelog](https://github.com/blast-project/BaseEntitiesBundle/compare/0.5.1...0.5.2)
+
+**Merged pull requests:**
+
+- Lisem fix & features [\#25](https://github.com/blast-project/BaseEntitiesBundle/pull/25) ([FanchTheSystem](https://github.com/FanchTheSystem))
+- Label Translation Strategy Update [\#24](https://github.com/blast-project/BaseEntitiesBundle/pull/24) ([FanchTheSystem](https://github.com/FanchTheSystem))
+
 ## [0.5.1](https://github.com/blast-project/BaseEntitiesBundle/tree/0.5.1) (2017-09-15)
 [Full Changelog](https://github.com/blast-project/BaseEntitiesBundle/compare/0.4.5...0.5.1)
 
