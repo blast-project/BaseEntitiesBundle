@@ -1,23 +1,11 @@
 
-librinfo:
-    label:
-        address: 'Adresse'
-        zip: 'Code postal'
-        city: 'Ville'
-        country: 'Pays'
-        npai: 'NPAI'
-        confirmed: 'Confirmé'
-        vcard_uid: 'Uid Vcard'
-        email: 'Email'
-        email_npai: 'NPAI Email'
-        email_no_newsletter: 'Pas de Newsletter'
-        owner: 'Propriétaire'
-        description: 'Description'
-        label: 'Libellé'
-        name: 'Nom'
-        sort_rank: 'Classement'
-        created_at: 'Créé le'
-        updated_at: 'Modifié le'
+
+blast:
+    baseentitiesbundle: ~
+        
+
+
+
 'form_group_address': 'Adresse'
 'form_group_email': 'Email'
 'form_group_communication': 'Communication'

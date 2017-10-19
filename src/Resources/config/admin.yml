@@ -1,4 +1,5 @@
 services:
+
     blast_base_entities.admin.search_index_entity:
         class: Blast\BaseEntitiesBundle\Admin\SearchIndexEntityAdmin
         arguments: [~, Blast\BaseEntitiesBundle\Entity\SearchIndexEntity, BlastCoreBundle:CRUD]
@@ -6,4 +7,5 @@ services:
             - name: sonata.admin
               manager_type: orm
               group: admin
-              label: SearchIndexEntity
+              label: librinfo.baseentitiesbundle.admin.SearchIndexEntity
+              label_translator_strategy: blast_core.label.strategy.librinfo_baseentities

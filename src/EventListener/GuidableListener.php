@@ -65,7 +65,7 @@ class GuidableListener implements LoggerAwareInterface, EventSubscriber
             }
         }
 
-        $this->logger->debug('[GuidableListener] Entering GuidableListener for « loadClassMetadata » event');
+        $this->logger->debug('[GuidableListener] Entering GuidableListener for « loadClassMetadata » event', [$metadata->getReflectionClass()->getName()]);
 
         $reflectionClass = $metadata->getReflectionClass();
 
