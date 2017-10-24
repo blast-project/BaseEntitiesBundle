@@ -133,9 +133,10 @@ class SearchableListener implements EventSubscriber
         $classMetadata = $em->getClassMetadata($indexClass);
 
         if (array_key_exists($entityClass, $this->classFields)) {
-            foreach ($this->classFields[$entityClass] as $field) {
+            foreach ($this->classFields[$entityClass]['fields'] as $field) {
                 if (!is_array($field)) {
                     $keywords = $entity->analyseField($field);
+
                     foreach ($keywords as $keyword) {
                         $index = new $indexClass();
                         $index->setObject($entity);

@@ -18,7 +18,6 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Blast\BaseEntitiesBundle\Entity\Repository\SearchableRepository;
 
 class SearchController extends CoreController
 {
@@ -100,8 +99,9 @@ class SearchController extends CoreController
         $class = $targetAdmin->getClass();
         $em = $this->getDoctrine()->getManager();
         $classMetadata = $em->getClassMetadata($class);
-        $repo = new SearchableRepository($em, $classMetadata);
-        $results = $repo->indexSearch($searchText, $itemsPerPage);
+        $searchHandler = $this->getContainer()->get('blast_base_entities.search_handler');
+        $searchHandler->handleEntity($classMetadata);
+        $results = $searchHandler->indexSearch($searchText, $itemsPerPage);
 
         $items = [];
         foreach ($results as $entity) {

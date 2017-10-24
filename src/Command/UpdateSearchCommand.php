@@ -17,7 +17,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Doctrine\Bundle\DoctrineBundle\Command\DoctrineCommand;
 use Blast\BaseEntitiesBundle\Entity\Traits\Searchable;
-use Blast\BaseEntitiesBundle\Entity\Repository\SearchableRepository;
 
 /**
  * Batch update of search indexes.
@@ -75,8 +74,10 @@ EOT
 
         $em = $this->getContainer()->get('doctrine')->getEntityManager();
         $metadata = $em->getClassMetadata($name);
-        $repo = new SearchableRepository($em, $metadata);
-        $repo->batchUpdate();
+
+        $searchHandler = $this->getContainer()->get('blast_base_entities.search_handler');
+        $searchHandler->handleEntity($metadata);
+        $searchHandler->batchUpdate();
         $output->writeln('DONE');
     }
 }

@@ -15,7 +15,7 @@ namespace Blast\BaseEntitiesBundle\Entity\Traits;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Doctrine\Common\Collections\ArrayCollection;
 use Blast\BaseEntitiesBundle\Entity\SearchIndexEntity;
-use Blast\BaseEntitiesBundle\SearchAnalyser\SearchAnalyser;
+use Blast\BaseEntitiesBundle\Search\SearchAnalyser;
 
 trait Searchable
 {
