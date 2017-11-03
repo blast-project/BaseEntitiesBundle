@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Blast\BaseEntitiesBundle\SearchAnalyser;
+namespace Blast\BaseEntitiesBundle\Search;
 
 use Behat\Transliterator\Transliterator;
 
