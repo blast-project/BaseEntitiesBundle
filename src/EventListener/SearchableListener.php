@@ -70,7 +70,7 @@ class SearchableListener implements EventSubscriber
                 'targetEntity' => $reflectionClass->getShortName() . 'SearchIndex',
                 'fieldName'    => 'searchIndexes',
                 'mappedBy'     => 'object',
-                'cascade'      => ['persist'],
+                'cascade'      => ['persist','remove'],
             ]);
         }
 
@@ -83,7 +83,7 @@ class SearchableListener implements EventSubscriber
                 'targetEntity' => str_replace('SearchIndex', '', $reflectionClass->getName()),
                 'fieldName'    => 'object',
                 'inversedBy'   => 'searchIndexes',
-                'cascade'      => ['persist'],
+                'cascade'      => ['persist','remove'],
             ]);
         }
     }
