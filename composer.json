@@ -41,6 +41,5 @@
     },
     "suggest": {
         "libre-informatique/crm-bundle": "Manage contacts, organisms and more..."
-    },
-    "version": "0.6.4"
+    }
 }
