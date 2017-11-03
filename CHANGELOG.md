@@ -1,7 +1,10 @@
 # Change Log
 
 ## [0.5.3](https://github.com/blast-project/BaseEntitiesBundle/tree/0.5.3) (2017-11-03)
-[Full Changelog](https://github.com/blast-project/BaseEntitiesBundle/compare/0.5.2...0.5.3)
+[Full Changelog](https://github.com/blast-project/BaseEntitiesBundle/compare/0.6.4...0.5.3)
+
+## [0.6.4](https://github.com/blast-project/BaseEntitiesBundle/tree/0.6.4) (2017-11-03)
+[Full Changelog](https://github.com/blast-project/BaseEntitiesBundle/compare/0.5.2...0.6.4)
 
 **Merged pull requests:**
 
