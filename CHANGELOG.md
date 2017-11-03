@@ -1,5 +1,15 @@
 # Change Log
 
+## [0.5.3](https://github.com/blast-project/BaseEntitiesBundle/tree/0.5.3) (2017-11-03)
+[Full Changelog](https://github.com/blast-project/BaseEntitiesBundle/compare/0.5.2...0.5.3)
+
+**Merged pull requests:**
+
+- DevKit updates for BaseEntitiesBundle [\#29](https://github.com/blast-project/BaseEntitiesBundle/pull/29) ([BlastCI](https://github.com/BlastCI))
+- DevKit updates for BaseEntitiesBundle [\#28](https://github.com/blast-project/BaseEntitiesBundle/pull/28) ([BlastCI](https://github.com/BlastCI))
+- Lisem fix & features [\#27](https://github.com/blast-project/BaseEntitiesBundle/pull/27) ([FanchTheSystem](https://github.com/FanchTheSystem))
+- DevKit updates for BaseEntitiesBundle [\#26](https://github.com/blast-project/BaseEntitiesBundle/pull/26) ([BlastCI](https://github.com/BlastCI))
+
 ## [0.5.2](https://github.com/blast-project/BaseEntitiesBundle/tree/0.5.2) (2017-10-19)
 [Full Changelog](https://github.com/blast-project/BaseEntitiesBundle/compare/0.5.1...0.5.2)
 
